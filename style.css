@@ -1,12 +1,15 @@
 /* Enhanced Glassmorphism Portfolio CSS */
 /* Root Variables for Consistent Design */
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.15);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
   --accent-primary: #0d9488;
   --accent-secondary: #4fd1c5;
   --backdrop-blur: blur(20px);
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
 }
 
 /* Dark theme variables */
@@ -14,6 +17,9 @@ html[data-theme="dark"] {
   --glass-bg: rgba(23, 23, 23, 0.25);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
 }
 
 /* Enhanced Body with Gradient Background */
@@ -41,8 +47,8 @@ html[data-theme="dark"] body {
 /* Enhanced Sections with Glassmorphism */
 section {
   background: var(--glass-bg) !important;
-  backdrop-filter: var(--backdrop-blur);
   -webkit-backdrop-filter: var(--backdrop-blur);
+  backdrop-filter: var(--backdrop-blur);
   border: 1px solid var(--glass-border) !important;
   margin: 2rem 1rem;
   border-radius: 24px !important;
@@ -52,18 +58,25 @@ section {
 
 section:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px 0 rgba(31, 38, 135, 0.2);
+  box-shadow: 0 20px 40px 0 rgba(31, 38, 135, 0.3);
 }
 
 /* Enhanced Cards */
 .bg-white,
 section .bg-white {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--backdrop-blur);
+  background: rgba(255, 255, 255, 0.95) !important;
   -webkit-backdrop-filter: var(--backdrop-blur);
+  backdrop-filter: var(--backdrop-blur);
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html[data-theme="dark"] .bg-white,
+html[data-theme="dark"] section .bg-white {
+  background: var(--glass-bg) !important;
   border: 1px solid var(--glass-border) !important;
   box-shadow: var(--glass-shadow);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .bg-white:hover {
@@ -125,20 +138,33 @@ body {
   border-bottom-color: #0d9488; /* teal-600 */
 }
 
+/* Enhanced Text Contrast for Light Mode */
+.text-stone-900 {
+  color: var(--text-primary) !important;
+}
+
+.text-stone-600,
+.text-stone-700 {
+  color: var(--text-secondary) !important;
+}
+
+.text-stone-800 {
+  color: var(--text-primary) !important;
+}
+
+/* Enhanced Section Titles */
 .section-title {
-  position: relative;
-  display: inline-block;
+  color: var(--text-primary) !important;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700 !important;
 }
 
 .section-title::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -8px;
-  width: 60%;
-  height: 4px;
-  background-color: #0d9488; /* teal-600 */
-  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)) !important;
+  box-shadow: 0 4px 8px rgba(13, 148, 136, 0.3);
 }
 
 /* Dark Mode Overrides (using data-theme attribute) */
@@ -271,4 +297,98 @@ html[data-theme="dark"] .skill-definition {
 
 .arrow-icon.rotate {
   transform: rotate(90deg);
+}
+
+/* Enhanced Skills Items for Better Contrast */
+.skill-item {
+  background: rgba(255, 255, 255, 0.9) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 4px 16px rgba(31, 38, 135, 0.1);
+}
+
+html[data-theme="dark"] .skill-item {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+}
+
+.skill-item:hover {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 8px 20px rgba(13, 148, 136, 0.2);
+}
+
+html[data-theme="dark"] .skill-item:hover {
+  background: rgba(13, 148, 136, 0.1) !important;
+}
+
+.skill-definition {
+  background: rgba(255, 255, 255, 0.95) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: var(--text-secondary) !important;
+}
+
+html[data-theme="dark"] .skill-definition {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--text-muted) !important;
+}
+
+/* Enhanced Education Card */
+.bg-stone-50 {
+  background: rgba(248, 250, 252, 0.95) !important;
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 8px 24px rgba(31, 38, 135, 0.15);
+}
+
+html[data-theme="dark"] .bg-stone-50 {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+}
+
+/* Enhanced Mobile Menu */
+#mobile-menu {
+  background: rgba(255, 255, 255, 0.95) !important;
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  backdrop-filter: var(--backdrop-blur);
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+}
+
+html[data-theme="dark"] #mobile-menu {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+}
+
+#mobile-menu a:hover {
+  background: rgba(13, 148, 136, 0.1) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* Enhanced Typography Hierarchy */
+h1, h2, h3 {
+  color: var(--text-primary) !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  color: var(--text-secondary) !important;
+}
+
+/* Enhanced Links */
+a {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a:hover {
+  text-shadow: 0 2px 4px rgba(13, 148, 136, 0.3);
 }
