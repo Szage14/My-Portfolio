@@ -119,6 +119,68 @@ button:hover {
   border: 1px solid var(--glass-border);
 }
 
+/* Enhanced TOR Section Styles */
+#tor iframe {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(31, 38, 135, 0.1);
+}
+
+html[data-theme="dark"] #tor iframe {
+  background: var(--glass-bg) !important;
+  box-shadow: var(--glass-shadow);
+}
+
+/* Enhanced TOR Buttons */
+#tor .bg-teal-600 {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important;
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(13, 148, 136, 0.3);
+}
+
+#tor .bg-teal-600:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(13, 148, 136, 0.4);
+}
+
+#tor .bg-stone-600 {
+  background: linear-gradient(135deg, #4b5563, #6b7280) !important;
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(75, 85, 99, 0.3);
+}
+
+#tor .bg-stone-600:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(75, 85, 99, 0.4);
+}
+
+html[data-theme="dark"] #tor .bg-teal-600 {
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary)) !important;
+}
+
+html[data-theme="dark"] #tor .bg-stone-600 {
+  background: linear-gradient(135deg, #64748b, #94a3b8) !important;
+}
+
+/* Enhanced TOR Preview Container */
+#tor .bg-stone-50 {
+  background: rgba(248, 250, 252, 0.95) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+}
+
+html[data-theme="dark"] #tor .bg-stone-50 {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+}
+
 /* Footer Enhancement */
 footer {
   background: var(--glass-bg) !important;
@@ -374,7 +436,9 @@ html[data-theme="dark"] #mobile-menu {
 }
 
 /* Enhanced Typography Hierarchy */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: var(--text-primary) !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
