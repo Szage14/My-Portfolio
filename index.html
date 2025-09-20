@@ -11,6 +11,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .tor-iframe-container {
+            height: 600px;
+        }
+    </style>
 </head>
 <body class="bg-stone-50 text-stone-800 transition-colors duration-500">
     <nav id="main-nav" class="bg-stone-50/80 backdrop-blur-lg border-b border-stone-200 transition-colors duration-500">
@@ -236,7 +241,7 @@
                             <h4 class="font-semibold text-stone-900 transition-colors duration-500">Document Preview</h4>
                             <p class="text-sm text-stone-600 transition-colors duration-500">Click "View TOR" above to open in full screen or "Download" to save the file.</p>
                         </div>
-                        <div class="relative" style="height: 600px;">
+                        <div class="relative tor-iframe-container">
                             <iframe 
                                 src="https://drive.google.com/file/d/1FTNoDGi4g3ZCDl31_kQ97D7FXdwG7Uu0/preview" 
                                 class="w-full h-full border-0"
