@@ -64,7 +64,10 @@
         <section id="about" class="py-16 md:py-24 bg-white transition-colors duration-500">
             <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
                 <div class="flex-shrink-0">
-                    <img src="https://www.dropbox.com/scl/fi/7fsk7ad2pe4lxa5c3q3lh/mypic.png?rlkey=y0zznx0ed8s710j8s659oebzi&st=5ux528kf&dl=1" alt="Cristian Jay T. Buquis" class="w-48 h-48 rounded-full object-cover border-4 border-teal-500 shadow-lg">
+                    <img id="profile-image" 
+                         src="https://www.dropbox.com/scl/fi/oy0abnmutgkgqhfkwz5jp/light.png?rlkey=j5x1j8g6awkolnkhdxvvv83nw&st=2c6lbz44&dl=1" 
+                         alt="Cristian Jay T. Buquis" 
+                         class="w-48 h-48 rounded-full object-cover border-4 border-teal-500 shadow-lg transition-opacity duration-500">
                 </div>
                 <div class="text-center md:text-left">
                     <h1 class="text-4xl md:text-5xl font-bold text-stone-900 leading-tight transition-colors duration-500">CRISTIAN JAY T. BUQUIS</h1>
@@ -416,16 +419,22 @@
 
             // Function to set theme
             const setTheme = (theme) => {
+                const profileImage = document.getElementById('profile-image');
+                
                 if (theme === 'dark') {
                     htmlElement.setAttribute('data-theme', 'dark');
                     moonIcon.classList.remove('hidden');
                     sunIcon.classList.add('hidden');
                     localStorage.setItem('theme', 'dark');
+                    profileImage.src = 'https://www.dropbox.com/scl/fi/zfr4kcmpxga2b0dnu63an/dark.png?rlkey=x89co49dnfdzxi2zbepwk6v7z&st=67xvm54h&dl=1';
+                    profileImage.alt = 'Cristian Jay T. Buquis - Dark Theme';
                 } else {
                     htmlElement.removeAttribute('data-theme');
                     sunIcon.classList.remove('hidden');
                     moonIcon.classList.add('hidden');
                     localStorage.setItem('theme', 'light');
+                    profileImage.src = 'https://www.dropbox.com/scl/fi/oy0abnmutgkgqhfkwz5jp/light.png?rlkey=j5x1j8g6awkolnkhdxvvv83nw&st=2c6lbz44&dl=1';
+                    profileImage.alt = 'Cristian Jay T. Buquis - Light Theme';
                 }
             };
 
