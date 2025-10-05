@@ -20,7 +20,7 @@
             <h2 class="text-h5 font-weight-bold mb-2">About Me</h2>
             <p>
               I am a Bachelor of Science in Information Systems graduate passionate about web development,
-              backend integration, and modern tech stacks like Vue, Strapi, and PostgreSQL.
+              backend integration, and modern tech stacks like Vue, Strapi, and Laravel.
             </p>
           </v-card>
         </v-expand-transition>
