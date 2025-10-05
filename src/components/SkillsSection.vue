@@ -1,5 +1,6 @@
 <template>
-  <v-container id="skills" class="py-16">
+  <v-container id="skills" class="py-16" data-aos="fade-right">
+
     <h2 class="text-h5 font-weight-bold mb-8 text-center">Skills</h2>
 
     <v-row>

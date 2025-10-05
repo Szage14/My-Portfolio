@@ -1,5 +1,6 @@
 <template>
-  <v-container id="education" class="py-16">
+ <v-container id="education" class="py-16" data-aos="fade-left">
+
     <h2 class="text-h5 font-weight-bold mb-8 text-center">Education</h2>
 
     <v-timeline side="end">

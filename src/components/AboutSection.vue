@@ -1,5 +1,5 @@
 <template>
-  <v-container id="about" class="py-16">
+  <v-container id="about" class="py-16" data-aos="fade-up">
     <v-row align="center" justify="center">
       <v-col cols="12" md="4" class="text-center">
         <v-avatar size="200">

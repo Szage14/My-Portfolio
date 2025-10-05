@@ -1,0 +1,50 @@
+/* 🌿 Global Styles to match the legacy feel */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Typography */
+body {
+  font-family: 'Poppins', 'Montserrat', sans-serif;
+  background-color: #f9fafb;
+  color: #333;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  font-weight: 700;
+}
+
+/* Card and button feel */
+.v-card {
+  border-radius: 16px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.v-btn {
+  border-radius: 10px !important;
+  transition: all 0.3s ease !important;
+}
+
+.v-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Section spacing */
+section, .v-container {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #009688;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00796b;
+}

@@ -1,3 +1,4 @@
+
 <template>
   <v-app-bar app color="teal-darken-3" dark elevate-on-scroll>
     <v-container class="d-flex align-center justify-space-between">
@@ -7,7 +8,7 @@
         class="text-h6 font-weight-bold text-white"
         @click="scrollTo('about')"
       >
-        CJ Buquis
+        CRISTIAN JAY T. BUQUIS
       </v-btn>
 
       <!-- Right: Navigation links -->
@@ -29,14 +30,27 @@
 
         <!-- Legacy version button -->
         <v-btn
-          href="/legacy/index.html"
-          target="_blank"
-          color="amber-darken-2"
-          variant="flat"
-          class="ms-3 text-black font-weight-bold"
-        >
-          Legacy
-        </v-btn>
+  href="/legacy/index.html"
+  target="_blank"
+  color="amber-darken-2"
+  variant="flat"
+  class="ms-3 text-black font-weight-bold"
+>
+  Legacy
+</v-btn>
+
+<v-btn
+  icon
+  variant="text"
+  class="ms-2"
+  @click="toggleTheme"
+  :title="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
+>
+  <v-icon>
+    {{ darkMode ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}
+  </v-icon>
+</v-btn>
+
       </v-btn-toggle>
 
       <!-- Mobile menu -->
@@ -76,7 +90,18 @@
 </template>
 
 <script setup>
+// import { ref } from 'vue'
+import { useTheme } from 'vuetify'
 import { ref } from 'vue'
+
+const theme = useTheme()
+const darkMode = ref(false)
+
+const toggleTheme = () => {
+  darkMode.value = !darkMode.value
+  theme.global.name.value = darkMode.value ? 'darkTheme' : 'lightTheme'
+}
+
 
 const active = ref(null)
 const menu = ref(false)
