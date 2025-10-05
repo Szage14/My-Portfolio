@@ -3,20 +3,22 @@
     id="home"
     class="fill-height d-flex flex-column align-center justify-center text-center"
   >
-    <v-avatar size="160" class="mb-6">
-  <v-img :src="currentProfile" alt="Cristian Jay Buquis" />
-</v-avatar>
+    <!-- Dynamic profile image based on theme -->
+    <v-avatar size="200" class="mb-6 profile-avatar">
+      <v-img :src="currentProfile" alt="Cristian Jay T. Buquis" />
+    </v-avatar>
 
-    <h1 class="text-h4 text-md-h3 font-weight-bold mb-2">
-      Cristian Jay T. Buquis
+    <!-- Updated to match legacy content exactly -->
+    <h1 class="text-h3 text-md-h2 font-weight-bold mb-2 text-white">
+      CRISTIAN JAY T. BUQUIS
     </h1>
 
-    <p class="text-subtitle-1 text-grey-lighten-2 mb-6">
-      BS Information Systems Graduate | Full-Stack Developer | Tech Enthusiast
+    <p class="text-h5 text-teal-lighten-2 mb-6 font-weight-medium">
+      Fullstack Developer
     </p>
 
     <v-btn
-      color="teal"
+      color="teal-lighten-1"
       size="large"
       variant="flat"
       @click="scrollTo('about')"
@@ -33,11 +35,10 @@ import { computed } from 'vue'
 import { useTheme } from 'vuetify'
 
 const theme = useTheme()
-
 const currentProfile = computed(() =>
   theme.global.name.value === 'darkTheme'
-    ? '/assets/profile-dark.png'
-    : '/assets/profile-light.png'
+    ? 'https://www.dropbox.com/scl/fi/zfr4kcmpxga2b0dnu63an/dark.png?rlkey=x89co49dnfdzxi2zbepwk6v7z&st=67xvm54h&dl=1'
+    : 'https://www.dropbox.com/scl/fi/oy0abnmutgkgqhfkwz5jp/light.png?rlkey=j5x1j8g6awkolnkhdxvvv83nw&st=2c6lbz44&dl=1'
 )
 
 const scrollTo = (id) => {
@@ -49,9 +50,9 @@ const scrollTo = (id) => {
 <style scoped>
 #home {
   min-height: 100vh;
-  background: linear-gradient(270deg, #004d40, #009688, #00695c);
-  background-size: 600% 600%;
-  animation: gradientShift 20s ease infinite;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
   color: white;
 }
 
@@ -67,4 +68,13 @@ const scrollTo = (id) => {
   }
 }
 
+.profile-avatar {
+  border: 4px solid #14b8a6;
+  box-shadow: 0 20px 40px rgba(13, 148, 136, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.05);
+}
 </style>

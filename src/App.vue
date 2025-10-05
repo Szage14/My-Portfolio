@@ -6,12 +6,14 @@
       <AboutSection />
       <SkillsSection />
       <EducationSection />
-
-      <v-container class="text-center py-10">
-        <v-btn color="teal" href="/legacy/index.html" target="_blank">
-          View Legacy Version
-        </v-btn>
-      </v-container>
+      <!-- Added all missing sections from legacy -->
+      <ExperienceSection />
+      <CertificationsSection />
+      <TORSection />
+      <ServicesSection />
+      <ReferencesSection />
+      <ContactSection />
+      <FooterSection />
     </v-main>
   </v-app>
 </template>
@@ -22,4 +24,11 @@ import HomeSection from './components/HomeSection.vue'
 import AboutSection from './components/AboutSection.vue'
 import SkillsSection from './components/SkillsSection.vue'
 import EducationSection from './components/EducationSection.vue'
+import ExperienceSection from './components/ExperienceSection.vue'
+import CertificationsSection from './components/CertificationsSection.vue'
+import TORSection from './components/TORSection.vue'
+import ServicesSection from './components/ServicesSection.vue'
+import ReferencesSection from './components/ReferencesSection.vue'
+import ContactSection from './components/ContactSection.vue'
+import FooterSection from './components/FooterSection.vue'
 </script>
