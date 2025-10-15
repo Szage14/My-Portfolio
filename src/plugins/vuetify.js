@@ -21,17 +21,19 @@ const lightTheme = {
 const darkTheme = {
   dark: true,
   colors: {
-    background: '#121212',
-    surface: '#1e1e1e',
-    primary: '#80cbc4',
-    secondary: '#004d40',
-    accent: '#009688',
-    error: '#ef5350',
+    background: '#0d1117',   // GitHub-like deep gray
+    surface: '#161b22',      // Card background
+    primary: '#80cbc4',      // Teal accent
+    secondary: '#009688',
+    accent: '#26a69a',
+    text: '#ffffff',         // bright text
     info: '#64b5f6',
     success: '#81c784',
     warning: '#ffca28',
+    error: '#ef5350',
   },
 }
+
 
 export default createVuetify({
   theme: {
