@@ -1,5 +1,5 @@
 <template>
-  <section id="home" class="home-about-wrapper">
+  <section id="home" class="home-about-wrapper surface-gradient-light">
     <Particles
       v-if="particlesReady"
       id="tsparticles"
@@ -9,16 +9,16 @@
       class="home-about-particles"
     />
 
-    <v-container fluid class="py-24 home-about-container">
+    <v-container fluid class="home-about-container">
       <div id="about" class="anchor-spacer" aria-hidden="true"></div>
       <v-fade-transition appear>
-        <v-row align="center" justify="center" class="fill-height g-8">
+        <v-row align="center" justify="center" class="home-about-grid g-8">
           <v-col cols="12" md="5" class="d-flex justify-center">
             <v-scale-transition appear>
               <v-hover v-slot="{ isHovering, props }">
                 <div
                   v-bind="props"
-                  class="home-about-avatar-wrapper transition-ease"
+                  class="home-about-avatar-wrapper glass-panel elevated-hover"
                   :class="{ 'home-about-avatar-wrapper--hover': isHovering }"
                   role="button"
                   tabindex="0"
@@ -35,7 +35,7 @@
                     width="220"
                     height="220"
                     cover
-                    class="rounded-circle elevation-4 home-about-avatar"
+                    class="rounded-circle home-about-avatar"
                     @load="handleImageLoad"
                     @error="onImgError"
                   />
@@ -45,26 +45,35 @@
           </v-col>
 
           <v-col cols="12" md="7" class="d-flex">
-            <v-card flat class="pa-6 pa-md-8 home-about-card">
+            <v-card flat class="home-about-card glass-panel">
               <div class="mx-auto home-about-text">
-                <h1 class="text-h3 text-md-h2 font-weight-bold mb-2">CRISTIAN JAY T. BUQUIS</h1>
-                <p class="text-subtitle-1 text-medium-emphasis mb-4">
+                <div class="home-about-kicker text-body-2 text-primary d-inline-flex align-center mb-3">
+                  <v-icon icon="mdi-star-four-points" size="18" class="me-2" />
+                  Information Systems Graduate
+                </div>
+
+                <h1 class="text-h3 text-md-h2 font-weight-bold mb-3">
+                  Cristian Jay T. Buquis
+                </h1>
+
+                <p class="text-h6 font-weight-medium text-primary mb-4">
                   Fullstack Developer
                 </p>
-                <p class="text-body-1 text-medium-emphasis mb-6">
-                  Full-Stack Developer with hands-on experience in Vue.js, React, Node.js, Strapi, and Laravel, seeking to leverage strong
-                  problem-solving skills and a growth mindset to build scalable web applications.
+
+                <p class="text-body-1 text-medium-emphasis mb-5">
+                  Full-stack developer experienced with Vue.js, React, Node.js, Strapi, and Laravel—focused on building resilient, scalable web
+                  applications with thoughtful UI/UX and measurable business impact.
                 </p>
 
-                <v-row justify="center" class="g-3 mb-4 mb-md-6">
-                  <v-col cols="auto">
+                <v-row justify="center" class="g-3 mb-6 home-about-cta">
+                  <v-col cols="12" sm="auto">
                     <v-hover v-slot="{ isHovering, props }">
                       <v-btn
                         v-bind="props"
-                        color="teal"
+                        color="primary"
                         variant="flat"
-                        class="ma-1 text-none home-about-btn"
-                        :elevation="isHovering ? 6 : 2"
+                        class="text-none px-6 py-3 home-about-btn"
+                        :elevation="isHovering ? 10 : 4"
                         href="https://m.me/cristianjay.buquis"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -74,14 +83,14 @@
                       </v-btn>
                     </v-hover>
                   </v-col>
-                  <v-col cols="auto">
+                  <v-col cols="12" sm="auto">
                     <v-hover v-slot="{ isHovering, props }">
                       <v-btn
                         v-bind="props"
                         variant="outlined"
-                        color="teal"
-                        class="ma-1 text-none home-about-btn"
-                        :elevation="isHovering ? 6 : 2"
+                        color="primary"
+                        class="text-none px-6 py-3 home-about-btn"
+                        :elevation="isHovering ? 10 : 0"
                         href="#contact"
                         @click.prevent="handleCtaScroll('Contact Me', 'contact')"
                       >
@@ -91,19 +100,20 @@
                   </v-col>
                 </v-row>
 
-                <v-divider class="my-6" />
+                <v-divider class="my-6 home-about-divider" />
 
-                <p class="text-body-1 text-medium-emphasis text-justify mb-4">
-                  Eager to contribute to cross-functional teams, continuously learn new technologies, and drive impactful solutions that align with business goals.
+                <p class="text-body-1 text-medium-emphasis mb-4">
+                  I love collaborating with cross-functional teams, mentoring peers, and iterating quickly using data-driven insights. Let’s work together to
+                  craft experiences that feel effortless and deliver results.
                 </p>
-                
 
-                <v-row justify="center" class="g-3 mt-6">
+                <v-row justify="center" class="g-3 home-about-actions">
                   <v-col cols="auto">
                     <v-btn
                       icon
                       variant="text"
-                      color="teal"
+                      color="primary"
+                      class="home-about-icon"
                       :href="mailtoHref"
                       aria-label="Send an email"
                       @click="handleActionClick('Email')"
@@ -115,7 +125,8 @@
                     <v-btn
                       icon
                       variant="text"
-                      color="teal"
+                      color="primary"
+                      class="home-about-icon"
                       href="https://m.me/cristianjay.buquis"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -320,15 +331,14 @@ onBeforeUnmount(() => {
 .home-about-wrapper {
   position: relative;
   min-height: 100vh;
-  color: #ffffff;
-  background: linear-gradient(270deg, #004d40, #009688, #00695c);
-  background-size: 600% 600%;
-  animation: gradientShift 20s ease infinite;
+  overflow: hidden;
+  padding-block: clamp(96px, 16vw, 168px);
 }
 
 .home-about-container {
   position: relative;
   z-index: 1;
+  max-width: 1240px;
 }
 
 .home-about-particles {
@@ -339,60 +349,86 @@ onBeforeUnmount(() => {
 
 .anchor-spacer {
   position: absolute;
-  top: -80px;
+  top: -120px;
+  width: 1px;
+  height: 1px;
+}
+
+.home-about-grid {
+  min-height: 60vh;
 }
 
 .home-about-avatar-wrapper {
-  border-radius: 50%;
-  padding: 16px;
+  padding: clamp(18px, 3vw, 28px);
+  border-radius: 999px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: inline-flex;
 }
 
 .home-about-avatar-wrapper--hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.14);
+  transform: translateY(-6px) scale(1.03);
 }
 
 .home-about-avatar {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: block;
+  border-radius: 999px;
 }
 
 .home-about-card {
   width: 100%;
-  max-width: 840px;
+  max-width: 880px;
   margin-inline: auto;
   background: transparent;
   color: inherit;
+  padding: clamp(28px, 5vw, 44px);
 }
 
 .home-about-text {
   max-width: 720px;
 }
 
+.home-about-kicker {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
 .home-about-btn {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 999px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .home-about-btn:hover,
 .home-about-btn:focus-visible {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+.home-about-divider {
+  opacity: 0.32;
+}
+
+.home-about-actions .home-about-icon {
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.home-about-actions .home-about-icon:hover,
+.home-about-actions .home-about-icon:focus-visible {
+  transform: translateY(-3px) scale(1.05);
+  color: var(--v-theme-secondary);
+}
+
+@media (max-width: 960px) {
+  .home-about-card {
+    padding: clamp(24px, 6vw, 36px);
   }
 }
 
 @media (max-width: 600px) {
+  .home-about-avatar-wrapper {
+    margin-bottom: 24px;
+  }
+
   .anchor-spacer {
-    top: -60px;
+    top: -72px;
   }
 }
 </style>
