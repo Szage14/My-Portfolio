@@ -194,6 +194,7 @@ const navItems = [
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'education', label: 'Education' },
+  { id: 'experience', label: 'Workshops & Training' } // added
 ]
 
 const scrollTo = (id) => {
