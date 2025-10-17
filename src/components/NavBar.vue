@@ -77,8 +77,8 @@
             <v-icon icon="mdi-account" />
           </v-avatar>
         </template>
-        <v-list-item-title class="text-body-1 font-weight-semibold">Cristian Buquis</v-list-item-title>
-        <v-list-item-subtitle class="text-body-2 text-medium-emphasis">Portfolio</v-list-item-subtitle>
+        <v-list-item-title class="text-body-1 font-weight-semibold">Cristian Jay T. Buquis</v-list-item-title>
+        <v-list-item-subtitle class="text-body-2 text-medium-emphasis">BSIS-Web Developer</v-list-item-subtitle>
       </v-list-item>
 
       <v-divider class="my-3" />
