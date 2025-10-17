@@ -6,74 +6,53 @@
         CJ Buquis
       </v-btn>
 
-      <!-- Desktop Menu -->
-      <v-row class="d-none d-md-flex align-center">
-        <v-btn
-          v-for="item in navItems"
-          :key="item.id"
-          variant="text"
-          class="text-white"
-          @click="scrollTo(item.id)"
-        >
-          {{ item.label }}
-        </v-btn>
-
-        <v-btn
-          :href="baseUrl + 'legacy/index.html'"
-          target="_blank"
-          color="amber-darken-2"
-          variant="flat"
-          class="ms-3 text-black font-weight-bold"
-        >
-          Legacy
-        </v-btn>
-
-        <v-btn
-          icon
-          variant="text"
-          class="ms-2"
-          @click="toggleTheme"
-          :title="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
-          :aria-label="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
-        >
-          <v-icon>
-            {{ darkMode ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}
-          </v-icon>
-        </v-btn>
-      </v-row>
-
-      <!-- Mobile Hamburger -->
-      <v-menu v-model="menu" transition="scale-transition" location="bottom end">
-        <template #activator="{ props }">
-          <v-btn icon v-bind="props" class="d-md-none" :aria-label="'Open menu'">
-            <v-icon>mdi-menu</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item v-for="item in navItems" :key="item.id" @click="scrollTo(item.id)">
-            <v-list-item-title>{{ item.label }}</v-list-item-title>
-          </v-list-item>
-
-          <v-divider />
-          <v-list-item :href="baseUrl + 'legacy/index.html'" target="_blank" title="Legacy Portfolio">
-            <v-icon start color="amber-darken-2">mdi-history</v-icon>
-            Legacy
-          </v-list-item>
-
-          <v-list-item @click="toggleTheme" :title="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
-            <v-icon start>{{ darkMode ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}</v-icon>
-            Toggle Theme
-          </v-list-item>
-        </v-list>
-      </v-menu>
+      <!-- Single Hamburger Menu (all navigations) -->
+      <v-btn icon :aria-label="'Open menu'" @click="drawer = true">
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
     </v-container>
   </v-app-bar>
+
+  <!-- Navigation Drawer -->
+  <v-navigation-drawer v-model="drawer" temporary location="end" width="300">
+    <v-list density="comfortable">
+      <v-list-subheader>Navigate</v-list-subheader>
+
+      <v-list-item
+        v-for="item in navItems"
+        :key="item.id"
+        @click="scrollTo(item.id)"
+        :title="item.label"
+        :value="item.id"
+      >
+        <template #prepend>
+          <v-icon icon="mdi-circle-small" />
+        </template>
+        <v-list-item-title>{{ item.label }}</v-list-item-title>
+      </v-list-item>
+
+      <v-divider class="my-2" />
+
+      <v-list-item :href="baseUrl + 'legacy/index.html'" target="_blank" title="Legacy Portfolio">
+        <template #prepend>
+          <v-icon color="amber-darken-2" icon="mdi-history" />
+        </template>
+        <v-list-item-title>Legacy</v-list-item-title>
+      </v-list-item>
+
+      <v-list-item @click="toggleTheme" :title="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+        <template #prepend>
+          <v-icon :icon="darkMode ? 'mdi-weather-night' : 'mdi-white-balance-sunny'" />
+        </template>
+        <v-list-item-title>Toggle Theme</v-list-item-title>
+      </v-list-item>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script setup>
 import { useTheme } from 'vuetify'
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ref, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
 /* ---------- lightweight logger you can copy from console ---------- */
 function serializeError(err) {
@@ -186,7 +165,7 @@ const toggleTheme = () => {
 }
 
 const active = ref(null)
-const menu = ref(false)
+const drawer = ref(false)
 const baseUrl = import.meta.env.BASE_URL
 
 const navItems = [
@@ -194,15 +173,23 @@ const navItems = [
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'education', label: 'Education' },
-  { id: 'experience', label: 'Workshops & Training' } // added
+  { id: 'experience', label: 'Workshops & Training' },
+  { id: 'certifications', label: 'Certifications' }
 ]
 
-const scrollTo = (id) => {
+const scrollTo = async (id) => {
   try {
+    await nextTick()
     const section = document.getElementById(id)
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      menu.value = false
+      // Prefer smooth scroll with offset fallback
+      try {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      } catch {
+        const top = window.scrollY + section.getBoundingClientRect().top
+        window.scrollTo({ top, behavior: 'smooth' })
+      }
+      drawer.value = false
       log.info('Scrolled to section', { id })
     } else {
       const available = Array.from(document.querySelectorAll('section[id]')).map(s => s.id)
