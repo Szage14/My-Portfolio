@@ -116,13 +116,13 @@
                       icon
                       variant="text"
                       color="teal"
-                      href="https://tinyurl.com/cjbuquis"
+                      href="https://m.me/cristianjay.buquis"
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label="Open portfolio link"
-                      @click="handleActionClick('Portfolio')"
+                      aria-label="Open Messenger"
+                      @click="handleActionClick('Messenger')"
                     >
-                      <v-icon icon="mdi-link-variant" />
+                      <v-icon icon="mdi-facebook-messenger" />
                     </v-btn>
                   </v-col>
                 </v-row>

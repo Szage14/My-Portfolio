@@ -86,9 +86,9 @@
       <v-list-item
         v-for="item in navItems"
         :key="`drawer-${item.id}`"
-        :title="item.label"
         :value="item.id"
         class="text-body-2"
+        :aria-label="`Navigate to ${item.label}`"
         @click="navigateTo(item)"
       >
         <template #prepend>
@@ -101,7 +101,11 @@
 
       <v-divider class="my-3" />
 
-      <v-list-item @click="toggleTheme" class="text-body-2" :title="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+      <v-list-item
+        @click="toggleTheme"
+        class="text-body-2"
+        :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+      >
         <template #prepend>
           <v-icon :icon="darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny'" class="theme-toggle__icon" />
         </template>
@@ -113,7 +117,7 @@
         target="_blank"
         rel="noopener noreferrer"
         class="text-body-2"
-        title="Legacy Portfolio"
+        aria-label="Open legacy portfolio"
         @click="log.info('Legacy portfolio opened')"
       >
         <template #prepend>
