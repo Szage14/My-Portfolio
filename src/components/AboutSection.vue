@@ -1,12 +1,6 @@
 <template>
   <section id="about" class="transition-colors duration-500">
     <v-container class="py-16">
-      <v-row justify="center">
-        <v-col cols="12" class="text-center">
-          <h2 class="text-h4 font-weight-bold mb-10">About Me</h2>
-        </v-col>
-      </v-row>
-
       <v-fade-transition appear>
         <v-row align="center" justify="center" dense class="g-8">
           <v-col cols="12" md="4" class="d-flex justify-center">

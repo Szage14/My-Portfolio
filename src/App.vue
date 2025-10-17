@@ -6,8 +6,7 @@
     <v-main class="flex-grow-1 bg-surface">
       <!-- 🏠 Main Portfolio Sections -->
       <v-container fluid class="pa-0">
-        <HomeSection />
-        <AboutSection />
+          <HomeAboutSection />
         <SkillsSection />
         <EducationSection />
         <WorkshopsSection />
@@ -66,8 +65,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 import NavBar from './components/NavBar.vue'
-import HomeSection from './components/HomeSection.vue'
-import AboutSection from './components/AboutSection.vue'
+import HomeAboutSection from './components/HomeAboutSection.vue'
 import SkillsSection from './components/SkillsSection.vue'
 import EducationSection from './components/EducationSection.vue'
 import WorkshopsSection from './components/WorkshopsSection.vue'

@@ -1,5 +1,6 @@
 // src/main.js
 import { createApp } from 'vue'
+import Particles from '@tsparticles/vue3'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
 // import './assets/style.css' // optional if you reuse your old CSS
@@ -33,7 +34,7 @@ window.addEventListener('unhandledrejection', (e) => {
 
 
 try {
-	createApp(App).use(vuetify).mount('#app')
+	createApp(App).use(vuetify).use(Particles).mount('#app')
 	pushGlobal('info', 'App mounted', null)
 } catch (e) {
 	pushGlobal('error', 'Mount failed', { error: e?.stack || e?.message || String(e) })

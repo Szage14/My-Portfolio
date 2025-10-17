@@ -1,41 +1,98 @@
 <template>
-  <div id="home" class="fill-height d-flex flex-column align-center justify-center text-center">
+  <section id="home" class="hero-wrapper">
     <Particles
       v-if="particlesReady"
       id="tsparticles"
       :options="particleOptions"
       :particlesInit="particlesInit"
       :particlesLoaded="particlesLoaded"
-      class="absolute inset-0 -z-10"
+      class="hero-particles"
     />
 
-    <v-avatar size="160" class="mb-6">
-      <v-img
-        :src="currentProfile"
-        alt="Cristian Jay Buquis"
-        @error="onImgError"
-      />
-    </v-avatar>
+    <v-container fluid class="py-24 text-center hero-container">
+      <v-fade-transition appear>
+        <v-row justify="center" align="center" class="fill-height">
+          <v-col cols="12" md="8" lg="6">
+            <v-img
+              :src="currentProfile"
+              :lazy-src="currentProfile"
+              alt="Cristian Jay T. Buquis"
+              class="mx-auto mb-6 rounded-circle elevation-4 hero-avatar transition-ease"
+              width="160"
+              height="160"
+              cover
+              @load="onImgLoad"
+              @error="onImgError"
+            />
 
-    <h1 class="text-h4 text-md-h3 font-weight-bold mb-2">Cristian Jay T. Buquis</h1>
-    <p class="text-subtitle-1 text-grey-lighten-2 mb-6">
-      BS Information Systems Graduate | Full-Stack Developer | Tech Enthusiast
-    </p>
+            <h1 class="text-h3 text-md-h2 font-weight-bold mb-4">Cristian Jay T. Buquis</h1>
+            <p class="text-subtitle-1 text-medium-emphasis mb-3">Information Systems Graduate | Fullstack Developer</p>
+            <p class="text-body-1 text-medium-emphasis mb-6 hero-tagline">
+              Full-Stack Developer with hands-on experience in Vue.js, React, Node.js, Strapi, and Laravel. Passionate about crafting scalable web
+              applications and collaborating with cross-functional teams to deliver impactful, user-focused solutions.
+            </p>
 
-    <v-btn color="teal" size="large" variant="flat" @click="scrollTo('about')" class="text-white">
-      Explore My Portfolio
-      <v-icon end>mdi-arrow-down</v-icon>
-    </v-btn>
-  </div>
+            <v-row justify="center" class="g-3">
+              <v-col cols="auto">
+                <v-hover v-slot="{ isHovering, props }">
+                  <v-btn
+                    v-bind="props"
+                    color="teal"
+                    variant="flat"
+                    class="ma-2 text-none hero-btn"
+                    :elevation="isHovering ? 6 : 2"
+                    href="#about"
+                    @click.prevent="handleCtaClick('Learn More', 'about')"
+                  >
+                    Learn More
+                  </v-btn>
+                </v-hover>
+              </v-col>
+              <v-col cols="auto">
+                <v-hover v-slot="{ isHovering, props }">
+                  <v-btn
+                    v-bind="props"
+                    variant="outlined"
+                    color="teal"
+                    class="ma-2 text-none hero-btn"
+                    :elevation="isHovering ? 6 : 2"
+                    href="#contact"
+                    @click.prevent="handleCtaClick('Contact Me', 'contact')"
+                  >
+                    Contact Me
+                  </v-btn>
+                </v-hover>
+              </v-col>
+              <v-col cols="auto">
+                <v-hover v-slot="{ isHovering, props }">
+                  <v-btn
+                    v-bind="props"
+                    variant="tonal"
+                    color="teal"
+                    class="ma-2 text-none hero-btn"
+                    :elevation="isHovering ? 6 : 2"
+                    href="https://drive.google.com/file/d/1FTNoDGi4g3ZCDl31_kQ97D7FXdwG7Uu0/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    @click="handleCtaExternal('View Resume')"
+                  >
+                    View Resume
+                  </v-btn>
+                </v-hover>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-fade-transition>
+    </v-container>
+  </section>
 </template>
 
 <script setup>
 import { computed, watch, onMounted, onBeforeUnmount, ref } from 'vue'
 import { useTheme } from 'vuetify'
-// Use the named export Particles (the default export is a plugin)
-import Particles from "@tsparticles/vue3"; // ✅ default export now
+import Particles from '@tsparticles/vue3'
 import { loadFull } from 'tsparticles'
-// Use Vite asset imports so paths work in dev and build
 import profileDark from '../assets/profile-dark.png'
 import profileLight from '../assets/profile-light.png'
 
@@ -81,16 +138,18 @@ const log = {
 /* --------------------------------------------------- */
 
 const theme = useTheme()
-const particlesReady = ref(false)
-const currentProfile = computed(() =>
-  theme.global.name.value === 'darkTheme' ? profileDark : profileLight
-)
+const particlesReady = ref(true)
+const currentProfile = computed(() => (theme.global.name.value === 'darkTheme' ? profileDark : profileLight))
 
 const onImgError = (e) => {
   log.error('Profile image failed to load', {
     srcTried: currentProfile.value,
     eventType: e?.type
   })
+}
+
+const onImgLoad = () => {
+  log.info('Profile image loaded', { src: currentProfile.value })
 }
 
 const scrollTo = (id) => {
@@ -115,6 +174,7 @@ const particlesInit = async (engine) => {
     particlesReady.value = true
   } catch (e) {
     log.error('Particles init failed', { error: serializeError(e) })
+    particlesReady.value = false
   }
 }
 const particlesLoaded = async (container) => {
@@ -123,6 +183,15 @@ const particlesLoaded = async (container) => {
     id: container?.id,
     count: container?.particles?.count
   })
+}
+
+const handleCtaClick = (label, targetId) => {
+  log.info('CTA clicked', { label, targetId })
+  scrollTo(targetId)
+}
+
+const handleCtaExternal = (label) => {
+  log.info('External CTA clicked', { label })
 }
 
 const particleOptions = {
@@ -188,13 +257,42 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-#home {
+.hero-wrapper {
   position: relative;
   min-height: 100vh;
-  color: white;
+  color: #ffffff;
   background: linear-gradient(270deg, #004d40, #009688, #00695c);
   background-size: 600% 600%;
   animation: gradientShift 20s ease infinite;
+}
+
+.hero-container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-avatar {
+  cursor: pointer;
+}
+
+.hero-tagline {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.hero-btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-btn:hover,
+.hero-btn:focus-visible {
+  transform: translateY(-2px);
 }
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
