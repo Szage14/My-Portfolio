@@ -1,129 +1,89 @@
 <template>
-  <section id="tor" class="py-16 md:py-24 bg-white transition-colors duration-500">
-    <v-container>
-      <v-row>
-        <v-col cols="12">
-          <h2 class="text-h4 text-md-h3 font-weight-bold text-center mb-8">
+  <section id="tor" class="transition-colors duration-500">
+    <v-container class="py-16">
+      <v-row justify="center">
+        <v-col cols="12" class="text-center">
+          <h2 class="text-h4 text-md-h3 font-weight-bold mb-10">
             Transcript of Records
           </h2>
         </v-col>
       </v-row>
 
-      <v-row class="g-6 mb-8">
-        <v-col cols="12" v-if="primaryDocument">
-          <v-card rounded="xl" variant="tonal" color="teal" class="pa-6">
-            <v-card-item>
-              <v-card-title class="text-h6 text-md-h5 font-weight-bold">
-                {{ primaryDocument.label }}
-              </v-card-title>
-              <v-card-subtitle class="text-subtitle-2">
-                {{ primaryDocument.degree }}
-              </v-card-subtitle>
-            </v-card-item>
-            <v-card-text class="pt-2">
-              <div class="text-body-2">
-                {{ primaryDocument.school }}
-              </div>
-              <div class="text-body-2 mt-3">
-                Click "View TOR" to open the Google Drive preview or "Download" to save a copy for offline reference.
-              </div>
-            </v-card-text>
-            <v-card-actions class="pt-2 flex-wrap gap-2">
-              <v-spacer />
-              <v-btn
-                v-if="primaryDocument.viewUrl"
-                :href="primaryDocument.viewUrl"
-                target="_blank"
-                rel="noopener noreferrer"
-                prepend-icon="mdi-open-in-new"
-                variant="flat"
-                color="teal"
-                class="text-none"
-                @click.stop
-              >
-                View TOR
-              </v-btn>
-              <v-btn
-                v-if="primaryDocument.downloadUrl"
-                :href="primaryDocument.downloadUrl"
-                target="_blank"
-                rel="noopener noreferrer"
-                prepend-icon="mdi-download"
-                variant="tonal"
-                color="teal"
-                class="text-none"
-                @click.stop
-              >
-                Download
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-
-      <v-row class="g-6 align-stretch">
+      <v-row justify="center" align="stretch" dense class="g-6">
         <v-col
           v-for="doc in torDocuments"
-          :key="doc.pdfFilename"
+          :key="doc.label"
           cols="12"
           sm="6"
           md="4"
+          class="d-flex"
         >
           <v-hover v-slot="{ isHovering, props }">
             <v-card
               v-bind="props"
-              :elevation="isHovering ? 12 : 4"
-              :class="['d-flex', 'flex-column', 'transition-ease', isHovering ? 'scale-102' : 'scale-100']"
+              :elevation="isHovering ? 10 : 3"
               rounded="xl"
+              max-width="400"
+              class="tor-card pa-4 mx-auto text-center transition-ease"
               role="button"
               tabindex="0"
               :aria-label="`Open ${doc.label} preview dialog`"
+              :class="{ 'tor-card--hover': isHovering }"
               @click="openDialog(doc)"
-              @keyup.enter.space="openDialog(doc)"
+              @keyup.enter.prevent="openDialog(doc)"
+              @keyup.space.prevent="openDialog(doc)"
             >
-              <v-img
-                :src="doc.previewSrc"
-                :alt="`${doc.label} preview`"
-                height="320"
-                cover
-                rounded="t-xl"
-                class="clickable-image"
-                @click.stop="openDialog(doc)"
-                @load="logImageLoad(`${doc.label} preview card`)"
-              />
-              <v-card-item>
-                <v-card-title class="text-subtitle-1 font-weight-semibold">
+              <v-card-item class="d-flex flex-column align-center pb-2">
+                <v-card-title class="text-subtitle-1 font-weight-semibold text-high-emphasis">
                   {{ doc.label }}
                 </v-card-title>
-                <v-card-subtitle class="text-body-2 text-medium-emphasis">
+                <v-card-subtitle class="text-body-2 text-medium-emphasis mb-2">
                   {{ doc.school }} • {{ doc.degree }}
                 </v-card-subtitle>
               </v-card-item>
-              <v-card-text class="text-body-2 text-medium-emphasis">
+
+              <v-fade-transition>
+                <v-img
+                  v-if="doc.previewSrc"
+                  :src="doc.previewSrc"
+                  :alt="`${doc.label} preview`"
+                  class="tor-img clickable-image"
+                  aspect-ratio="4 / 3"
+                  contain
+                  rounded="lg"
+                  @click.stop="handleImageClick(doc)"
+                  @load="logImageLoad(`${doc.label} preview card`)"
+                />
+              </v-fade-transition>
+
+              <v-card-text class="text-body-2 text-medium-emphasis mt-3">
                 {{ doc.note }}
               </v-card-text>
-              <v-spacer />
-              <v-card-actions class="pt-0 mt-auto">
-                <v-btn
-                  variant="text"
-                  color="teal"
-                  class="text-none"
-                  :href="doc.viewUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  prepend-icon="mdi-open-in-new"
-                  @click.stop
-                >
-                  View TOR
-                </v-btn>
+
+              <v-card-actions class="justify-center gap-2 pt-2">
                 <v-btn
                   variant="tonal"
                   color="teal"
                   class="text-none"
-                  prepend-icon="mdi-magnify"
-                  @click.stop="openDialog(doc)"
+                  prepend-icon="mdi-eye"
+                  :href="doc.viewUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  @click.stop="handleExternalLink(doc, 'view')"
                 >
-                  Preview
+                  View TOR
+                </v-btn>
+                <v-btn
+                  variant="text"
+                  color="teal"
+                  class="text-none"
+                  prepend-icon="mdi-file-pdf-box"
+                  :href="doc.previewEmbedUrl || doc.viewUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  @click.stop="handleExternalLink(doc, 'pdf')"
+                >
+                  Open PDF
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -136,7 +96,7 @@
         max-width="960"
         transition="dialog-bottom-transition"
       >
-        <v-card rounded="xl">
+        <v-card rounded="xl" class="text-center">
           <v-card-title class="text-h6 font-weight-semibold">
             {{ selectedDocument?.label }}
           </v-card-title>
@@ -146,16 +106,17 @@
             </span>
           </v-card-subtitle>
           <v-card-text>
-            <v-img
-              v-if="selectedDocument"
-              :src="selectedDocument.previewSrc"
-              :alt="`${selectedDocument.label} preview`"
-              height="420"
-              cover
-              rounded="lg"
-              class="mb-6"
-              @load="logImageLoad(`${selectedDocument.label} dialog image`)"
-            />
+            <v-fade-transition>
+              <v-img
+                v-if="selectedDocument"
+                :src="selectedDocument.previewSrc"
+                :alt="`${selectedDocument.label} dialog preview`"
+                class="tor-img-dialog mb-6"
+                contain
+                rounded="lg"
+                @load="logImageLoad(`${selectedDocument.label} dialog image`)"
+              />
+            </v-fade-transition>
             <v-responsive
               v-if="selectedDocument?.previewEmbedUrl"
               class="rounded-lg overflow-hidden"
@@ -170,8 +131,7 @@
               ></iframe>
             </v-responsive>
           </v-card-text>
-          <v-card-actions class="flex-wrap gap-2">
-            <v-spacer />
+          <v-card-actions class="flex-wrap gap-2 justify-center">
             <v-btn
               variant="text"
               color="teal"
@@ -185,11 +145,11 @@
               :href="selectedDocument.viewUrl"
               target="_blank"
               rel="noopener noreferrer"
-              prepend-icon="mdi-open-in-new"
+              prepend-icon="mdi-eye"
               variant="text"
               color="teal"
               class="text-none"
-              @click.stop
+              @click.stop="handleExternalLink(selectedDocument, 'view')"
             >
               View TOR
             </v-btn>
@@ -202,7 +162,7 @@
               variant="tonal"
               color="teal"
               class="text-none"
-              @click.stop
+              @click.stop="handleExternalLink(selectedDocument, 'download')"
             >
               Download
             </v-btn>
@@ -237,8 +197,6 @@ const torDocuments = [
   previewSrc: encodeAsset(doc.previewFilename)
 }))
 
-const primaryDocument = torDocuments.length > 0 ? torDocuments[0] : null
-
 const dialog = ref(false)
 const selectedDocument = ref(null)
 
@@ -251,6 +209,15 @@ watch(dialog, (value, oldValue) => {
 
 const logImageLoad = (label) => {
   console.log('[Transcript] Image loaded:', label)
+}
+
+const handleImageClick = (doc) => {
+  console.log('[Transcript] Image clicked:', doc.label)
+  openDialog(doc)
+}
+
+const handleExternalLink = (doc, type) => {
+  console.log('[Transcript] External link clicked:', doc.label, type)
 }
 
 const openDialog = (doc) => {
@@ -269,16 +236,26 @@ const closeDialog = () => {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.scale-102 {
-  transform: scale(1.02);
+.tor-card {
+  cursor: pointer;
+  width: 100%;
 }
 
-.scale-100 {
-  transform: scale(1);
+.tor-card--hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.14);
 }
 
 .clickable-image {
   cursor: pointer;
+}
+
+.tor-img {
+  max-height: 260px;
+}
+
+.tor-img-dialog {
+  max-height: 420px;
 }
 
 .preview-frame {
