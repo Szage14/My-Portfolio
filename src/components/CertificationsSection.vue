@@ -59,7 +59,7 @@
                   rel="noopener noreferrer"
                   prepend-icon="mdi-open-in-new"
                   variant="tonal"
-                  color="primary"
+                  :color="buttonColor"
                   class="text-none"
                   :aria-label="`Open ${cert.label} certificate in new tab`"
                 >
@@ -96,7 +96,7 @@
             <v-spacer />
             <v-btn
               variant="text"
-              color="primary"
+              :color="buttonColor"
               class="text-none"
               @click="closeDialog"
               aria-label="Close certificate preview"
@@ -110,7 +110,7 @@
               rel="noopener noreferrer"
               prepend-icon="mdi-open-in-new"
               variant="tonal"
-              color="primary"
+              :color="buttonColor"
               class="text-none"
               :aria-label="`Open ${selectedCertificate.label} certificate in new tab`"
             >
@@ -124,7 +124,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useTheme } from 'vuetify'
 
 const baseUrl = import.meta.env.BASE_URL
 
@@ -174,6 +175,9 @@ const certificates = [
 
 const dialog = ref(false)
 const selectedCertificate = ref(null)
+const theme = useTheme()
+const isDark = computed(() => theme.global.current.value.dark)
+const buttonColor = computed(() => (isDark.value ? 'cyan-accent-3' : 'primary'))
 
 const logImageLoad = (label) => {
   console.log('[Certifications] Image loaded:', label)
