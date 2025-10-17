@@ -1,25 +1,126 @@
 <template>
   <section id="certifications" class="py-16 md:py-24 bg-white transition-colors duration-500">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 transition-colors duration-500">Certifications</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <a
+    <v-container>
+      <v-row>
+        <v-col cols="12">
+          <h2 class="text-h4 text-md-h3 font-weight-bold mb-8 text-center text-md-start">
+            Certifications
+          </h2>
+        </v-col>
+      </v-row>
+
+      <v-row class="g-4">
+        <v-col
           v-for="cert in certificates"
           :key="cert.filename"
-          :href="cert.href"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group"
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
         >
-          <img :src="cert.imgSrc" :alt="cert.alt" class="w-full h-auto rounded-lg mb-2">
-          <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">{{ cert.label }}</p>
-        </a>
-      </div>
-    </div>
+          <v-hover v-slot="{ isHovering, props }">
+            <v-card
+              v-bind="props"
+              :elevation="isHovering ? 12 : 4"
+              :class="['mx-auto', 'd-flex', 'flex-column', 'transition-ease', isHovering ? 'scale-102' : 'scale-100']"
+              variant="outlined"
+              rounded="xl"
+              role="button"
+              :aria-label="`Open ${cert.label} certificate preview`"
+              tabindex="0"
+              @click="openDialog(cert)"
+              @keyup.enter.space="openDialog(cert)"
+            >
+              <v-img
+                :src="cert.imgSrc"
+                :alt="cert.alt"
+                height="200"
+                cover
+                rounded="t-xl"
+                @load="logImageLoad(cert.label)"
+              />
+
+              <v-card-item>
+                <v-card-title class="text-subtitle-1 font-weight-semibold">{{ cert.label }}</v-card-title>
+                <v-card-subtitle class="text-caption text-medium-emphasis">{{ cert.alt }}</v-card-subtitle>
+              </v-card-item>
+
+              <v-spacer />
+
+              <v-card-actions class="mt-auto pt-0">
+                <v-btn
+                  :href="cert.href"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  prepend-icon="mdi-open-in-new"
+                  variant="tonal"
+                  color="teal"
+                  class="text-none"
+                  :aria-label="`Open ${cert.label} certificate in new tab`"
+                >
+                  View Certificate
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-hover>
+        </v-col>
+      </v-row>
+
+      <v-dialog
+        v-model="dialog"
+        max-width="720"
+        transition="dialog-bottom-transition"
+        persistent
+      >
+        <v-card rounded="xl">
+          <v-card-title class="text-h6 font-weight-semibold">
+            {{ selectedCertificate?.label }}
+          </v-card-title>
+          <v-card-text>
+            <v-img
+              v-if="selectedCertificate"
+              :src="selectedCertificate.imgSrc"
+              :alt="selectedCertificate.alt"
+              height="420"
+              cover
+              rounded="lg"
+              @load="logImageLoad(`${selectedCertificate.label} (dialog)`)"
+            />
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn
+              variant="text"
+              color="teal"
+              class="text-none"
+              @click="closeDialog"
+              aria-label="Close certificate preview"
+            >
+              Close
+            </v-btn>
+            <v-btn
+              v-if="selectedCertificate"
+              :href="selectedCertificate.href"
+              target="_blank"
+              rel="noopener noreferrer"
+              prepend-icon="mdi-open-in-new"
+              variant="tonal"
+              color="teal"
+              class="text-none"
+              :aria-label="`Open ${selectedCertificate.label} certificate in new tab`"
+            >
+              Open Original
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-container>
   </section>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
 const baseUrl = import.meta.env.BASE_URL
 
 const encodeAsset = (filename) => `${baseUrl}assets/${encodeURI(filename)}`
@@ -65,4 +166,36 @@ const certificates = [
   href: encodeAsset(item.filename),
   imgSrc: encodeAsset(item.filename)
 }))
+
+const dialog = ref(false)
+const selectedCertificate = ref(null)
+
+const logImageLoad = (label) => {
+  console.log('[Certifications] Image loaded:', label)
+}
+
+const openDialog = (cert) => {
+  selectedCertificate.value = cert
+  dialog.value = true
+  console.log('[Certifications] Dialog opened:', cert.label)
+}
+
+const closeDialog = () => {
+  dialog.value = false
+  console.log('[Certifications] Dialog closed')
+}
 </script>
+
+<style scoped>
+.transition-ease {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.scale-102 {
+  transform: scale(1.02);
+}
+
+.scale-100 {
+  transform: scale(1);
+}
+</style>
