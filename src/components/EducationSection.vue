@@ -9,16 +9,16 @@
         </v-col>
       </v-row>
 
-      <v-row justify="center" align="stretch" dense class="g-6">
-        <v-col
-          v-for="item in education"
-          :key="item.degree"
-          cols="12"
-          sm="6"
-          md="4"
-          class="d-flex"
-        >
-          <v-fade-transition appear>
+      <v-fade-transition appear>
+        <v-row justify="center" align="stretch" dense class="g-6">
+          <v-col
+            v-for="item in education"
+            :key="item.degree"
+            cols="12"
+            sm="6"
+            md="4"
+            class="d-flex"
+          >
             <v-hover v-slot="{ isHovering, props }">
               <v-card
                 v-bind="props"
@@ -39,7 +39,7 @@
                     <v-icon icon="mdi-school" size="32" />
                   </v-avatar>
                 </v-card-item>
-                <v-card-title class="text-subtitle-1 font-weight-bold text-high-emphasis">
+                <v-card-title class="text-subtitle-1 font-weight-bold text-high-emphasis education-card__title">
                   {{ item.degree }}
                 </v-card-title>
                 <v-card-subtitle class="text-body-2 text-medium-emphasis">
@@ -53,9 +53,9 @@
                 </v-card-text>
               </v-card>
             </v-hover>
-          </v-fade-transition>
-        </v-col>
-      </v-row>
+          </v-col>
+        </v-row>
+      </v-fade-transition>
     </v-container>
   </section>
 </template>
@@ -93,12 +93,15 @@ const logCardClick = (degree) => {
   cursor: pointer;
   border: 1px solid rgba(125, 125, 125, 0.18);
   width: 100%;
-  max-width: 360px;
 }
 
 .education-card--hover {
   transform: translateY(-4px) scale(1.01);
   box-shadow: 0 16px 28px rgba(0, 0, 0, 0.14);
   border-color: var(--v-theme-primary);
+}
+
+.education-card__title {
+  white-space: normal;
 }
 </style>
