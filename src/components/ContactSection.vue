@@ -137,10 +137,11 @@
                   aria-label="Contact form"
                 >
                   <v-row class="g-4">
+                    <input type="hidden" name="name" :value="formData.name" />
                     <v-col cols="12" md="6">
                       <v-text-field
                         v-model="formData.name"
-                        name="user_name"
+                        name="from_name"
                         label="Full Name"
                         density="comfortable"
                         variant="outlined"
@@ -152,12 +153,24 @@
                     <v-col cols="12" md="6">
                       <v-text-field
                         v-model="formData.email"
-                        name="user_email"
+                        name="from_email"
                         label="Email Address"
                         density="comfortable"
                         variant="outlined"
                         autocomplete="email"
                         :rules="rules.email"
+                        required
+                      />
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                        v-model="formData.subject"
+                        name="subject"
+                        label="Subject"
+                        density="comfortable"
+                        variant="outlined"
+                        autocomplete="off"
+                        :rules="rules.subject"
                         required
                       />
                     </v-col>
@@ -210,6 +223,7 @@ const isSubmitting = ref(false)
 const formData = reactive({
   name: '',
   email: '',
+  subject: '',
   message: ''
 })
 
@@ -222,6 +236,10 @@ const rules = {
   email: [
     (value) => !!value || 'Email is required',
     (value) => emailPattern.test(value) || 'Enter a valid email address'
+  ],
+  subject: [
+    (value) => !!value || 'Subject is required',
+    (value) => value.length >= 4 || 'Subject should be at least 4 characters'
   ],
   message: [
     (value) => !!value || 'Message is required'
@@ -282,6 +300,7 @@ const showSnackbar = (message, color) => {
 const resetForm = () => {
   formData.name = ''
   formData.email = ''
+  formData.subject = ''
   formData.message = ''
   formRef.value?.reset()
   formRef.value?.resetValidation()
@@ -315,7 +334,8 @@ const handleSubmit = async () => {
     isSubmitting.value = true
     console.log('[Contact] Sending message via EmailJS', {
       name: formData.name,
-      email: formData.email
+      email: formData.email,
+      subject: formData.subject
     })
 
     const response = await emailjs.sendForm(
