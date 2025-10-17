@@ -1,5 +1,5 @@
 <template>
-  <section id="services" class="py-16 md:py-24 bg-white transition-colors duration-500">
+  <section id="services" class="surface-gradient-light transition-colors duration-500">
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -22,14 +22,17 @@
             <v-hover v-slot="{ isHovering, props }">
               <v-card
                 v-bind="props"
-                :elevation="isHovering ? 10 : 2"
+                :elevation="isHovering ? 14 : 6"
                 :class="[
                   'services-card',
+                  'glass-panel',
                   'transition-ease',
+                  'pa-6',
+                  'text-center',
                   isHovering ? 'services-card--hover' : ''
                 ]"
+                variant="flat"
                 rounded="xl"
-                class="pa-6 text-center"
                 role="button"
                 tabindex="0"
                 :aria-label="`Learn more about ${service.title}`"
@@ -48,7 +51,7 @@
                   >
                     <span aria-hidden="true" class="text-h5">{{ service.icon }}</span>
                   </v-avatar>
-                  <v-card-title class="text-h6 font-weight-semibold">
+                  <v-card-title class="text-h6 font-weight-semibold text-high-emphasis">
                     {{ service.title }}
                   </v-card-title>
                 </v-card-item>
@@ -193,13 +196,18 @@ const handleCardActivate = (service, source) => {
 
 .services-card {
   cursor: pointer;
-  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .services-card--hover {
   transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
-  border-color: var(--v-theme-primary);
+  box-shadow: 0 28px 56px rgba(15, 23, 42, 0.25);
+}
+
+.v-theme--dark .services-card--hover {
+  box-shadow: 0 28px 56px rgba(5, 9, 20, 0.5);
 }
 
 .services-avatar {

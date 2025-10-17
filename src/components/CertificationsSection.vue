@@ -1,5 +1,5 @@
 <template>
-  <section id="certifications" class="py-16 md:py-24 bg-white transition-colors duration-500">
+  <section id="certifications" class="surface-gradient-light transition-colors duration-500">
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -21,9 +21,14 @@
           <v-hover v-slot="{ isHovering, props }">
             <v-card
               v-bind="props"
-              :elevation="isHovering ? 12 : 4"
-              :class="['mx-auto', 'd-flex', 'flex-column', 'transition-ease', isHovering ? 'scale-102' : 'scale-100']"
-              variant="outlined"
+              :elevation="isHovering ? 16 : 8"
+              :class="[
+                'cert-card',
+                'glass-panel',
+                'transition-ease',
+                isHovering ? 'cert-card--hover' : ''
+              ]"
+              variant="flat"
               rounded="xl"
               role="button"
               :aria-label="`Open ${cert.label} certificate preview`"
@@ -41,20 +46,20 @@
               />
 
               <v-card-item>
-                <v-card-title class="text-subtitle-1 font-weight-semibold">{{ cert.label }}</v-card-title>
+                <v-card-title class="text-subtitle-1 font-weight-semibold text-high-emphasis">{{ cert.label }}</v-card-title>
                 <v-card-subtitle class="text-caption text-medium-emphasis">{{ cert.alt }}</v-card-subtitle>
               </v-card-item>
 
               <v-spacer />
 
-              <v-card-actions class="mt-auto pt-0">
+              <v-card-actions class="mt-auto pt-0 cert-card__actions">
                 <v-btn
                   :href="cert.href"
                   target="_blank"
                   rel="noopener noreferrer"
                   prepend-icon="mdi-open-in-new"
                   variant="tonal"
-                  color="teal"
+                  color="primary"
                   class="text-none"
                   :aria-label="`Open ${cert.label} certificate in new tab`"
                 >
@@ -72,7 +77,7 @@
         transition="dialog-bottom-transition"
         persistent
       >
-        <v-card rounded="xl">
+        <v-card rounded="xl" class="glass-panel">
           <v-card-title class="text-h6 font-weight-semibold">
             {{ selectedCertificate?.label }}
           </v-card-title>
@@ -91,7 +96,7 @@
             <v-spacer />
             <v-btn
               variant="text"
-              color="teal"
+              color="primary"
               class="text-none"
               @click="closeDialog"
               aria-label="Close certificate preview"
@@ -105,7 +110,7 @@
               rel="noopener noreferrer"
               prepend-icon="mdi-open-in-new"
               variant="tonal"
-              color="teal"
+              color="primary"
               class="text-none"
               :aria-label="`Open ${selectedCertificate.label} certificate in new tab`"
             >
@@ -188,14 +193,27 @@ const closeDialog = () => {
 
 <style scoped>
 .transition-ease {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-.scale-102 {
-  transform: scale(1.02);
+.cert-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.scale-100 {
-  transform: scale(1);
+.cert-card--hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 52px rgba(15, 23, 42, 0.22);
+  border-color: rgba(24, 255, 255, 0.38);
+}
+
+.v-theme--dark .cert-card--hover {
+  box-shadow: 0 26px 52px rgba(3, 7, 18, 0.56);
+  border-color: rgba(24, 255, 255, 0.22);
+}
+
+.cert-card__actions {
+  justify-content: center;
 }
 </style>
