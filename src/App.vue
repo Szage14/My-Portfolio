@@ -14,6 +14,8 @@
         <CertificationsSection />
         <TranscriptSection />
         <ServicesSection />
+        <ReferencesSection />
+        <ContactSection />
       </v-container>
 
       <!-- 🔗 Legacy Portfolio Button -->
@@ -72,6 +74,8 @@ import WorkshopsSection from './components/WorkshopsSection.vue'
 import CertificationsSection from './components/CertificationsSection.vue'
 import TranscriptSection from './components/TranscriptSection.vue'
 import ServicesSection from './components/ServicesSection.vue'
+import ReferencesSection from './components/ReferencesSection.vue'
+import ContactSection from './components/ContactSection.vue'
 import FooterSection from './components/FooterSection.vue'
 
 const baseUrl = import.meta.env.BASE_URL
