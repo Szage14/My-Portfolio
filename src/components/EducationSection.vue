@@ -1,19 +1,104 @@
 <template>
- <v-container id="education" class="py-16" data-aos="fade-left">
+  <section id="education" class="transition-colors duration-500">
+    <v-container class="py-16">
+      <v-row justify="center">
+        <v-col cols="12" class="text-center">
+          <h2 class="text-h4 text-md-h3 font-weight-bold mb-10">
+            Education
+          </h2>
+        </v-col>
+      </v-row>
 
-    <h2 class="text-h5 font-weight-bold mb-8 text-center">Education</h2>
-
-    <v-timeline side="end">
-      <v-timeline-item dot-color="teal" fill-dot>
-        <template #opposite>2020 – 2024</template>
-        <v-card variant="outlined" class="pa-4">
-          <h3 class="text-subtitle-1 font-weight-bold">Bachelor of Science in Information Systems</h3>
-          <p class="text-body-2 mb-2">University of San Jose-Recoletos – Butuan Campus</p>
-          <p class="text-body-2">
-            Focused on software development, database systems, and information management.
-          </p>
-        </v-card>
-      </v-timeline-item>
-    </v-timeline>
-  </v-container>
+      <v-row justify="center" align="stretch" dense class="g-6">
+        <v-col
+          v-for="item in education"
+          :key="item.degree"
+          cols="12"
+          sm="6"
+          md="4"
+          class="d-flex"
+        >
+          <v-fade-transition appear>
+            <v-hover v-slot="{ isHovering, props }">
+              <v-card
+                v-bind="props"
+                :elevation="isHovering ? 6 : 3"
+                rounded="xl"
+                class="education-card pa-6 text-center mx-auto transition-ease"
+                role="button"
+                tabindex="0"
+                :class="{ 'education-card--hover': isHovering }"
+                @mouseenter="logHoverEnter(item.degree)"
+                @mouseleave="logHoverLeave(item.degree)"
+                @click="logCardClick(item.degree)"
+                @keyup.enter.prevent="logCardClick(item.degree)"
+                @keyup.space.prevent="logCardClick(item.degree)"
+              >
+                <v-card-item class="d-flex flex-column align-center mb-3">
+                  <v-avatar size="64" variant="tonal" color="teal">
+                    <v-icon icon="mdi-school" size="32" />
+                  </v-avatar>
+                </v-card-item>
+                <v-card-title class="text-subtitle-1 font-weight-bold text-high-emphasis">
+                  {{ item.degree }}
+                </v-card-title>
+                <v-card-subtitle class="text-body-2 text-medium-emphasis">
+                  {{ item.school }}
+                </v-card-subtitle>
+                <v-card-subtitle class="text-body-2 text-medium-emphasis mb-3">
+                  {{ item.years }}
+                </v-card-subtitle>
+                <v-card-text class="text-body-2 text-medium-emphasis">
+                  {{ item.summary }}
+                </v-card-text>
+              </v-card>
+            </v-hover>
+          </v-fade-transition>
+        </v-col>
+      </v-row>
+    </v-container>
+  </section>
 </template>
+
+<script setup>
+const education = [
+  {
+    degree: 'Bachelor of Science in Information Systems',
+    school: 'Caraga State University-Main Campus',
+    years: '2021 – 2025',
+    summary:
+      'A blend of technical depth, business understanding, and applied practice equips students with the skills for a dynamic career at the intersection of technology and management.'
+  }
+]
+
+const logHoverEnter = (degree) => {
+  console.log('[Education] Hover enter:', degree)
+}
+
+const logHoverLeave = (degree) => {
+  console.log('[Education] Hover leave:', degree)
+}
+
+const logCardClick = (degree) => {
+  console.log('[Education] Card activated:', degree)
+}
+</script>
+
+<style scoped>
+.transition-ease {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.education-card {
+  cursor: pointer;
+  border: 1px solid rgba(125, 125, 125, 0.18);
+  width: 100%;
+  max-width: 360px;
+}
+
+.education-card--hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.14);
+  border-color: var(--v-theme-primary);
+}
+</style>
