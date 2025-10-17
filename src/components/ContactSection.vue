@@ -197,9 +197,9 @@ const rules = {
 
 const socialLinks = [
   {
-    label: 'LinkedIn Profile',
-    icon: 'mdi-linkedin',
-    href: 'https://tinyurl.com/cjbuquis'
+    label: 'Messenger',
+    icon: 'mdi-facebook-messenger',
+    href: 'https://m.me/cristianjay.buquis'
   },
   {
     label: 'Primary Email',

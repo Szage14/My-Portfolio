@@ -65,12 +65,12 @@
                         variant="flat"
                         class="ma-1 text-none home-about-btn"
                         :elevation="isHovering ? 6 : 2"
-                        href="https://drive.google.com/file/d/1FTNoDGi4g3ZCDl31_kQ97D7FXdwG7Uu0/view?usp=sharing"
+                        href="https://m.me/cristianjay.buquis"
                         target="_blank"
                         rel="noopener noreferrer"
-                        @click="handleCtaExternal('View Resume')"
+                        @click="handleCtaExternal('View TOR')"
                       >
-                        View Resume
+                        View TOR
                       </v-btn>
                     </v-hover>
                   </v-col>
