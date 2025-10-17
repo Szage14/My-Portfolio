@@ -1,60 +1,133 @@
 <template>
-  <v-app-bar app color="teal-darken-3" dark elevate-on-scroll>
-    <v-container class="d-flex align-center justify-space-between">
-      <!-- Brand -->
-      <v-btn variant="text" class="text-h6 font-weight-bold text-white" @click="scrollTo('home')">
-        CJ Buquis
-      </v-btn>
+  <v-slide-y-transition>
+    <v-app-bar
+      app
+      color="surface"
+      elevate-on-scroll
+      scroll-behavior="hide"
+      :elevation="isScrolled ? 2 : 0"
+      height="72"
+      class="nav-bar"
+    >
+      <v-container class="d-flex align-center flex-wrap py-0">
+        <v-app-bar-title class="text-h6 text-md-h5 font-weight-bold me-4">
+          <v-btn
+            variant="text"
+            class="text-primary text-none px-0 brand-button"
+            aria-label="Go to Home"
+            @click.prevent="navigateTo(homeItem)"
+          >
+            My Portfolio
+          </v-btn>
+        </v-app-bar-title>
 
-      <!-- Single Hamburger Menu (all navigations) -->
-      <v-btn icon :aria-label="'Open menu'" @click="drawer = true">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-    </v-container>
-  </v-app-bar>
+        <v-spacer />
 
-  <!-- Navigation Drawer -->
-  <v-navigation-drawer v-model="drawer" temporary location="end" width="300">
-    <v-list density="comfortable">
-      <v-list-subheader>Navigate</v-list-subheader>
+        <div class="nav-buttons d-none d-md-flex align-center">
+          <v-btn
+            v-for="item in navItems"
+            :key="item.id"
+            variant="text"
+            :color="isSectionActive(item.id) ? 'teal' : 'primary'"
+            class="text-none nav-link mx-1"
+            :class="{ 'nav-link--active': isSectionActive(item.id) }"
+            :aria-label="`Go to ${item.label}`"
+            :aria-current="isSectionActive(item.id) ? 'page' : undefined"
+            @click.prevent="navigateTo(item)"
+          >
+            {{ item.label }}
+          </v-btn>
+        </div>
+
+        <v-btn
+          icon
+          variant="text"
+          color="primary"
+          class="ms-2 theme-toggle"
+          :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+          @click="toggleTheme"
+        >
+          <v-icon :icon="darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny'" class="theme-toggle__icon" />
+        </v-btn>
+
+        <v-app-bar-nav-icon
+          class="d-md-none ms-1"
+          aria-label="Open navigation menu"
+          @click="drawer = true"
+        />
+      </v-container>
+    </v-app-bar>
+  </v-slide-y-transition>
+
+  <v-navigation-drawer
+    v-model="drawer"
+    temporary
+    location="right"
+    color="surface-variant"
+    width="320"
+    elevation="6"
+    class="nav-drawer"
+  >
+    <v-list nav density="compact">
+      <v-list-item class="py-4 px-3">
+        <template #prepend>
+          <v-avatar color="teal" size="44" class="me-3" variant="tonal">
+            <v-icon icon="mdi-account" />
+          </v-avatar>
+        </template>
+        <v-list-item-title class="text-body-1 font-weight-semibold">Cristian Buquis</v-list-item-title>
+        <v-list-item-subtitle class="text-body-2 text-medium-emphasis">Portfolio</v-list-item-subtitle>
+      </v-list-item>
+
+      <v-divider class="my-3" />
 
       <v-list-item
         v-for="item in navItems"
-        :key="item.id"
-        @click="scrollTo(item.id)"
+        :key="`drawer-${item.id}`"
         :title="item.label"
         :value="item.id"
+        class="text-body-2"
+        @click="navigateTo(item)"
       >
         <template #prepend>
-          <v-icon icon="mdi-circle-small" />
+          <v-icon :icon="item.icon" />
         </template>
-        <v-list-item-title>{{ item.label }}</v-list-item-title>
+        <v-list-item-title :class="{ 'text-primary font-weight-semibold': isSectionActive(item.id) }">
+          {{ item.label }}
+        </v-list-item-title>
       </v-list-item>
 
-      <v-divider class="my-2" />
+      <v-divider class="my-3" />
 
-      <v-list-item :href="baseUrl + 'legacy/index.html'" target="_blank" title="Legacy Portfolio">
+      <v-list-item @click="toggleTheme" class="text-body-2" :title="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+        <template #prepend>
+          <v-icon :icon="darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny'" class="theme-toggle__icon" />
+        </template>
+        <v-list-item-title>Toggle Theme</v-list-item-title>
+      </v-list-item>
+
+      <v-list-item
+        :href="legacyHref"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-body-2"
+        title="Legacy Portfolio"
+        @click="log.info('Legacy portfolio opened')"
+      >
         <template #prepend>
           <v-icon color="amber-darken-2" icon="mdi-history" />
         </template>
         <v-list-item-title>Legacy</v-list-item-title>
-      </v-list-item>
-
-      <v-list-item @click="toggleTheme" :title="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
-        <template #prepend>
-          <v-icon :icon="darkMode ? 'mdi-weather-night' : 'mdi-white-balance-sunny'" />
-        </template>
-        <v-list-item-title>Toggle Theme</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script setup>
+import { ref, watch, onMounted, onBeforeUnmount, nextTick, computed } from 'vue'
 import { useTheme } from 'vuetify'
-import { ref, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
-/* ---------- lightweight logger you can copy from console ---------- */
+/* ---------- lightweight logger (copyable) ---------- */
 function serializeError(err) {
   if (!err) return null
   return { name: err.name, message: err.message, stack: err.stack }
@@ -62,11 +135,14 @@ function serializeError(err) {
 function ensureDebug() {
   if (!window.__debug) {
     Object.defineProperty(window, '__debug', {
-      value: { logs: [], copy: async () => {
-        const text = JSON.stringify(window.__debug.logs, null, 2)
-        await navigator.clipboard.writeText(text)
-        console.info('[NavBar] Copied debug logs to clipboard. count=', window.__debug.logs.length)
-      }},
+      value: {
+        logs: [],
+        copy: async () => {
+          const text = JSON.stringify(window.__debug.logs, null, 2)
+          await navigator.clipboard.writeText(text)
+          console.info('[NavBar] Copied debug logs to clipboard. count=', window.__debug.logs.length)
+        }
+      },
       writable: false
     })
   }
@@ -84,46 +160,113 @@ function pushLog(level, message, data) {
 const log = {
   info: (m, d) => pushLog('info', m, d),
   warn: (m, d) => pushLog('warn', m, d),
-  error: (m, d) => pushLog('error', m, d),
+  error: (m, d) => pushLog('error', m, d)
 }
-/* ------------------------------------------------------------------ */
+/* --------------------------------------------------- */
+
+const navItems = [
+  { id: 'home', label: 'Home/About', icon: 'mdi-home-variant' },
+  { id: 'skills', label: 'Skills', icon: 'mdi-lightning-bolt-outline' },
+  { id: 'education', label: 'Education', icon: 'mdi-school-outline' },
+  { id: 'experience', label: 'Workshops', icon: 'mdi-briefcase-account-outline' },
+  { id: 'certifications', label: 'Certifications', icon: 'mdi-certificate-outline' },
+  { id: 'tor', label: 'TOR', icon: 'mdi-file-certificate-outline' },
+  { id: 'references', label: 'References', icon: 'mdi-account-group-outline' },
+  { id: 'contact', label: 'Contact', icon: 'mdi-email-outline' }
+]
+const homeItem = navItems[0]
+
+const drawer = ref(false)
+const darkMode = ref(false)
+const activeSection = ref('home')
+const isScrolled = ref(false)
+const baseUrl = import.meta.env.BASE_URL
+const legacyHref = computed(() => `${baseUrl}legacy/index.html`)
 
 const theme = useTheme()
-const darkMode = ref(false)
+let sectionObserver
 
-// Load saved theme from localStorage
-onMounted(() => {
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 120
+}
+
+const initSectionObserver = async () => {
   try {
-    const savedTheme = localStorage.getItem('theme')
-    if (savedTheme) {
-      darkMode.value = savedTheme === 'dark'
-      const next = darkMode.value ? 'darkTheme' : 'lightTheme'
-      // Prefer Vuetify API
-      if (typeof theme.change === 'function') {
-        theme.change(next)
-      } else {
-        theme.global.name.value = next
+    await nextTick()
+    const options = { root: null, rootMargin: '-35% 0px -55% 0px', threshold: 0.2 }
+    sectionObserver = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+
+      if (visible) {
+        const id = visible.target.id
+        if (navItems.some((item) => item.id === id) && activeSection.value !== id) {
+          activeSection.value = id
+          log.info('Active section changed', { id })
+        }
       }
-    }
-    log.info('Mounted NavBar', {
-      savedTheme,
-      appliedTheme: theme.global?.name?.value
+    }, options)
+
+    navItems.forEach((item) => {
+      const section = document.getElementById(item.id)
+      if (section) {
+        sectionObserver.observe(section)
+      }
     })
   } catch (e) {
-    log.error('Theme init failed', { error: serializeError(e) })
+    log.error('Observer init failed', { error: serializeError(e) })
   }
+}
 
-  // Global error hooks
-  window.addEventListener('error', onWindowError)
-  window.addEventListener('unhandledrejection', onUnhandledRejection)
-})
+const destroySectionObserver = () => {
+  if (sectionObserver) {
+    sectionObserver.disconnect()
+    sectionObserver = undefined
+  }
+}
 
-onBeforeUnmount(() => {
-  window.removeEventListener('error', onWindowError)
-  window.removeEventListener('unhandledrejection', onUnhandledRejection)
-})
+const navigateTo = async (item) => {
+  try {
+    drawer.value = false
+    log.info('Navigation clicked', { target: item.id })
+    await nextTick()
+    const section = document.getElementById(item.id)
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      activeSection.value = item.id
+    } else {
+      const available = Array.from(document.querySelectorAll('section[id]')).map((s) => s.id)
+      log.warn('Section not found', { requested: item.id, available })
+    }
+  } catch (e) {
+    log.error('navigateTo failed', { target: item.id, error: serializeError(e) })
+  }
+}
 
-function onWindowError(event) {
+const isSectionActive = (id) => activeSection.value === id
+
+const applyTheme = (val) => {
+  const next = val ? 'darkTheme' : 'lightTheme'
+  if (typeof theme.change === 'function') {
+    theme.change(next)
+  } else {
+    theme.global.name.value = next
+  }
+  localStorage.setItem('theme', val ? 'dark' : 'light')
+  log.info('Theme applied', { darkMode: val, appliedTheme: next })
+}
+
+const toggleTheme = () => {
+  try {
+    darkMode.value = !darkMode.value
+    applyTheme(darkMode.value)
+  } catch (e) {
+    log.error('toggleTheme failed', { error: serializeError(e) })
+  }
+}
+
+const onWindowError = (event) => {
   log.error('WindowError', {
     message: event.message,
     filename: event.filename,
@@ -133,79 +276,92 @@ function onWindowError(event) {
   })
 }
 
-function onUnhandledRejection(event) {
+const onUnhandledRejection = (event) => {
   const reason = event?.reason
-  log.error('UnhandledRejection', typeof reason === 'object'
-    ? { reason: serializeError(reason) }
-    : { reason })
+  log.error('UnhandledRejection', typeof reason === 'object' ? { reason: serializeError(reason) } : { reason })
 }
 
-// Watch for changes and save preference
-watch(darkMode, (val) => {
+onMounted(async () => {
   try {
-    const next = val ? 'darkTheme' : 'lightTheme'
-    if (typeof theme.change === 'function') {
-      theme.change(next)
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme) {
+      darkMode.value = savedTheme === 'dark'
+      applyTheme(darkMode.value)
     } else {
-      theme.global.name.value = next
+      applyTheme(theme.global.name.value === 'darkTheme')
     }
-    localStorage.setItem('theme', val ? 'dark' : 'light')
-    log.info('Theme toggled', { darkMode: val, appliedTheme: next })
+    log.info('NavBar mounted', { savedTheme, appliedTheme: theme.global?.name?.value })
   } catch (e) {
-    log.error('Theme toggle failed', { error: serializeError(e), requestedDark: val })
+    log.error('Theme init failed', { error: serializeError(e) })
   }
+
+  await initSectionObserver()
+  handleScroll()
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  window.addEventListener('error', onWindowError)
+  window.addEventListener('unhandledrejection', onUnhandledRejection)
 })
 
-const toggleTheme = () => {
-  try {
-    darkMode.value = !darkMode.value
-  } catch (e) {
-    log.error('toggleTheme handler failed', { error: serializeError(e) })
-  }
-}
+onBeforeUnmount(() => {
+  destroySectionObserver()
+  window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('error', onWindowError)
+  window.removeEventListener('unhandledrejection', onUnhandledRejection)
+})
 
-const active = ref(null)
-const drawer = ref(false)
-const baseUrl = import.meta.env.BASE_URL
-
-const navItems = [
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'education', label: 'Education' },
-  { id: 'experience', label: 'Workshops & Training' },
-  { id: 'certifications', label: 'Certifications' }
-]
-
-const scrollTo = async (id) => {
-  try {
-    await nextTick()
-    const section = document.getElementById(id)
-    if (section) {
-      // Prefer smooth scroll with offset fallback
-      try {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      } catch {
-        const top = window.scrollY + section.getBoundingClientRect().top
-        window.scrollTo({ top, behavior: 'smooth' })
-      }
-      drawer.value = false
-      log.info('Scrolled to section', { id })
-    } else {
-      const available = Array.from(document.querySelectorAll('section[id]')).map(s => s.id)
-      log.warn('Section not found', { requested: id, available })
+watch(
+  () => theme.global.name.value,
+  (val) => {
+    const isDark = val === 'darkTheme'
+    if (darkMode.value !== isDark) {
+      darkMode.value = isDark
+      log.info('Theme changed externally', { theme: val })
     }
-  } catch (e) {
-    log.error('scrollTo failed', { id, error: serializeError(e) })
   }
-}
+)
 </script>
 
 <style scoped>
-/* Do not follow on scroll */
-.v-app-bar {
-  position: static !important;
-  top: auto !important;
-  z-index: auto !important;
+.nav-bar {
+  backdrop-filter: blur(12px);
+  transition: box-shadow 0.2s ease;
+}
+
+.nav-buttons {
+  gap: 4px;
+}
+
+.nav-link {
+  letter-spacing: 0.03em;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  transform: translateY(-1px);
+}
+
+.nav-link--active {
+  color: var(--v-theme-teal);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.brand-button {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.theme-toggle__icon {
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover .theme-toggle__icon,
+.theme-toggle:focus-visible .theme-toggle__icon {
+  transform: rotate(20deg) scale(1.05);
+}
+
+.nav-drawer {
+  backdrop-filter: blur(8px);
 }
 </style>
