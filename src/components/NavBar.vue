@@ -10,15 +10,17 @@
       class="nav-bar"
     >
       <v-container class="d-flex align-center flex-wrap py-0">
-        <v-app-bar-title class="text-h6 text-md-h5 font-weight-bold me-4">
+        <v-app-bar-title class="brand-title me-4">
           <v-btn
             variant="text"
-            class="text-primary text-none px-0 brand-button"
+            color="teal"
+            class="brand-button text-none px-0"
             aria-label="Go to Home"
             @click.prevent="navigateTo(homeItem)"
           >
-            My Portfolio
+           My Portfolio
           </v-btn>
+          <!-- <span class="brand-subtitle text-body-2 text-medium-emphasis">Web Developer</span> -->
         </v-app-bar-title>
 
         <v-spacer />
@@ -42,7 +44,7 @@
         <v-btn
           icon
           variant="text"
-          color="primary"
+          color="teal"
           class="ms-2 theme-toggle"
           :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
           @click="toggleTheme"
@@ -347,9 +349,21 @@ watch(
   text-underline-offset: 6px;
 }
 
+.brand-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+  gap: 2px;
+}
+
 .brand-button {
   font-size: inherit;
   font-weight: inherit;
+}
+
+.brand-subtitle {
+  letter-spacing: 0.04em;
 }
 
 .theme-toggle__icon {
