@@ -35,18 +35,6 @@ section {
   text-transform: uppercase;
 }
 
-.glass-panel {
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-.glass-panel--muted {
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-.v-theme--dark .glass-panel {
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
-.v-theme--dark .glass-panel--muted {
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
 .v-theme--light body,
 .v-theme--light .v-application {
   background-color: #eef5ff !important;
@@ -58,23 +46,33 @@ section {
   background-color: #050914 !important;
   color: #E8F1FF !important;
 }
+
+.glass-panel {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   background: rgba(255, 255, 255, 0.18);
   border: 1px solid rgba(255, 255, 255, 0.32);
   box-shadow: 0 18px 46px rgba(15, 23, 42, 0.18);
 }
 
 .glass-panel--muted {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.24);
 }
 
 .v-theme--dark .glass-panel {
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
   background: rgba(10, 18, 33, 0.58);
   border: 1px solid rgba(232, 241, 255, 0.14);
   box-shadow: 0 18px 46px rgba(9, 17, 34, 0.52);
 }
 
 .v-theme--dark .glass-panel--muted {
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
   background: rgba(9, 17, 34, 0.46);
   border-color: rgba(232, 241, 255, 0.1);
 }
