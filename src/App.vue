@@ -91,6 +91,8 @@ const scrollToTop = () => {
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+  // Keep page title consistent in the SPA
+  document.title = 'Cristian Jay T. Buquis — Portfolio'
 })
 
 onUnmounted(() => {
