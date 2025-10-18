@@ -14,8 +14,8 @@
           v-for="doc in torDocuments"
           :key="doc.label"
           cols="12"
-          sm="6"
-          md="4"
+          sm="8"
+          md="6"
           class="d-flex"
         >
           <v-hover v-slot="{ isHovering, props }">
@@ -23,7 +23,6 @@
               v-bind="props"
               :elevation="isHovering ? 10 : 3"
               rounded="xl"
-              max-width="400"
               class="tor-card pa-4 mx-auto text-center transition-ease"
               role="button"
               tabindex="0"
@@ -34,10 +33,10 @@
               @keyup.space.prevent="openDialog(doc)"
             >
               <v-card-item class="d-flex flex-column align-center pb-2">
-                <v-card-title class="text-subtitle-1 font-weight-semibold text-high-emphasis">
+                <v-card-title class="tor-card-title text-subtitle-1 font-weight-semibold text-high-emphasis">
                   {{ doc.label }}
                 </v-card-title>
-                <v-card-subtitle class="text-body-2 text-medium-emphasis mb-2">
+                <v-card-subtitle class="tor-card-subtitle text-body-2 text-medium-emphasis mb-2">
                   {{ doc.school }} • {{ doc.degree }}
                 </v-card-subtitle>
               </v-card-item>
@@ -178,7 +177,7 @@ import { ref, watch } from 'vue'
 
 const baseUrl = import.meta.env.BASE_URL
 
-const encodeAsset = (filename) => `${baseUrl}assets/${encodeURI(filename)}`
+const encodeAsset = (filename) => `${baseUrl}legacy/assets/${encodeURI(filename)}`
 
 const torDocuments = [
   {
@@ -239,11 +238,18 @@ const closeDialog = () => {
 .tor-card {
   cursor: pointer;
   width: 100%;
+  max-width: 560px;
 }
 
 .tor-card--hover {
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 18px 36px rgba(0, 0, 0, 0.14);
+}
+
+.tor-card-title,
+.tor-card-subtitle {
+  white-space: normal;
+  word-break: break-word;
 }
 
 .clickable-image {

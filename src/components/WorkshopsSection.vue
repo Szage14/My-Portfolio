@@ -19,8 +19,8 @@
           xl="3"
           class="d-flex"
         >
-          <v-scale-transition appear>
-            <v-hover v-slot="{ isHovering, props }">
+          <v-hover v-slot="{ isHovering, props }">
+            <v-scale-transition appear>
               <v-card
                 v-bind="props"
                 :elevation="isHovering ? 5 : 3"
@@ -65,8 +65,8 @@
                   </div>
                 </v-card-text>
               </v-card>
-            </v-hover>
-          </v-scale-transition>
+            </v-scale-transition>
+          </v-hover>
         </v-col>
       </v-row>
     </v-container>

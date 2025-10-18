@@ -129,7 +129,7 @@ import { useTheme } from 'vuetify'
 
 const baseUrl = import.meta.env.BASE_URL
 
-const encodeAsset = (filename) => `${baseUrl}assets/${encodeURI(filename)}`
+const encodeAsset = (filename) => `${baseUrl}legacy/assets/${encodeURI(filename)}`
 
 const certificates = [
   {
