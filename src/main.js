@@ -33,8 +33,25 @@ window.addEventListener('unhandledrejection', (e) => {
 })
 
 
+const app = createApp(App)
+
+app.use(vuetify)
+
+app.use(Particles, {
+	init: async (engine) => {
+		try {
+			const { loadFull } = await import('tsparticles')
+			await loadFull(engine)
+			pushGlobal('info', 'Particles engine initialised', null)
+		} catch (error) {
+			pushGlobal('error', 'Particles init failed', { error: error?.stack || error?.message || String(error) })
+			throw error
+		}
+	}
+})
+
 try {
-	createApp(App).use(vuetify).use(Particles).mount('#app')
+	app.mount('#app')
 	pushGlobal('info', 'App mounted', null)
 } catch (e) {
 	pushGlobal('error', 'Mount failed', { error: e?.stack || e?.message || String(e) })

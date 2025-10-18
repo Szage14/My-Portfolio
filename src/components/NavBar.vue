@@ -30,7 +30,7 @@
             v-for="item in navItems"
             :key="item.id"
             variant="text"
-            :color="isSectionActive(item.id) ? 'teal' : 'primary'"
+            :color="isSectionActive(item.id) ? 'teal' : inactiveNavColor"
             class="text-none nav-link mx-1"
             :class="{ 'nav-link--active': isSectionActive(item.id) }"
             :aria-label="`Go to ${item.label}`"
@@ -54,8 +54,8 @@
 
         <v-app-bar-nav-icon
           class="d-md-none ms-1"
-          aria-label="Open navigation menu"
-          @click="drawer = true"
+          :aria-label="drawer ? 'Close navigation menu' : 'Open navigation menu'"
+          @click="drawer = !drawer"
         />
       </v-container>
     </v-app-bar>
@@ -77,7 +77,12 @@
             <v-icon icon="mdi-account" />
           </v-avatar>
         </template>
-        <v-list-item-title class="text-body-1 font-weight-semibold">Cristian Jay T. Buquis</v-list-item-title>
+        <v-list-item-title
+          class="text-body-1 font-weight-semibold drawer-title"
+          :style="drawerAccentStyle"
+        >
+          Cristian Jay T. Buquis
+        </v-list-item-title>
         <v-list-item-subtitle class="text-body-2 text-medium-emphasis">BSIS-Web Developer</v-list-item-subtitle>
       </v-list-item>
 
@@ -92,9 +97,12 @@
         @click="navigateTo(item)"
       >
         <template #prepend>
-          <v-icon :icon="item.icon" />
+          <v-icon :icon="item.icon" :color="isSectionActive(item.id) ? 'teal' : inactiveNavColor" />
         </template>
-        <v-list-item-title :class="{ 'text-primary font-weight-semibold': isSectionActive(item.id) }">
+        <v-list-item-title
+          :class="{ 'text-primary font-weight-semibold': isSectionActive(item.id) }"
+          :style="isSectionActive(item.id) ? undefined : { color: inactiveNavColor }"
+        >
           {{ item.label }}
         </v-list-item-title>
       </v-list-item>
@@ -109,7 +117,7 @@
         <template #prepend>
           <v-icon :icon="darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny'" class="theme-toggle__icon" />
         </template>
-        <v-list-item-title>Toggle Theme</v-list-item-title>
+  <v-list-item-title class="drawer-link" :style="drawerAccentStyle">Toggle Theme</v-list-item-title>
       </v-list-item>
 
       <v-list-item
@@ -123,7 +131,7 @@
         <template #prepend>
           <v-icon color="amber-darken-2" icon="mdi-history" />
         </template>
-        <v-list-item-title>Legacy</v-list-item-title>
+  <v-list-item-title class="drawer-link" :style="drawerAccentStyle">Legacy</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
@@ -181,6 +189,8 @@ const navItems = [
   { id: 'contact', label: 'Contact', icon: 'mdi-email-outline' }
 ]
 const homeItem = navItems[0]
+const inactiveNavColor = '#039BE5'
+const drawerAccentStyle = { color: '#00897B' }
 
 const drawer = ref(false)
 const darkMode = ref(false)
@@ -381,5 +391,10 @@ watch(
 
 .nav-drawer {
   backdrop-filter: blur(8px);
+}
+
+.drawer-title,
+.drawer-link {
+  color: var(--v-theme-teal);
 }
 </style>
