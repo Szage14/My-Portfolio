@@ -51,7 +51,7 @@
                   >
                     <span aria-hidden="true" class="text-h5">{{ service.icon }}</span>
                   </v-avatar>
-                  <v-card-title class="text-h6 font-weight-semibold text-high-emphasis">
+                  <v-card-title class="text-h6 font-weight-semibold text-high-emphasis services-title">
                     {{ service.title }}
                   </v-card-title>
                 </v-card-item>
@@ -88,25 +88,20 @@
       scrollable
     >
       <v-card v-if="selectedService" class="glass-panel">
-        <v-card-title class="d-flex align-center pa-6 text-h5 font-weight-bold">
-          <v-avatar
-            size="48"
-            variant="tonal"
-            color="primary"
-            class="me-4"
-          >
-            <span class="text-h6">{{ selectedService.icon }}</span>
-          </v-avatar>
-          <span>{{ selectedService.title }}</span>
-          <v-spacer />
-          <v-btn
-            icon
-            variant="text"
-            @click="dialogOpen = false"
-            aria-label="Close dialog"
-          >
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
+        <v-card-title class="pa-6">
+          <div class="dialog-title-wrap">
+            <div class="dialog-title-center">
+              <v-avatar
+                size="48"
+                variant="tonal"
+                color="primary"
+                class="me-3"
+              >
+                <span class="text-h6">{{ selectedService.icon }}</span>
+              </v-avatar>
+              <span class="text-h5 font-weight-bold dialog-title-text">{{ selectedService.title }}</span>
+            </div>
+          </div>
         </v-card-title>
 
         <v-divider />
@@ -162,7 +157,7 @@
                 :href="example.url"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-none"
+                class="text-none service-example-btn"
               >
                 <v-icon start>mdi-open-in-new</v-icon>
                 {{ example.label }}
@@ -474,6 +469,16 @@ const handleCardActivate = (service, source) => {
   font-size: 1.75rem;
 }
 
+.services-title {
+  white-space: normal; /* allow wrapping */
+  word-break: break-word;
+  overflow: visible;
+  text-align: center;
+  line-height: 1.25;
+  margin-inline: auto;
+  max-width: 22ch; /* keep nice readable width */
+}
+
 .services-link {
   color: #0091ea;
   text-decoration: none;
@@ -509,5 +514,62 @@ const handleCardActivate = (service, source) => {
 
 .gap-2 {
   gap: 0.5rem;
+}
+
+/* Centered dialog title with floating close button */
+.dialog-title-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+}
+
+.dialog-title-center {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.dialog-title-text {
+  display: inline-block;
+  white-space: normal;
+  word-break: break-word;
+  text-align: center;
+  line-height: 1.2;
+  max-width: min(72ch, 80vw);
+}
+
+/* Responsive example buttons to prevent label/icon overlap on small screens */
+.service-example-btn {
+  width: 100%;
+  justify-content: center;
+  white-space: normal; /* allow wrapping */
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+/* Ensure icon and text stay centered on multiple lines */
+.service-example-btn .v-btn__content {
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .dialog-title-center {
+    gap: 6px;
+  }
+  .dialog-title-text {
+    font-size: 1.125rem; /* ~18px for better fit on mobile */
+    max-width: 90vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .services-title {
+    max-width: 26ch;
+    font-size: 1.05rem; /* slightly smaller to fit */
+  }
 }
 </style>
