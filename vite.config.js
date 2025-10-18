@@ -7,5 +7,5 @@ import vuetify from 'vite-plugin-vuetify'
 export default defineConfig({
   plugins: [vue(), vuetify({ autoImport: true })],
   base: process.env.NODE_ENV === 'production' ? '/My-Portfolio/' : '/',
-  publicDir: 'legacy', // ensures your old portfolio is served
+  publicDir: 'public', // expose static legacy files under /legacy/
 })
