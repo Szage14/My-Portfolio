@@ -47,7 +47,7 @@
           <v-col cols="12" md="7" class="d-flex">
             <v-card flat class="home-about-card glass-panel">
               <div class="mx-auto home-about-text">
-                <div class="home-about-kicker text-body-2 text-primary d-inline-flex align-center mb-3">
+                <div class="home-about-kicker text-body-2 home-about-accent d-inline-flex align-center mb-3">
                   <v-icon icon="mdi-star-four-points" size="18" class="me-2" />
                   Information Systems Graduate
                 </div>
@@ -56,7 +56,7 @@
                   Cristian Jay T. Buquis
                 </h1>
 
-                <p class="text-h6 font-weight-medium text-primary mb-4">
+                <p class="text-h6 font-weight-medium home-about-accent mb-4">
                   Fullstack Developer
                 </p>
 
@@ -414,6 +414,10 @@ onBeforeUnmount(() => {
 .home-about-actions .home-about-icon:focus-visible {
   transform: translateY(-3px) scale(1.05);
   color: var(--v-theme-secondary);
+}
+
+.home-about-accent {
+  color: #00897b;
 }
 
 @media (max-width: 960px) {
