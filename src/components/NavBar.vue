@@ -97,11 +97,11 @@
         @click="navigateTo(item)"
       >
         <template #prepend>
-          <v-icon :icon="item.icon" :color="isSectionActive(item.id) ? 'teal' : inactiveNavColor" />
+          <v-icon :icon="item.icon" :color="isSectionActive(item.id) ? accentNavColor : inactiveNavColor" />
         </template>
         <v-list-item-title
-          :class="{ 'text-primary font-weight-semibold': isSectionActive(item.id) }"
-          :style="isSectionActive(item.id) ? undefined : { color: inactiveNavColor }"
+          :class="{ 'drawer-link--active': isSectionActive(item.id) }"
+          :style="isSectionActive(item.id) ? { color: accentNavColor } : { color: inactiveNavColor }"
         >
           {{ item.label }}
         </v-list-item-title>
@@ -190,7 +190,9 @@ const navItems = [
 ]
 const homeItem = navItems[0]
 const inactiveNavColor = '#039BE5'
-const drawerAccentStyle = { color: '#00897B' }
+const drawerAccentColor = '#00897B'
+const accentNavColor = '#69F0AE'
+const drawerAccentStyle = { color: drawerAccentColor }
 
 const drawer = ref(false)
 const darkMode = ref(false)
@@ -396,5 +398,10 @@ watch(
 .drawer-title,
 .drawer-link {
   color: var(--v-theme-teal);
+}
+
+.drawer-link--active {
+  color: #69F0AE !important;
+  font-weight: 600;
 }
 </style>

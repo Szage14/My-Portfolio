@@ -70,14 +70,10 @@
                     <v-hover v-slot="{ isHovering, props }">
                       <v-btn
                         v-bind="props"
-                        color="primary"
                         variant="flat"
-                        class="text-none px-6 py-3 home-about-btn"
+                        class="text-none px-6 py-3 home-about-btn home-about-btn--primary"
                         :elevation="isHovering ? 10 : 4"
-                        href="https://m.me/cristianjay.buquis"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        @click="handleCtaExternal('View TOR')"
+                        @click.prevent="handleCtaScroll('View TOR', 'tor')"
                       >
                         View TOR
                       </v-btn>
@@ -88,8 +84,7 @@
                       <v-btn
                         v-bind="props"
                         variant="outlined"
-                        color="primary"
-                        class="text-none px-6 py-3 home-about-btn"
+                        class="text-none px-6 py-3 home-about-btn home-about-btn--secondary"
                         :elevation="isHovering ? 10 : 0"
                         href="#contact"
                         @click.prevent="handleCtaScroll('Contact Me', 'contact')"
@@ -112,8 +107,7 @@
                     <v-btn
                       icon
                       variant="text"
-                      color="primary"
-                      class="home-about-icon"
+                      class="home-about-icon home-about-icon--accent"
                       :href="mailtoHref"
                       aria-label="Send an email"
                       @click="handleActionClick('Email')"
@@ -125,8 +119,7 @@
                     <v-btn
                       icon
                       variant="text"
-                      color="primary"
-                      class="home-about-icon"
+                      class="home-about-icon home-about-icon--accent"
                       href="https://m.me/cristianjay.buquis"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -198,10 +191,6 @@ const theme = useTheme()
 const particlesReady = ref(true)
 const currentProfile = computed(() => (theme.global.name.value === 'darkTheme' ? profileDark : profileLight))
 const mailtoHref = 'mailto:Cjbuquis@gmail.com'
-
-const handleCtaExternal = (label) => {
-  log.info('CTA external clicked', { label })
-}
 
 const handleCtaScroll = (label, targetId) => {
   log.info('CTA scroll clicked', { label, targetId })
@@ -402,6 +391,29 @@ onBeforeUnmount(() => {
   transform: translateY(-3px);
 }
 
+.home-about-btn--primary {
+  background-color: #0091ea !important;
+  color: #ffffff !important;
+  border-color: #0091ea !important;
+}
+
+.home-about-btn--primary:hover,
+.home-about-btn--primary:focus-visible {
+  background-color: #0091ea !important;
+  box-shadow: 0 12px 24px rgba(0, 145, 234, 0.28);
+}
+
+.home-about-btn--secondary {
+  border-color: #0091ea !important;
+  color: #0091ea !important;
+}
+
+.home-about-btn--secondary:hover,
+.home-about-btn--secondary:focus-visible {
+  background-color: rgba(0, 145, 234, 0.12) !important;
+  color: #0091ea !important;
+}
+
 .home-about-divider {
   opacity: 0.32;
 }
@@ -410,10 +422,14 @@ onBeforeUnmount(() => {
   transition: transform 0.25s ease, color 0.25s ease;
 }
 
+.home-about-icon--accent {
+  color: #0091ea !important;
+}
+
 .home-about-actions .home-about-icon:hover,
 .home-about-actions .home-about-icon:focus-visible {
   transform: translateY(-3px) scale(1.05);
-  color: var(--v-theme-secondary);
+  color: #40c4ff !important;
 }
 
 .home-about-accent {
