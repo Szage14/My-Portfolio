@@ -74,7 +74,13 @@
 </template>
 
 <script setup>
+// cSpell:ignore Butuan
 const experiences = [
+  {
+    title: 'Work Experience - Stock Clerk',
+    organization: 'SM Appliance Center, SM City Butuan',
+    details: 'Employed for 5 months (Nov 28, 2025 to Apr 28, 2026)'
+  },
   {
     title: 'Intern - Project Monitoring System (PMS)',
     organization: 'Caraga State University-Main Campus',
