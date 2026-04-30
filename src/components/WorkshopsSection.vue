@@ -31,12 +31,9 @@
                 :class="{ 'workshop-card--hover': isHovering }"
                 @mouseenter="logHoverEnter(experience.title)"
                 @mouseleave="logHoverLeave(experience.title)"
-                @click="logCardClick(experience.title)"
-                @keyup.enter.prevent="logCardClick(experience.title)"
-                @keyup.space.prevent="logCardClick(experience.title)"
-                @touchstart="startLongPress(experience.title)"
-                @touchend="cancelLongPress"
-                @touchcancel="cancelLongPress"
+                @click="openCardDetails(experience)"
+                @keyup.enter.prevent="openCardDetails(experience)"
+                @keyup.space.prevent="openCardDetails(experience)"
               >
                 <v-card-title class="text-h6 font-weight-bold text-high-emphasis">
                   {{ experience.title }}
@@ -47,23 +44,11 @@
 
                 <v-card-text class="text-body-2 text-medium-emphasis">
                   <p v-if="experience.details" class="mb-3">
-                    {{ isExpanded(experience.title) ? experience.details : getPreview(experience.details) }}
+                    {{ getPreview(experience.details) }}
                   </p>
                   <p v-if="experience.description" class="mb-3">
-                    {{ isExpanded(experience.title) ? experience.description : getPreview(experience.description) }}
+                    {{ getPreview(experience.description) }}
                   </p>
-
-                  <div v-if="experience.details || experience.description" class="mb-3">
-                    <v-btn
-                      variant="text"
-                      color="teal"
-                      size="small"
-                      class="text-none"
-                      @click.stop="toggleExpanded(experience.title)"
-                    >
-                      {{ isExpanded(experience.title) ? 'Show less' : 'Read more' }}
-                    </v-btn>
-                  </div>
 
                   <div v-if="experience.link" class="d-flex justify-center">
                     <v-btn
@@ -85,6 +70,49 @@
           </v-hover>
         </v-col>
       </v-row>
+
+      <v-dialog v-model="detailsDialog" max-width="560" scrollable>
+        <v-card rounded="xl" class="pa-2">
+          <v-card-title class="text-h6 font-weight-bold text-high-emphasis">
+            {{ selectedExperience?.title }}
+          </v-card-title>
+
+          <v-card-subtitle class="text-teal-accent-4 font-weight-medium mb-2">
+            {{ selectedExperience?.organization }}
+          </v-card-subtitle>
+
+          <v-card-text class="text-body-1 text-medium-emphasis">
+            <p v-if="selectedExperience?.details" class="mb-3">
+              {{ selectedExperience.details }}
+            </p>
+            <p v-if="selectedExperience?.description" class="mb-3">
+              {{ selectedExperience.description }}
+            </p>
+          </v-card-text>
+
+          <v-card-actions class="px-4 pb-4 d-flex justify-space-between">
+            <v-btn
+              v-if="selectedExperience?.link"
+              variant="text"
+              color="teal"
+              prepend-icon="mdi-link"
+              :href="selectedExperience.link.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-none"
+              @click="handleLinkClick(selectedExperience.title, selectedExperience.link.label)"
+            >
+              {{ selectedExperience.link.label }}
+            </v-btn>
+
+            <v-spacer />
+
+            <v-btn variant="tonal" color="teal" class="text-none" @click="detailsDialog = false">
+              Close
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-container>
   </section>
 </template>
@@ -126,32 +154,18 @@ const experiences = [
   }
 ]
 
-const expandedCard = ref(null)
-const longPressTimer = ref(null)
-
-const isExpanded = (title) => expandedCard.value === title
-
-const toggleExpanded = (title) => {
-  expandedCard.value = expandedCard.value === title ? null : title
-}
+const detailsDialog = ref(false)
+const selectedExperience = ref(null)
 
 const getPreview = (text, maxLength = 130) => {
   if (!text || text.length <= maxLength) return text
   return `${text.slice(0, maxLength).trimEnd()}...`
 }
 
-const startLongPress = (title) => {
-  cancelLongPress()
-  longPressTimer.value = setTimeout(() => {
-    toggleExpanded(title)
-    longPressTimer.value = null
-  }, 450)
-}
-
-const cancelLongPress = () => {
-  if (!longPressTimer.value) return
-  clearTimeout(longPressTimer.value)
-  longPressTimer.value = null
+const openCardDetails = (experience) => {
+  selectedExperience.value = experience
+  detailsDialog.value = true
+  logCardClick(experience.title)
 }
 
 const logHoverEnter = (title) => {
@@ -163,8 +177,6 @@ const logHoverLeave = (title) => {
 }
 
 const logCardClick = (title) => {
-  toggleExpanded(title)
-  cancelLongPress()
   console.log('[Workshops] Card activated:', title)
 }
 
