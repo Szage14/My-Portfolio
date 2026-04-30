@@ -71,21 +71,21 @@
         </v-col>
       </v-row>
 
-      <v-dialog v-model="detailsDialog" max-width="560" scrollable>
+      <v-dialog v-model="detailsDialog" max-width="560" scrollable transition="dialog-bottom-transition">
         <v-card rounded="xl" class="pa-2">
-          <v-card-title class="text-h6 font-weight-bold text-high-emphasis">
+          <v-card-title class="text-h6 font-weight-bold text-high-emphasis workshop-dialog-title">
             {{ selectedExperience?.title }}
           </v-card-title>
 
-          <v-card-subtitle class="text-teal-accent-4 font-weight-medium mb-2">
+          <v-card-subtitle class="text-teal-accent-4 font-weight-medium mb-2 workshop-dialog-subtitle">
             {{ selectedExperience?.organization }}
           </v-card-subtitle>
 
-          <v-card-text class="text-body-1 text-medium-emphasis">
-            <p v-if="selectedExperience?.details" class="mb-3">
+          <v-card-text class="text-body-1 text-medium-emphasis workshop-dialog-text">
+            <p v-if="selectedExperience?.details" class="mb-3 workshop-dialog-text">
               {{ selectedExperience.details }}
             </p>
-            <p v-if="selectedExperience?.description" class="mb-3">
+            <p v-if="selectedExperience?.description" class="mb-3 workshop-dialog-text">
               {{ selectedExperience.description }}
             </p>
           </v-card-text>
@@ -200,5 +200,13 @@ const handleLinkClick = (title, label) => {
   transform: translateY(-4px) scale(1.01);
   box-shadow: 0 16px 28px rgba(0, 0, 0, 0.14);
   border-color: var(--v-theme-primary);
+}
+
+.workshop-dialog-title,
+.workshop-dialog-subtitle,
+.workshop-dialog-text {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 </style>
