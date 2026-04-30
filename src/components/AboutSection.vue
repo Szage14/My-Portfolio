@@ -41,10 +41,10 @@
                   CRISTIAN JAY T. BUQUIS
                 </h3>
                 <p class="text-subtitle-1 text-md-h6 text-teal-accent-4 font-weight-medium text-center text-md-start mb-4">
-                  Fullstack Developer
+                  Vibe Coder | Web Developer
                 </p>
                 <p class="text-body-1 text-medium-emphasis mb-3">
-                  Full-Stack Developer with hands-on experience in Vue.js, React, Node.js, Strapi, and Laravel, seeking to leverage strong
+                  Web Developer with hands-on experience in Vue.js, React, Node.js, Strapi, and Laravel, seeking to leverage strong
                   problem-solving skills and a growth mindset to build scalable web applications.
                 </p>
                 <p class="text-body-1 text-medium-emphasis">
