@@ -58,7 +58,7 @@
                   target="_blank"
                   rel="noopener noreferrer"
                   prepend-icon="mdi-open-in-new"
-                  variant="tonal"
+                  :variant="actionButtonVariant"
                   :color="buttonColor"
                   class="text-none"
                   :aria-label="`Open ${cert.label} certificate in new tab`"
@@ -109,7 +109,7 @@
               target="_blank"
               rel="noopener noreferrer"
               prepend-icon="mdi-open-in-new"
-              variant="tonal"
+              :variant="actionButtonVariant"
               :color="buttonColor"
               class="text-none"
               :aria-label="`Open ${selectedCertificate.label} certificate in new tab`"
@@ -177,7 +177,8 @@ const dialog = ref(false)
 const selectedCertificate = ref(null)
 const theme = useTheme()
 const isDark = computed(() => theme.global.current.value.dark)
-const buttonColor = computed(() => (isDark.value ? 'cyan-accent-3' : 'primary'))
+const buttonColor = computed(() => (isDark.value ? 'cyan-accent-3' : 'blue-darken-4'))
+const actionButtonVariant = computed(() => (isDark.value ? 'tonal' : 'flat'))
 
 const logImageLoad = (label) => {
   console.log('[Certifications] Image loaded:', label)
