@@ -4,7 +4,7 @@
       <v-row justify="center">
         <v-col cols="12" class="text-center">
           <h2 class="text-h4 text-md-h3 font-weight-bold mb-10">
-            Workshop and Training
+            Experience and Training
           </h2>
         </v-col>
       </v-row>
