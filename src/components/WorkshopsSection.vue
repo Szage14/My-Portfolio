@@ -34,6 +34,9 @@
                 @click="logCardClick(experience.title)"
                 @keyup.enter.prevent="logCardClick(experience.title)"
                 @keyup.space.prevent="logCardClick(experience.title)"
+                @touchstart="startLongPress(experience.title)"
+                @touchend="cancelLongPress"
+                @touchcancel="cancelLongPress"
               >
                 <v-card-title class="text-h6 font-weight-bold text-high-emphasis">
                   {{ experience.title }}
@@ -44,11 +47,24 @@
 
                 <v-card-text class="text-body-2 text-medium-emphasis">
                   <p v-if="experience.details" class="mb-3">
-                    {{ experience.details }}
+                    {{ isExpanded(experience.title) ? experience.details : getPreview(experience.details) }}
                   </p>
                   <p v-if="experience.description" class="mb-3">
-                    {{ experience.description }}
+                    {{ isExpanded(experience.title) ? experience.description : getPreview(experience.description) }}
                   </p>
+
+                  <div v-if="experience.details || experience.description" class="mb-3">
+                    <v-btn
+                      variant="text"
+                      color="teal"
+                      size="small"
+                      class="text-none"
+                      @click.stop="toggleExpanded(experience.title)"
+                    >
+                      {{ isExpanded(experience.title) ? 'Show less' : 'Read more' }}
+                    </v-btn>
+                  </div>
+
                   <div v-if="experience.link" class="d-flex justify-center">
                     <v-btn
                       variant="text"
@@ -74,6 +90,8 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
 // cSpell:ignore Butuan
 const experiences = [
   {
@@ -108,6 +126,34 @@ const experiences = [
   }
 ]
 
+const expandedCard = ref(null)
+const longPressTimer = ref(null)
+
+const isExpanded = (title) => expandedCard.value === title
+
+const toggleExpanded = (title) => {
+  expandedCard.value = expandedCard.value === title ? null : title
+}
+
+const getPreview = (text, maxLength = 130) => {
+  if (!text || text.length <= maxLength) return text
+  return `${text.slice(0, maxLength).trimEnd()}...`
+}
+
+const startLongPress = (title) => {
+  cancelLongPress()
+  longPressTimer.value = setTimeout(() => {
+    toggleExpanded(title)
+    longPressTimer.value = null
+  }, 450)
+}
+
+const cancelLongPress = () => {
+  if (!longPressTimer.value) return
+  clearTimeout(longPressTimer.value)
+  longPressTimer.value = null
+}
+
 const logHoverEnter = (title) => {
   console.log('[Workshops] Hover enter:', title)
 }
@@ -117,6 +163,8 @@ const logHoverLeave = (title) => {
 }
 
 const logCardClick = (title) => {
+  toggleExpanded(title)
+  cancelLongPress()
   console.log('[Workshops] Card activated:', title)
 }
 
