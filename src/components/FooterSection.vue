@@ -11,7 +11,7 @@
         <v-row class="w-100 ma-0" justify="center">
           <v-col cols="12" class="py-1">
             <p class="mb-3 text-center text-body-2 text-medium-emphasis">
-              © 2025 Cristian Jay T. Buquis. All Rights Reserved.
+              © {{ currentYear }} Cristian Jay T. Buquis. All Rights Reserved.
             </p>
           </v-col>
           <v-col cols="12" class="py-0">
@@ -38,6 +38,8 @@
 </template>
 
 <script setup>
+const currentYear = new Date().getFullYear()
+
 const socialLinks = [
   {
     label: 'GitHub',

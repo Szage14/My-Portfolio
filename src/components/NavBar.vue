@@ -182,7 +182,7 @@ const navItems = [
   { id: 'home', label: 'Home/About', icon: 'mdi-home-variant' },
   { id: 'skills', label: 'Skills', icon: 'mdi-lightning-bolt-outline' },
   { id: 'education', label: 'Education', icon: 'mdi-school-outline' },
-  { id: 'experience', label: 'Workshops', icon: 'mdi-briefcase-account-outline' },
+  { id: 'experience', label: 'Experience', icon: 'mdi-briefcase-account-outline' },
   { id: 'certifications', label: 'Certifications', icon: 'mdi-certificate-outline' },
   { id: 'tor', label: 'TOR', icon: 'mdi-file-certificate-outline' },
   { id: 'references', label: 'References', icon: 'mdi-account-group-outline' },

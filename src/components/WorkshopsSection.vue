@@ -4,7 +4,7 @@
       <v-row justify="center">
         <v-col cols="12" class="text-center">
           <h2 class="text-h4 text-md-h3 font-weight-bold mb-10">
-            Workshop and Training
+            Experience and Training
           </h2>
         </v-col>
       </v-row>
@@ -31,9 +31,9 @@
                 :class="{ 'workshop-card--hover': isHovering }"
                 @mouseenter="logHoverEnter(experience.title)"
                 @mouseleave="logHoverLeave(experience.title)"
-                @click="logCardClick(experience.title)"
-                @keyup.enter.prevent="logCardClick(experience.title)"
-                @keyup.space.prevent="logCardClick(experience.title)"
+                @click="openCardDetails(experience)"
+                @keyup.enter.prevent="openCardDetails(experience)"
+                @keyup.space.prevent="openCardDetails(experience)"
               >
                 <v-card-title class="text-h6 font-weight-bold text-high-emphasis">
                   {{ experience.title }}
@@ -44,11 +44,12 @@
 
                 <v-card-text class="text-body-2 text-medium-emphasis">
                   <p v-if="experience.details" class="mb-3">
-                    {{ experience.details }}
+                    {{ getPreview(experience.details) }}
                   </p>
                   <p v-if="experience.description" class="mb-3">
-                    {{ experience.description }}
+                    {{ getPreview(experience.description) }}
                   </p>
+
                   <div v-if="experience.link" class="d-flex justify-center">
                     <v-btn
                       variant="text"
@@ -69,12 +70,63 @@
           </v-hover>
         </v-col>
       </v-row>
+
+      <v-dialog v-model="detailsDialog" max-width="560" scrollable transition="dialog-bottom-transition">
+        <v-card rounded="xl" class="pa-2">
+          <v-card-title class="text-h6 font-weight-bold text-high-emphasis workshop-dialog-title">
+            {{ selectedExperience?.title }}
+          </v-card-title>
+
+          <v-card-subtitle class="text-teal-accent-4 font-weight-medium mb-2 workshop-dialog-subtitle">
+            {{ selectedExperience?.organization }}
+          </v-card-subtitle>
+
+          <v-card-text class="text-body-1 text-medium-emphasis workshop-dialog-text">
+            <p v-if="selectedExperience?.details" class="mb-3 workshop-dialog-text">
+              {{ selectedExperience.details }}
+            </p>
+            <p v-if="selectedExperience?.description" class="mb-3 workshop-dialog-text">
+              {{ selectedExperience.description }}
+            </p>
+          </v-card-text>
+
+          <v-card-actions class="px-4 pb-4 d-flex justify-space-between">
+            <v-btn
+              v-if="selectedExperience?.link"
+              variant="text"
+              color="teal"
+              prepend-icon="mdi-link"
+              :href="selectedExperience.link.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-none"
+              @click="handleLinkClick(selectedExperience.title, selectedExperience.link.label)"
+            >
+              {{ selectedExperience.link.label }}
+            </v-btn>
+
+            <v-spacer />
+
+            <v-btn variant="tonal" color="teal" class="text-none" @click="detailsDialog = false">
+              Close
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-container>
   </section>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
+// cSpell:ignore Butuan
 const experiences = [
+  {
+    title: 'Work Experience - Stock Clerk',
+    organization: 'SM Appliance Center, SM City Butuan',
+    details: 'Employed for 5 months (Nov 28, 2025 to Apr 28, 2026)'
+  },
   {
     title: 'Intern - Project Monitoring System (PMS)',
     organization: 'Caraga State University-Main Campus',
@@ -101,6 +153,20 @@ const experiences = [
       'An Android application designed for reviewers taking the civil service exam, featuring practice questions and study materials.'
   }
 ]
+
+const detailsDialog = ref(false)
+const selectedExperience = ref(null)
+
+const getPreview = (text, maxLength = 130) => {
+  if (!text || text.length <= maxLength) return text
+  return `${text.slice(0, maxLength).trimEnd()}...`
+}
+
+const openCardDetails = (experience) => {
+  selectedExperience.value = experience
+  detailsDialog.value = true
+  logCardClick(experience.title)
+}
 
 const logHoverEnter = (title) => {
   console.log('[Workshops] Hover enter:', title)
@@ -134,5 +200,13 @@ const handleLinkClick = (title, label) => {
   transform: translateY(-4px) scale(1.01);
   box-shadow: 0 16px 28px rgba(0, 0, 0, 0.14);
   border-color: var(--v-theme-primary);
+}
+
+.workshop-dialog-title,
+.workshop-dialog-subtitle,
+.workshop-dialog-text {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 </style>
