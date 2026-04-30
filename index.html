@@ -1,404 +1,71 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cristian Jay T. Buquis - Fullstack Developer</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Link to your custom CSS file -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body class="bg-stone-50 text-stone-800 transition-colors duration-500">
-    <nav id="main-nav" class="bg-stone-50/80 backdrop-blur-lg border-b border-stone-200 transition-colors duration-500">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center h-16">
-                <a href="#" class="text-xl font-bold text-teal-600">Cristian Jay Buquis</a>
-                <div class="flex items-center space-x-4">
-                    <div class="hidden md:flex items-center space-x-6">
-                        <a href="#about" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">About</a>
-                        <a href="#skills" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">Skills</a>
-                        <a href="#education" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">Education</a>
-                        <a href="#experience" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">Experience</a>
-                        <a href="#certifications" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">Certifications</a>
-                        <a href="#references" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">References</a>
-                        <a href="#contact" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">Contact</a>
-                    </div>
-                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors duration-300 text-stone-700 dark:text-stone-300" aria-label="Toggle dark/light theme">
-                        <svg id="moon-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"></path>
-                        </svg>
-                        <svg id="sun-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12H2m15.325-7.325l-.707-.707M6.343 17.657l-.707.707M18.95 18.95l-.707-.707M5.05 5.05l-.707-.707M12 15a3 3 0 100-6 3 3 0 000 6z"></path>
-                        </svg>
-                    </button>
-                    <button id="mobile-menu-button" class="md:hidden text-stone-700 dark:text-stone-300" aria-label="Toggle mobile navigation menu">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200 transition-colors duration-500">
-            <a href="#about" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">About</a>
-            <a href="#skills" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">Skills</a>
-            <a href="#education" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">Education</a>
-            <a href="#experience" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">Experience</a>
-            <a href="#certifications" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">Certifications</a>
-            <a href="#references" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">References</a>
-            <a href="#contact" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">Contact</a>
-        </div>
-    </nav>
-    <main>
-        <section id="about" class="py-16 md:py-24 bg-white transition-colors duration-500">
-            <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
-                <div class="flex-shrink-0">
-                    <img src="https://www.dropbox.com/scl/fi/7fsk7ad2pe4lxa5c3q3lh/mypic.png?rlkey=y0zznx0ed8s710j8s659oebzi&st=5ux528kf&dl=1" alt="Cristian Jay T. Buquis" class="w-48 h-48 rounded-full object-cover border-4 border-teal-500 shadow-lg">
-                </div>
-                <div class="text-center md:text-left">
-                    <h1 class="text-4xl md:text-5xl font-bold text-stone-900 leading-tight transition-colors duration-500">CRISTIAN JAY T. BUQUIS</h1>
-                    <p class="mt-2 text-2xl text-teal-600 font-semibold transition-colors duration-500">Fullstack Developer</p>
-                    <p class="mt-6 max-w-2xl text-lg text-stone-600 transition-colors duration-500">
-                        Full-Stack Developer with hands-on experience in Vue.js, React, Node.js, Strapi, and Laravel, seeking to leverage strong
-                        problem-solving skills and a growth mindset to build scalable web applications. Eager to contribute to cross-functional
-                        teams, continuously learn new technologies, and drive impactful solutions that align with business goals.
-                    </p>
-                </div>
-            </div>
-        </section>
-        <section id="skills" class="py-16 md:py-24 transition-colors duration-500">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 transition-colors duration-500">Skills</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
-                        <h3 class="font-bold text-xl text-stone-900 mb-4 flex items-center gap-2 transition-colors duration-500">
-                            <span class="text-2xl">💻</span> Web Development
-                        </h3>
-                        <ul class="space-y-2 text-stone-700 transition-colors duration-500" id="web-development-skills">
-                            <!-- Skills will be populated by JS -->
-                        </ul>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
-                        <h3 class="font-bold text-xl text-stone-900 mb-4 flex items-center gap-2 transition-colors duration-500">
-                            <span class="text-2xl">🤝</span> Version Control & Collaboration
-                        </h3>
-                        <ul class="space-y-2 text-stone-700 transition-colors duration-500" id="version-control-skills">
-                            <!-- Skills will be populated by JS -->
-                        </ul>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
-                        <h3 class="font-bold text-xl text-stone-900 mb-4 flex items-center gap-2 transition-colors duration-500">
-                            <span class="text-2xl">📊</span> Data & Database Management
-                        </h3>
-                        <ul class="space-y-2 text-stone-700 transition-colors duration-500" id="data-management-skills">
-                            <!-- Skills will be populated by JS -->
-                        </ul>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
-                        <h3 class="font-bold text-xl text-stone-900 mb-4 flex items-center gap-2 transition-colors duration-500">
-                            <span class="text-2xl">⭐</span> Core Competencies
-                        </h3>
-                        <ul class="space-y-2 text-stone-700 transition-colors duration-500" id="core-competencies-skills">
-                            <!-- Skills will be populated by JS -->
-                        </ul>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
-                        <h3 class="font-bold text-xl text-stone-900 mb-4 flex items-center gap-2 transition-colors duration-500">
-                            <span class="text-2xl">🖥️</span> Computer Proficiency
-                        </h3>
-                        <ul class="space-y-2 text-stone-700 transition-colors duration-500" id="computer-proficiency-skills">
-                            <!-- Skills will be populated by JS -->
-                        </ul>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
-                        <h3 class="font-bold text-xl text-stone-900 mb-4 flex items-center gap-2 transition-colors duration-500">
-                            <span class="text-2xl">🗣️</span> Languages
-                        </h3>
-                        <ul class="space-y-2 text-stone-700 transition-colors duration-500" id="languages-skills">
-                            <!-- Skills will be populated by JS -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="education" class="py-16 md:py-24 bg-white transition-colors duration-500">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 transition-colors duration-500">Education</h2>
-                <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm max-w-3xl mx-auto transition-colors duration-500">
-                    <h3 class="font-bold text-xl text-stone-900 transition-colors duration-500">Bachelor of Science in Information Systems</h3>
-                    <p class="text-teal-600 mt-1 transition-colors duration-500">Caraga State University-Main Campus</p>
-                    <p class="text-stone-600 mt-2 transition-colors duration-500">2021-2025</p>
-                    <p class="text-stone-700 mt-4 transition-colors duration-500">
-                        A blend of technical depth, business understanding, and applied practice equips students with the skills for a dynamic career at the intersection of technology and management.
-                    </p>
-                </div>
-            </div>
-        </section>
-        <section id="experience" class="py-16 md:py-24 transition-colors duration-500">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 transition-colors duration-500">Workshop and Training</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
-                        <h3 class="font-bold text-xl text-stone-900 transition-colors duration-500">Intern - Project Monitoring System (PMS)</h3>
-                        <p class="text-teal-600 mt-1 transition-colors duration-500">Caraga State University-Main Campus</p>
-                        <p class="text-stone-600 text-sm mt-2">Deployed by MIS: <a href="http://gso.carsu.edu.ph" target="_blank" rel="noopener noreferrer" class="text-teal-600 hover:underline">gso.carsu.edu.ph</a></p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
-                        <h3 class="font-bold text-xl text-stone-900 transition-colors duration-500">Capstone - Caraga Heritage Sites Interactive Map Portal (CTSIMP)</h3>
-                        <p class="text-teal-600 mt-1 transition-colors duration-500">Caraga State University-Main Campus</p>
-                        <p class="text-stone-600 text-sm mt-2">Source Code: <a href="https://github.com/Szage14/Caraga-Tourist-Spots-Interactive-Map-Portal-CTSIMP-Docs" target="_blank" rel="noopener noreferrer" class="text-teal-600 hover:underline">GitHub Repository</a></p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
-                        <h3 class="font-bold text-xl text-stone-900 transition-colors duration-500">ITE Competency Appraisal - Retail Management System (RMS)</h3>
-                        <p class="text-teal-600 mt-1 transition-colors duration-500">Caraga State University-Main Campus</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
-                        <h3 class="font-bold text-xl text-stone-900 transition-colors duration-500">Coursework - Quizmo Android Application</h3>
-                        <p class="text-teal-600 mt-1 transition-colors duration-500">App Development Course</p>
-                        <p class="text-stone-600 text-sm mt-2">An Android application designed for reviewers taking the civil service exam, featuring practice questions and study materials.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="certifications" class="py-16 md:py-24 bg-white transition-colors duration-500">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 transition-colors duration-500">Certifications</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <a href="assets/C INTRO CERT.jpg" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group">
-                        <img src="assets/C INTRO CERT.jpg" alt="Introduction to C Certificate" class="w-full h-auto rounded-lg mb-2">
-                        <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">Introduction to C</p>
-                    </a>
-                    <a href="assets/CSS INTRO CERT.png" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group">
-                        <img src="assets/CSS INTRO CERT.png" alt="Introduction to CSS Certificate" class="w-full h-auto rounded-lg mb-2">
-                        <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">Introduction to CSS</p>
-                    </a>
-                    <a href="assets/HTML INTRO CERT.png" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group">
-                        <img src="assets/HTML INTRO CERT.png" alt="Introduction to HTML Certificate" class="w-full h-auto rounded-lg mb-2">
-                        <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">Introduction to HTML</p>
-                    </a>
-                    <a href="assets/JS INTRO CERT.png" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group">
-                        <img src="assets/JS INTRO CERT.png" alt="Introduction to JavaScript Certificate" class="w-full h-auto rounded-lg mb-2">
-                        <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">Introduction to JavaScript</p>
-                    </a>
-                    <a href="assets/JS INTERMEDIATE CERT.jpg" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group">
-                        <img src="assets/JS INTERMEDIATE CERT.jpg" alt="JavaScript Intermediate Certificate" class="w-full h-auto rounded-lg mb-2">
-                        <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">JavaScript Intermediate</p>
-                    </a>
-                    <a href="assets/SQL INTRO CERT.jpg" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group">
-                        <img src="assets/SQL INTRO CERT.jpg" alt="Introduction to SQL Certificate" class="w-full h-auto rounded-lg mb-2">
-                        <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">Introduction to SQL</p>
-                    </a>
-                    <a href="assets/networking-basics cert.png" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group">
-                        <img src="assets/networking-basics cert.png" alt="Networking Basics Certificate" class="w-full h-auto rounded-lg mb-2">
-                        <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">Networking Basics (Cisco)</p>
-                    </a>
-                </div>
-            </div>
-        </section>
-        <section id="references" class="py-16 md:py-24 transition-colors duration-500">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 mx-auto transition-colors duration-500">References</h2>
-                <div class="max-w-xl mx-auto space-y-6 text-lg text-stone-700 transition-colors duration-500">
-                    <p><strong>AR. Christian Dwight C. Dolotina</strong></p>
-                    <p>Director of General Services Office,</p>
-                    <p>Caraga State University-Main Campus</p>
-                    <p>Email: <a href="mailto:cdwightdol27@gmail.com" class="text-teal-600 hover:underline transition-colors duration-500">cdwightdol27@gmail.com</a></p>
-                </div>
-            </div>
-        </section>
-        <section id="contact" class="py-16 md:py-24 bg-white transition-colors duration-500">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 mx-auto transition-colors duration-500">Contact Me</h2>
-                <div class="max-w-xl mx-auto space-y-6 text-lg text-stone-700 transition-colors duration-500">
-                    <p><strong>Email:</strong> 
-                        <a href="mailto:Cjbuquis@gmail.com" class="text-teal-600 hover:underline transition-colors duration-500">Cjbuquis@gmail.com</a> | 
-                        <a href="mailto:cristianjay.buquis@carsu.edu.ph" class="text-teal-600 hover:underline transition-colors duration-500">cristianjay.buquis@carsu.edu.ph</a>
-                    </p>
-                    <p><strong>Phone:</strong> 09472756345 / 09084782586</p>
-                    <p><strong>Location:</strong> Buenavista, Agusan del Norte</p>
-                    <p><strong>Portfolio/LinkedIn:</strong> <a href="https://tinyurl.com/cjbuquis" target="_blank" rel="noopener noreferrer" class="text-teal-600 hover:underline transition-colors duration-500">https://tinyurl.com/cjbuquis</a></p>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer class="bg-stone-800 text-stone-300 transition-colors duration-500">
-        <div class="container mx-auto px-4 py-8 text-center">
-            <p>&copy; 2025 Cristian Jay T. Buquis. All rights reserved.</p>
-        </div>
-    </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-            document.querySelectorAll('#mobile-menu a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                });
-            });
+<!doctype html>
+<html lang="en">
+  <head>
+    <link
+  href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap"
+  rel="stylesheet"
+/>
 
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('main section');
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.4
-            };
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href').substring(1) === entry.target.id) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
-            }, observerOptions);
+    <!-- Primary Meta -->
+    <title>Cristian Jay T. Buquis — Portfolio</title>
+    <meta name="title" content="Cristian Jay T. Buquis — Portfolio" />
+    <meta
+      name="description"
+      content="Cristian Jay T. Buquis — Full‑stack developer building resilient, scalable web applications with Vue, React, Node.js, Laravel, and more. Explore skills, certifications, services, and contact details."
+    />
+    <meta name="author" content="Cristian Jay T. Buquis" />
+    <meta name="robots" content="index, follow" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="msapplication-TileColor" content="#0091EA" />
+    <meta
+      name="keywords"
+      content="Cristian Jay T. Buquis, CJ Buquis, Cristian Buquis, Full-stack Developer, Portfolio, Vue, Vue.js, React, Node.js, Laravel, Strapi, JavaScript, TypeScript, Web Developer, Philippines"
+    />
 
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+    <!-- Canonical -->
+    <link rel="canonical" href="https://szage14.github.io/My-Portfolio/" />
 
-            // Light/Dark Mode Toggle
-            const themeToggle = document.getElementById('theme-toggle');
-            const htmlElement = document.documentElement;
-            const sunIcon = document.getElementById('sun-icon');
-            const moonIcon = document.getElementById('moon-icon');
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://szage14.github.io/My-Portfolio/" />
+    <meta property="og:site_name" content="Cristian Jay T. Buquis — Portfolio" />
+    <meta property="og:title" content="Cristian Jay T. Buquis — Portfolio" />
+    <meta property="og:description" content="Full‑stack developer portfolio: projects, certifications, services, and contact." />
+    <meta property="og:image" content="https://szage14.github.io/My-Portfolio/og-image.svg" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:alt" content="Cristian Jay T. Buquis portfolio preview" />
 
-            // Function to set theme
-            const setTheme = (theme) => {
-                if (theme === 'dark') {
-                    htmlElement.setAttribute('data-theme', 'dark');
-                    moonIcon.classList.remove('hidden');
-                    sunIcon.classList.add('hidden');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    htmlElement.removeAttribute('data-theme');
-                    sunIcon.classList.remove('hidden');
-                    moonIcon.classList.add('hidden');
-                    localStorage.setItem('theme', 'light');
-                }
-            };
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Cristian Jay T. Buquis — Portfolio" />
+    <meta name="twitter:description" content="Full‑stack developer portfolio: projects, certifications, services, and contact." />
+    <meta name="twitter:image" content="https://szage14.github.io/My-Portfolio/og-image.svg" />
+    <meta name="twitter:image:alt" content="Cristian Jay T. Buquis portfolio preview" />
 
-            // Check local storage for theme preference on load
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                setTheme(savedTheme);
-            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                // Default to system preference if no saved theme
-                setTheme('dark');
-            } else {
-                setTheme('light'); // Default to light if no preference
-            }
-
-            // Toggle theme on button click
-            themeToggle.addEventListener('click', () => {
-                const currentTheme = htmlElement.getAttribute('data-theme');
-                if (currentTheme === 'dark') {
-                    setTheme('light');
-                } else {
-                    setTheme('dark');
-                }
-            });
-
-            const skillDefinitions = {
-                "Vue.js": "A progressive JavaScript framework for building user interfaces.",
-                "React": "A JavaScript library for building user interfaces, maintained by Facebook and a community of individual developers and companies.",
-                "Node.js": "A JavaScript runtime built on Chrome's V8 JavaScript engine, used for server-side applications.",
-                "Strapi": "An open-source headless CMS (Content Management System) that allows developers to build APIs quickly.",
-                "Laravel": "A free, open-source PHP web framework, intended for the development of web applications following the model–view–controller (MVC) architectural pattern.",
-                "HTML": "HyperText Markup Language, the standard markup language for documents designed to be displayed in a web browser.",
-                "CSS": "Cascading Style Sheets, used for describing the presentation of a document written in HTML.",
-                "JavaScript": "A high-level, often just-in-time compiled language that conforms to the ECMAScript standard. It is a multi-paradigm language, supporting event-driven, functional, and imperative programming styles.",
-                "Basic web development and system management": "Fundamental understanding of web technologies and principles of managing computer systems.",
-                "Git": "A distributed version control system for tracking changes in source code during software development.",
-                "GitHub": "A web-based platform for version control and collaboration, built around Git.",
-                "Document Merging: Autocrat": "A tool used for merging data into documents, often for generating personalized documents from templates.",
-                "Data Analysis: Jupyter": "An open-source web application used for creating and sharing documents that contain live code, equations, visualizations, and narrative text.",
-                "Data entry, analysis, and reporting": "The process of inputting, examining, and presenting data to derive insights and inform decisions.",
-                "Strong Problem-Solving and Analytical Thinking": "Ability to identify, analyze, and solve complex problems effectively.",
-                "Excellent Communication and Interpersonal Skills": "Proficiency in conveying information clearly and interacting effectively with others.",
-                "Quick Learning and Adaptability": "Capacity to rapidly acquire new knowledge and adjust to changing circumstances.",
-                "Team Collaboration and Leadership Potential": "Ability to work effectively within a team and demonstrate qualities of leadership.",
-                "Attention to Detail and Quality-Focused": "Thoroughness in work and commitment to producing high-quality outcomes.",
-                "Time Management and Organizational Skills": "Efficiency in planning and controlling time to accomplish specific goals.",
-                "Customer Service Orientation": "A focus on meeting and exceeding customer expectations.",
-                "Eagerness to Learn": "A strong desire to acquire new knowledge and skills.",
-                "Adaptability": "The ability to adjust to new conditions.",
-                "Communication": "The process of conveying information, ideas, and feelings.",
-                "Microsoft Office Suite (Word, Excel, PowerPoint)": "Proficiency in widely used office productivity software.",
-                "Various office applications": "Competence in using a range of software tools for administrative and business tasks.",
-                "Filipino (Native)": "Native proficiency in the Filipino language.",
-                "English (Fluent)": "Fluent proficiency in the English language.",
-                "Bisaya (Native)": "Native proficiency in the Bisaya language."
-            };
-
-            const skillsData = {
-                "Web Development": {
-                    id: "web-development-skills",
-                    skills: ["Vue.js", "React", "Node.js", "Strapi", "Laravel", "HTML", "CSS", "JavaScript", "Basic web development and system management"]
-                },
-                "Version Control & Collaboration": {
-                    id: "version-control-skills",
-                    skills: ["Git", "GitHub", "Document Merging: Autocrat"]
-                },
-                "Data & Database Management": {
-                    id: "data-management-skills",
-                    skills: ["Data Analysis: Jupyter", "Data entry, analysis, and reporting"]
-                },
-                "Core Competencies": {
-                    id: "core-competencies-skills",
-                    skills: ["Strong Problem-Solving and Analytical Thinking", "Excellent Communication and Interpersonal Skills", "Quick Learning and Adaptability", "Team Collaboration and Leadership Potential", "Attention to Detail and Quality-Focused", "Time Management and Organizational Skills", "Customer Service Orientation", "Eagerness to Learn", "Adaptability", "Communication"]
-                },
-                "Computer Proficiency": {
-                    id: "computer-proficiency-skills",
-                    skills: ["Microsoft Office Suite (Word, Excel, PowerPoint)", "Various office applications"]
-                },
-                "Languages": {
-                    id: "languages-skills",
-                    skills: ["Filipino (Native)", "English (Fluent)", "Bisaya (Native)"]
-                }
-            };
-
-            // Function to populate skills
-            function populateSkills() {
-                for (const category in skillsData) {
-                    const ulElement = document.getElementById(skillsData[category].id);
-                    if (ulElement) {
-                        ulElement.innerHTML = ''; // Clear existing list items
-                        skillsData[category].skills.forEach(skillText => {
-                            const li = document.createElement('li');
-                            li.className = 'text-stone-700 transition-colors duration-500';
-                            li.innerHTML = `
-                                <div class="skill-item">
-                                    <span>${skillText}</span>
-                                    <span class="arrow-icon text-teal-600">&#9656;</span>
-                                </div>
-                                <div class="skill-definition transition-colors duration-500">
-                                    ${skillDefinitions[skillText] || 'Definition not available.'}
-                                </div>
-                            `;
-                            ulElement.appendChild(li);
-                            const skillItemHeader = li.querySelector('.skill-item');
-                            const skillDefinitionContent = li.querySelector('.skill-definition');
-                            const arrowIcon = li.querySelector('.arrow-icon');
-                            skillItemHeader.addEventListener('click', () => {
-                                skillDefinitionContent.classList.toggle('open');
-                                arrowIcon.classList.toggle('rotate');
-                            });
-                        });
-                    }
-                }
-            }
-            populateSkills(); // Call the function to populate skills on load
-        });
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Cristian Jay T. Buquis",
+        "alternateName": ["CJ Buquis", "Cristian Buquis"],
+        "jobTitle": "Full-stack Developer",
+        "url": "https://szage14.github.io/My-Portfolio/",
+        "email": "Cjbuquis@gmail.com",
+        "sameAs": [
+          "https://github.com/Szage14",
+          "https://m.me/cristianjay.buquis"
+        ]
+      }
     </script>
-</body>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristian Jay T. Buquis - Fullstack Developer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to your custom CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .tor-iframe-container {
+            height: 600px;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 transition-colors duration-500">
+    <nav id="main-nav" class="bg-stone-50/80 backdrop-blur-lg border-b border-stone-200 transition-colors duration-500">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="#" class="text-xl font-bold text-teal-600">Cristian Jay Buquis</a>
+                <div class="flex items-center space-x-4">
+                    <div class="hidden md:flex items-center space-x-6">
+                        <a href="#about" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">About</a>
+                        <a href="#skills" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">Skills</a>
+                        <a href="#education" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">Education</a>
+                        <a href="#experience" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">Experience</a>
+                        <a href="#certifications" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">Certifications</a>
+                        <a href="#tor" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">TOR</a>
+                        <a href="#services" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">Services</a>
+                        <a href="#references" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">References</a>
+                        <a href="#contact" class="nav-link text-stone-600 hover:text-teal-600 border-b-2 border-transparent pb-1 transition-all duration-300">Contact</a>
+                    </div>
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors duration-300 text-stone-700 dark:text-stone-300" aria-label="Toggle dark/light theme">
+                        <svg id="moon-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z"></path>
+                        </svg>
+                        <svg id="sun-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12H2m15.325-7.325l-.707-.707M6.343 17.657l-.707.707M18.95 18.95l-.707-.707M5.05 5.05l-.707-.707M12 15a3 3 0 100-6 3 3 0 000 6z"></path>
+                        </svg>
+                    </button>
+                    <button id="mobile-menu-button" class="md:hidden text-stone-700 dark:text-stone-300" aria-label="Toggle mobile navigation menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200 transition-colors duration-500">
+            <a href="#about" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">About</a>
+            <a href="#skills" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">Skills</a>
+            <a href="#education" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">Education</a>
+            <a href="#experience" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">Experience</a>
+            <a href="#certifications" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">Certifications</a>
+            <a href="#tor" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">TOR</a>
+            <a href="#services" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">Services</a>
+            <a href="#references" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">References</a>
+            <a href="#contact" class="block py-2 px-4 text-sm text-stone-600 hover:bg-teal-50 dark:text-stone-300 dark:hover:bg-stone-700">Contact</a>
+        </div>
+    </nav>
+    <main>
+        <section id="about" class="py-16 md:py-24 bg-white transition-colors duration-500">
+            <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
+                <div class="flex-shrink-0">
+                    <img id="profile-image" 
+                         src="https://www.dropbox.com/scl/fi/oy0abnmutgkgqhfkwz5jp/light.png?rlkey=j5x1j8g6awkolnkhdxvvv83nw&st=2c6lbz44&dl=1" 
+                         alt="Cristian Jay T. Buquis" 
+                         class="w-48 h-48 rounded-full object-cover border-4 border-teal-500 shadow-lg transition-opacity duration-500">
+                </div>
+                <div class="text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl font-bold text-stone-900 leading-tight transition-colors duration-500">CRISTIAN JAY T. BUQUIS</h1>
+                    <p class="mt-2 text-2xl text-teal-600 font-semibold transition-colors duration-500">Fullstack Developer</p>
+                    <p class="mt-6 max-w-2xl text-lg text-stone-600 transition-colors duration-500">
+                        Full-Stack Developer with hands-on experience in Vue.js, React, Node.js, Strapi, and Laravel, seeking to leverage strong
+                        problem-solving skills and a growth mindset to build scalable web applications. Eager to contribute to cross-functional
+                        teams, continuously learn new technologies, and drive impactful solutions that align with business goals.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="skills" class="py-16 md:py-24 transition-colors duration-500">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 transition-colors duration-500">Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
+                        <h3 class="font-bold text-xl text-stone-900 mb-4 flex items-center gap-2 transition-colors duration-500">
+                            <span class="text-2xl">💻</span> Web Development
+                        </h3>
+                        <ul class="space-y-2 text-stone-700 transition-colors duration-500" id="web-development-skills">
+                            <!-- Skills will be populated by JS -->
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
+                        <h3 class="font-bold text-xl text-stone-900 mb-4 flex items-center gap-2 transition-colors duration-500">
+                            <span class="text-2xl">🤝</span> Version Control & Collaboration
+                        </h3>
+                        <ul class="space-y-2 text-stone-700 transition-colors duration-500" id="version-control-skills">
+                            <!-- Skills will be populated by JS -->
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
+                        <h3 class="font-bold text-xl text-stone-900 mb-4 flex items-center gap-2 transition-colors duration-500">
+                            <span class="text-2xl">📊</span> Data & Database Management
+                        </h3>
+                        <ul class="space-y-2 text-stone-700 transition-colors duration-500" id="data-management-skills">
+                            <!-- Skills will be populated by JS -->
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
+                        <h3 class="font-bold text-xl text-stone-900 mb-4 flex items-center gap-2 transition-colors duration-500">
+                            <span class="text-2xl">⭐</span> Core Competencies
+                        </h3>
+                        <ul class="space-y-2 text-stone-700 transition-colors duration-500" id="core-competencies-skills">
+                            <!-- Skills will be populated by JS -->
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
+                        <h3 class="font-bold text-xl text-stone-900 mb-4 flex items-center gap-2 transition-colors duration-500">
+                            <span class="text-2xl">🖥️</span> Computer Proficiency
+                        </h3>
+                        <ul class="space-y-2 text-stone-700 transition-colors duration-500" id="computer-proficiency-skills">
+                            <!-- Skills will be populated by JS -->
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
+                        <h3 class="font-bold text-xl text-stone-900 mb-4 flex items-center gap-2 transition-colors duration-500">
+                            <span class="text-2xl">🗣️</span> Languages
+                        </h3>
+                        <ul class="space-y-2 text-stone-700 transition-colors duration-500" id="languages-skills">
+                            <!-- Skills will be populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="education" class="py-16 md:py-24 bg-white transition-colors duration-500">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 transition-colors duration-500">Education</h2>
+                <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm max-w-3xl mx-auto transition-colors duration-500">
+                    <h3 class="font-bold text-xl text-stone-900 transition-colors duration-500">Bachelor of Science in Information Systems</h3>
+                    <p class="text-teal-600 mt-1 transition-colors duration-500">Caraga State University-Main Campus</p>
+                    <p class="text-stone-600 mt-2 transition-colors duration-500">2021-2025</p>
+                    <p class="text-stone-700 mt-4 transition-colors duration-500">
+                        A blend of technical depth, business understanding, and applied practice equips students with the skills for a dynamic career at the intersection of technology and management.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="experience" class="py-16 md:py-24 transition-colors duration-500">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 transition-colors duration-500">Workshop and Training</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
+                        <h3 class="font-bold text-xl text-stone-900 transition-colors duration-500">Intern - Project Monitoring System (PMS)</h3>
+                        <p class="text-teal-600 mt-1 transition-colors duration-500">Caraga State University-Main Campus</p>
+                        <p class="text-stone-600 text-sm mt-2">Deployed by MIS: <a href="http://gso.carsu.edu.ph" target="_blank" rel="noopener noreferrer" class="text-teal-600 hover:underline">gso.carsu.edu.ph</a></p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
+                        <h3 class="font-bold text-xl text-stone-900 transition-colors duration-500">Capstone - Caraga Heritage Sites Interactive Map Portal (CTSIMP)</h3>
+                        <p class="text-teal-600 mt-1 transition-colors duration-500">Caraga State University-Main Campus</p>
+                        <p class="text-stone-600 text-sm mt-2">Source Code: <a href="https://github.com/Szage14/Caraga-Tourist-Spots-Interactive-Map-Portal-CTSIMP-Docs" target="_blank" rel="noopener noreferrer" class="text-teal-600 hover:underline">GitHub Repository</a></p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
+                        <h3 class="font-bold text-xl text-stone-900 transition-colors duration-500">ITE Competency Appraisal - Retail Management System (RMS)</h3>
+                        <p class="text-teal-600 mt-1 transition-colors duration-500">Caraga State University-Main Campus</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500">
+                        <h3 class="font-bold text-xl text-stone-900 transition-colors duration-500">Coursework - Quizmo Android Application</h3>
+                        <p class="text-teal-600 mt-1 transition-colors duration-500">App Development Course</p>
+                        <p class="text-stone-700 transition-colors duration-500">An Android application designed for reviewers taking the civil service exam, featuring practice questions and study materials.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="certifications" class="py-16 md:py-24 bg-white transition-colors duration-500">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 transition-colors duration-500">Certifications</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <a href="assets/C INTRO CERT.jpg" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group">
+                        <img src="assets/C INTRO CERT.jpg" alt="Introduction to C Certificate" class="w-full h-auto rounded-lg mb-2">
+                        <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">Introduction to C</p>
+                    </a>
+                    <a href="assets/CSS INTRO CERT.png" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group">
+                        <img src="assets/CSS INTRO CERT.png" alt="Introduction to CSS Certificate" class="w-full h-auto rounded-lg mb-2">
+                        <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">Introduction to CSS</p>
+                    </a>
+                    <a href="assets/HTML INTRO CERT.png" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group">
+                        <img src="assets/HTML INTRO CERT.png" alt="Introduction to HTML Certificate" class="w-full h-auto rounded-lg mb-2">
+                        <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">Introduction to HTML</p>
+                    </a>
+                    <a href="assets/JS INTRO CERT.png" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group">
+                        <img src="assets/JS INTRO CERT.png" alt="Introduction to JavaScript Certificate" class="w-full h-auto rounded-lg mb-2">
+                        <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">Introduction to JavaScript</p>
+                    </a>
+                    <a href="assets/JS INTERMEDIATE CERT.jpg" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group">
+                        <img src="assets/JS INTERMEDIATE CERT.jpg" alt="JavaScript Intermediate Certificate" class="w-full h-auto rounded-lg mb-2">
+                        <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">JavaScript Intermediate</p>
+                    </a>
+                    <a href="assets/SQL INTRO CERT.jpg" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group">
+                        <img src="assets/SQL INTRO CERT.jpg" alt="Introduction to SQL Certificate" class="w-full h-auto rounded-lg mb-2">
+                        <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">Introduction to SQL</p>
+                    </a>
+                    <a href="assets/networking-basics cert.png" target="_blank" rel="noopener noreferrer" class="block bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 group">
+                        <img src="assets/networking-basics cert.png" alt="Networking Basics Certificate" class="w-full h-auto rounded-lg mb-2">
+                        <p class="text-center text-sm font-semibold text-stone-700 group-hover:text-teal-600 transition-colors duration-300">Networking Basics (Cisco)</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section id="tor" class="py-16 md:py-24 transition-colors duration-500">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 transition-colors duration-500">Transcript of Records (TOR)</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 mb-6">
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div class="text-center sm:text-left">
+                                <h3 class="font-bold text-xl text-stone-900 transition-colors duration-500">Official Transcript of Records</h3>
+                                <p class="text-stone-600 mt-1 transition-colors duration-500">Bachelor of Science in Information Systems</p>
+                                <p class="text-stone-600 text-sm mt-1 transition-colors duration-500">Caraga State University-Main Campus</p>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <a href="https://drive.google.com/file/d/1FTNoDGi4g3ZCDl31_kQ97D7FXdwG7Uu0/view?usp=sharing" target="_blank" rel="noopener noreferrer" 
+                                   class="inline-flex items-center px-6 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors duration-300 shadow-md hover:shadow-lg">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                    View TOR
+                                </a>
+                                <a href="https://drive.google.com/uc?export=download&id=1FTNoDGi4g3ZCDl31_kQ97D7FXdwG7Uu0" target="_blank" rel="noopener noreferrer"
+                                   class="inline-flex items-center px-6 py-3 bg-stone-600 text-white font-semibold rounded-lg hover:bg-stone-700 transition-colors duration-300 shadow-md hover:shadow-lg">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- PDF Viewer Container -->
+                    <div class="bg-white rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 overflow-hidden">
+                        <div class="p-4 bg-stone-50 border-b border-stone-200 transition-colors duration-500">
+                            <h4 class="font-semibold text-stone-900 transition-colors duration-500">Document Preview</h4>
+                            <p class="text-sm text-stone-600 transition-colors duration-500">Click "View TOR" above to open in full screen or "Download" to save the file.</p>
+                        </div>
+                        <div class="relative tor-iframe-container">
+                            <iframe 
+                                src="https://drive.google.com/file/d/1FTNoDGi4g3ZCDl31_kQ97D7FXdwG7Uu0/preview" 
+                                class="w-full h-full border-0"
+                                title="Transcript of Records - Cristian Jay T. Buquis">
+                                <p class="p-4 text-center text-stone-600">
+                                    Your browser does not support PDF viewing. 
+                                    <a href="https://drive.google.com/file/d/1FTNoDGi4g3ZCDl31_kQ97D7FXdwG7Uu0/view?usp=sharing" target="_blank" class="text-teal-600 hover:underline">Click here to view the TOR</a>
+                                </p>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="services" class="py-16 md:py-24 bg-white transition-colors duration-500">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 transition-colors duration-500">Services Offered</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 hover:shadow-md">
+                        <div class="text-3xl mb-4">🌐</div>
+                        <h3 class="font-bold text-xl text-stone-900 mb-3 transition-colors duration-500">Personal Portfolio Website</h3>
+                        <p class="text-stone-700 transition-colors duration-500">Custom portfolio websites like this one, showcasing your skills, experience, and projects professionally.</p>
+                    </div>
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 hover:shadow-md">
+                        <div class="text-3xl mb-4">📄</div>
+                        <h3 class="font-bold text-xl text-stone-900 mb-3 transition-colors duration-500">Resume Creation</h3>
+                        <p class="text-stone-700 transition-colors duration-500 mb-3">Professional resume design and creation tailored to your industry and career goals.</p>
+                        <p class="text-stone-600 text-sm transition-colors duration-500">
+                            <strong>Free Resource:</strong> Build your resume for free at 
+                            <a href="https://makefreecv.com/" target="_blank" rel="noopener noreferrer" class="text-teal-600 hover:underline font-medium">makefreecv.com</a>
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 hover:shadow-md">
+                        <div class="text-3xl mb-4">🔍</div>
+                        <h3 class="font-bold text-xl text-stone-900 mb-3 transition-colors duration-500">Basic OSINT Services</h3>
+                        <p class="text-stone-700 transition-colors duration-500">Open Source Intelligence gathering covering personal details and social media analysis for legitimate purposes.</p>
+                    </div>
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 hover:shadow-md">
+                        <div class="text-3xl mb-4">💼</div>
+                        <h3 class="font-bold text-xl text-stone-900 mb-3 transition-colors duration-500">MS Office Solutions</h3>
+                        <p class="text-stone-700 transition-colors duration-500">Microsoft Office installation and setup services with proper licensing guidance.</p>
+                    </div>
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 hover:shadow-md">
+                        <div class="text-3xl mb-4">⬇️</div>
+                        <h3 class="font-bold text-xl text-stone-900 mb-3 transition-colors duration-500">Internet Download Manager</h3>
+                        <p class="text-stone-700 transition-colors duration-500">IDM installation and setup for enhanced download management and lifetime usage.</p>
+                    </div>
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 hover:shadow-md">
+                        <div class="text-3xl mb-4">🤖</div>
+                        <h3 class="font-bold text-xl text-stone-900 mb-3 transition-colors duration-500">AI Image Editing</h3>
+                        <p class="text-stone-700 transition-colors duration-500">AI-powered image editing and enhancement using advanced prompting techniques.</p>
+                    </div>
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 hover:shadow-md">
+                        <div class="text-3xl mb-4">⚙️</div>
+                        <h3 class="font-bold text-xl text-stone-900 mb-3 transition-colors duration-500">Backend Development</h3>
+                        <p class="text-stone-700 transition-colors duration-500">Server-side application development using Node.js, Laravel, and database management.</p>
+                    </div>
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 hover:shadow-md">
+                        <div class="text-3xl mb-4">🎨</div>
+                        <h3 class="font-bold text-xl text-stone-900 mb-3 transition-colors duration-500">Frontend Development</h3>
+                        <p class="text-stone-700 transition-colors duration-500">User interface development using React, Vue.js, and modern web technologies.</p>
+                    </div>
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 hover:shadow-md">
+                        <div class="text-3xl mb-4">📊</div>
+                        <h3 class="font-bold text-xl text-stone-900 mb-3 transition-colors duration-500">Data Analytics & Visualization</h3>
+                        <p class="text-stone-700 transition-colors duration-500">Data analysis and visualization using Jupyter notebooks and various analytical tools.</p>
+                    </div>
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 hover:shadow-md">
+                        <div class="text-3xl mb-4">📋</div>
+                        <h3 class="font-bold text-xl text-stone-900 mb-3 transition-colors duration-500">Document Merging</h3>
+                        <p class="text-stone-700 transition-colors duration-500">Automated document merging and generation using Autocrat and other tools.</p>
+                    </div>
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 hover:shadow-md">
+                        <div class="text-3xl mb-4">🎬</div>
+                        <h3 class="font-bold text-xl text-stone-900 mb-3 transition-colors duration-500">Video & Photo Editing</h3>
+                        <p class="text-stone-700 transition-colors duration-500">Professional video and photo editing services for personal and business needs.</p>
+                    </div>
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 hover:shadow-md">
+                        <div class="text-3xl mb-4">📝</div>
+                        <h3 class="font-bold text-xl text-stone-900 mb-3 transition-colors duration-500">Documentation Services</h3>
+                        <p class="text-stone-700 transition-colors duration-500">Technical writing, documentation creation, and content development services.</p>
+                    </div>
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 hover:shadow-md">
+                        <div class="text-3xl mb-4">🎨</div>
+                        <h3 class="font-bold text-xl text-stone-900 mb-3 transition-colors duration-500">Canva Portfolio Builder</h3>
+                        <p class="text-stone-700 transition-colors duration-500">Creative portfolio design and development using Canva for visual impact.</p>
+                    </div>
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-sm transition-colors duration-500 hover:shadow-md">
+                        <div class="text-3xl mb-4">🌐</div>
+                        <h3 class="font-bold text-xl text-stone-900 mb-3 transition-colors duration-500">Google Sites Portfolio</h3>
+                        <p class="text-stone-700 transition-colors duration-500">Simple and effective portfolio websites using Google Sites platform.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="references" class="py-16 md:py-24 transition-colors duration-500">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 mx-auto transition-colors duration-500">References</h2>
+                <div class="max-w-xl mx-auto space-y-6 text-lg text-stone-700 transition-colors duration-500">
+                    <p><strong>AR. Christian Dwight C. Dolotina</strong></p>
+                    <p>Director of General Services Office,</p>
+                    <p>Caraga State University-Main Campus</p>
+                    <p>Email: <a href="mailto:cdwightdol27@gmail.com" class="text-teal-600 hover:underline transition-colors duration-500">cdwightdol27@gmail.com</a></p>
+                </div>
+            </div>
+        </section>
+        <section id="contact" class="py-16 md:py-24 bg-white transition-colors duration-500">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold text-stone-900 section-title mb-12 mx-auto transition-colors duration-500">Contact Me</h2>
+                <div class="max-w-xl mx-auto space-y-6 text-lg text-stone-700 transition-colors duration-500">
+                    <p><strong>Email:</strong> 
+                        <a href="mailto:Cjbuquis@gmail.com" class="text-teal-600 hover:underline transition-colors duration-500">Cjbuquis@gmail.com</a> | 
+                        <a href="mailto:cristianjay.buquis@carsu.edu.ph" class="text-teal-600 hover:underline transition-colors duration-500">cristianjay.buquis@carsu.edu.ph</a>
+                    </p>
+                    <p><strong>Phone:</strong> 09472756345 / 09084782586</p>
+                    <p><strong>Location:</strong> Buenavista, Agusan del Norte</p>
+                    <p><strong>Portfolio/LinkedIn:</strong> <a href="https://tinyurl.com/cjbuquis" target="_blank" rel="noopener noreferrer" class="text-teal-600 hover:underline transition-colors duration-500">https://tinyurl.com/cjbuquis</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-stone-800 text-stone-300 transition-colors duration-500">
+        <div class="container mx-auto px-4 py-8 text-center">
+            <p>&copy; 2025 Cristian Jay T. Buquis. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Light/Dark Mode Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+            const sunIcon = document.getElementById('sun-icon');
+            const moonIcon = document.getElementById('moon-icon');
+
+            // Function to set theme
+            const setTheme = (theme) => {
+                const profileImage = document.getElementById('profile-image');
+                
+                if (theme === 'dark') {
+                    htmlElement.setAttribute('data-theme', 'dark');
+                    moonIcon.classList.remove('hidden');
+                    sunIcon.classList.add('hidden');
+                    localStorage.setItem('theme', 'dark');
+                    profileImage.src = 'https://www.dropbox.com/scl/fi/zfr4kcmpxga2b0dnu63an/dark.png?rlkey=x89co49dnfdzxi2zbepwk6v7z&st=67xvm54h&dl=1';
+                    profileImage.alt = 'Cristian Jay T. Buquis - Dark Theme';
+                } else {
+                    htmlElement.removeAttribute('data-theme');
+                    sunIcon.classList.remove('hidden');
+                    moonIcon.classList.add('hidden');
+                    localStorage.setItem('theme', 'light');
+                    profileImage.src = 'https://www.dropbox.com/scl/fi/oy0abnmutgkgqhfkwz5jp/light.png?rlkey=j5x1j8g6awkolnkhdxvvv83nw&st=2c6lbz44&dl=1';
+                    profileImage.alt = 'Cristian Jay T. Buquis - Light Theme';
+                }
+            };
+
+            // Check local storage for theme preference on load
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                // Default to system preference if no saved theme
+                setTheme('dark');
+            } else {
+                setTheme('light'); // Default to light if no preference
+            }
+
+            // Toggle theme on button click
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    setTheme('light');
+                } else {
+                    setTheme('dark');
+                }
+            });
+
+            const skillDefinitions = {
+                "Vue.js": "A progressive JavaScript framework for building user interfaces.",
+                "React": "A JavaScript library for building user interfaces, maintained by Facebook and a community of individual developers and companies.",
+                "Node.js": "A JavaScript runtime built on Chrome's V8 JavaScript engine, used for server-side applications.",
+                "Strapi": "An open-source headless CMS (Content Management System) that allows developers to build APIs quickly.",
+                "Supabase": "An open-source Firebase alternative that provides a backend-as-a-service with real-time database, authentication, and storage.",
+                "Laravel": "A free, open-source PHP web framework, intended for the development of web applications following the model–view–controller (MVC) architectural pattern.",
+                "HTML": "HyperText Markup Language, the standard markup language for documents designed to be displayed in a web browser.",
+                "CSS": "Cascading Style Sheets, used for describing the presentation of a document written in HTML.",
+                "JavaScript": "A high-level, often just-in-time compiled language that conforms to the ECMAScript standard. It is a multi-paradigm language, supporting event-driven, functional, and imperative programming styles.",
+                "Basic web development and system management": "Fundamental understanding of web technologies and principles of managing computer systems.",
+                "Git": "A distributed version control system for tracking changes in source code during software development.",
+                "GitHub": "A web-based platform for version control and collaboration, built around Git.",
+                "Document Merging: Autocrat": "A tool used for merging data into documents, often for generating personalized documents from templates.",
+                "Data Analysis: Jupyter": "An open-source web application used for creating and sharing documents that contain live code, equations, visualizations, and narrative text.",
+                "Data entry, analysis, and reporting": "The process of inputting, examining, and presenting data to derive insights and inform decisions.",
+                "Strong Problem-Solving and Analytical Thinking": "Ability to identify, analyze, and solve complex problems effectively.",
+                "Excellent Communication and Interpersonal Skills": "Proficiency in conveying information clearly and interacting effectively with others.",
+                "Quick Learning and Adaptability": "Capacity to rapidly acquire new knowledge and adjust to changing circumstances.",
+                "Team Collaboration and Leadership Potential": "Ability to work effectively within a team and demonstrate qualities of leadership.",
+                "Attention to Detail and Quality-Focused": "Thoroughness in work and commitment to producing high-quality outcomes.",
+                "Time Management and Organizational Skills": "Efficiency in planning and controlling time to accomplish specific goals.",
+                "Customer Service Orientation": "A focus on meeting and exceeding customer expectations.",
+                "Eagerness to Learn": "A strong desire to acquire new knowledge and skills.",
+                "Adaptability": "The ability to adjust to new conditions.",
+                "Communication": "The process of conveying information, ideas, and feelings.",
+                "Microsoft Office Suite (Word, Excel, PowerPoint)": "Proficiency in widely used office productivity software.",
+                "OSINT (Open Source Intelligence)": "The practice of collecting and analyzing publicly available information from various sources for intelligence purposes.",
+                "Various office applications": "Competence in using a range of software tools for administrative and business tasks.",
+                "Filipino (Native)": "Native proficiency in the Filipino language.",
+                "English (Fluent)": "Fluent proficiency in the English language.",
+                "Bisaya (Native)": "Native proficiency in the Bisaya language."
+            };
+
+            const skillsData = {
+                "Web Development": {
+                    id: "web-development-skills",
+                    skills: ["Vue.js", "React", "Node.js", "Strapi", "Supabase", "Laravel", "HTML", "CSS", "JavaScript", "Basic web development and system management"]
+                },
+                "Version Control & Collaboration": {
+                    id: "version-control-skills",
+                    skills: ["Git", "GitHub", "Document Merging: Autocrat"]
+                },
+                "Data & Database Management": {
+                    id: "data-management-skills",
+                    skills: ["Data Analysis: Jupyter", "Data entry, analysis, and reporting"]
+                },
+                "Core Competencies": {
+                    id: "core-competencies-skills",
+                    skills: ["Strong Problem-Solving and Analytical Thinking", "Excellent Communication and Interpersonal Skills", "Quick Learning and Adaptability", "Team Collaboration and Leadership Potential", "Attention to Detail and Quality-Focused", "Time Management and Organizational Skills", "Customer Service Orientation", "Eagerness to Learn", "Adaptability", "Communication"]
+                },
+                "Computer Proficiency": {
+                    id: "computer-proficiency-skills",
+                    skills: ["Microsoft Office Suite (Word, Excel, PowerPoint)", "OSINT (Open Source Intelligence)", "Various office applications"]
+                },
+                "Languages": {
+                    id: "languages-skills",
+                    skills: ["Filipino (Native)", "English (Fluent)", "Bisaya (Native)"]
+                }
+            };
+
+            // Function to populate skills
+            function populateSkills() {
+                for (const category in skillsData) {
+                    const ulElement = document.getElementById(skillsData[category].id);
+                    if (ulElement) {
+                        ulElement.innerHTML = ''; // Clear existing list items
+                        skillsData[category].skills.forEach(skillText => {
+                            const li = document.createElement('li');
+                            li.className = 'text-stone-700 transition-colors duration-500';
+                            li.innerHTML = `
+                                <div class="skill-item">
+                                    <span>${skillText}</span>
+                                    <span class="arrow-icon text-teal-600">&#9656;</span>
+                                </div>
+                                <div class="skill-definition transition-colors duration-500">
+                                    ${skillDefinitions[skillText] || 'Definition not available.'}
+                                </div>
+                            `;
+                            ulElement.appendChild(li);
+                            const skillItemHeader = li.querySelector('.skill-item');
+                            const skillDefinitionContent = li.querySelector('.skill-definition');
+                            const arrowIcon = li.querySelector('.arrow-icon');
+                            skillItemHeader.addEventListener('click', () => {
+                                skillDefinitionContent.classList.toggle('open');
+                                arrowIcon.classList.toggle('rotate');
+                            });
+                        });
+                    }
+                }
+            }
+            populateSkills(); // Call the function to populate skills on load
+        });
+    </script>
+</body>
+</html>
