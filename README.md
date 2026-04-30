@@ -1,5 +1,25 @@
-# Vue 3 + Vite
+# My Portfolio
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This project is my digital handshake.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+It showcases who I am as a full-stack developer through my skills, education, certifications, services, and contact channels—all in one fast, responsive, and modern website.
+
+Built to present my work clearly, build credibility quickly, and make it easy for recruiters, clients, and collaborators to connect with me.
+
+## Live Demo
+
+https://szage14.github.io/My-Portfolio/
+
+## Tech Stack
+
+- Vue 3
+- Vite
+- Vuetify
+- JavaScript
+
+## Run Locally
+
+```bash
+npm install
+npm run dev
+```
