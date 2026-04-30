@@ -22,15 +22,17 @@
                   :class="{ 'home-about-avatar-wrapper--hover': isHovering }"
                   role="button"
                   tabindex="0"
+                  aria-label="Profile — Cristian Jay T. Buquis"
                   @mouseenter="logAvatarHover('enter')"
                   @mouseleave="logAvatarHover('leave')"
                   @click="logAvatarClick"
-                  @keyup.enter.prevent="logAvatarClick"
-                  @keyup.space.prevent="logAvatarClick"
+                  @keydown.enter.prevent="logAvatarClick"
+                  @keydown.space.prevent="logAvatarClick"
                 >
                   <v-img
-                    :src="currentProfile"
-                    :lazy-src="currentProfile"
+                    v-if="imageSrc"
+                    :src="imageSrc"
+                    :lazy-src="imageSrc"
                     alt="Cristian Jay T. Buquis"
                     width="220"
                     height="220"
@@ -39,6 +41,8 @@
                     @load="handleImageLoad"
                     @error="onImgError"
                   />
+
+                  <div v-else class="avatar-fallback" aria-hidden="true">CJ</div>
                 </div>
               </v-hover>
             </v-scale-transition>
@@ -140,7 +144,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, onMounted, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
 import { useTheme } from 'vuetify'
 import { loadFull } from 'tsparticles'
 import profileDark from '../assets/profile-dark.png'
@@ -190,6 +194,11 @@ const log = {
 const theme = useTheme()
 const particlesReady = ref(true)
 const currentProfile = computed(() => (theme.global.name.value === 'darkTheme' ? profileDark : profileLight))
+// Reactive image source with fallback behavior for the home avatar
+const imageSrc = ref(currentProfile.value)
+watchEffect(() => {
+  imageSrc.value = currentProfile.value
+})
 const mailtoHref = 'mailto:Cjbuquis@gmail.com'
 
 const handleCtaScroll = (label, targetId) => {
@@ -210,14 +219,20 @@ const logAvatarClick = () => {
 }
 
 const handleImageLoad = () => {
-  log.info('Profile image loaded', { src: currentProfile.value })
+  log.info('Profile image loaded', { src: imageSrc.value })
 }
 
 const onImgError = (event) => {
   log.error('Profile image failed to load', {
-    attemptedSrc: currentProfile.value,
+    attemptedSrc: imageSrc.value,
     eventType: event?.type
   })
+  // Try the light profile first; if that fails, show initials fallback.
+  if (imageSrc.value !== profileLight) {
+    imageSrc.value = profileLight
+  } else {
+    imageSrc.value = null
+  }
 }
 
 const particleOptions = {
@@ -352,6 +367,24 @@ onBeforeUnmount(() => {
   border-radius: 999px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: inline-flex;
+}
+
+.home-about-avatar-wrapper:focus-visible {
+  outline: 3px solid rgba(0, 150, 136, 0.18);
+  outline-offset: 4px;
+}
+
+.avatar-fallback {
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #009688;
+  color: #fff;
+  font-size: 48px;
+  font-weight: 700;
+  border-radius: 999px;
 }
 
 .home-about-avatar-wrapper--hover {
