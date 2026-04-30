@@ -26,9 +26,9 @@
             />
 
             <h1 class="text-h3 text-md-h2 font-weight-bold mb-4">Cristian Jay T. Buquis</h1>
-            <p class="text-subtitle-1 text-medium-emphasis mb-3">Information Systems Graduate | Fullstack Developer</p>
+            <p class="text-subtitle-1 text-medium-emphasis mb-3">Information Systems Graduate | Web Developer</p>
             <p class="text-body-1 text-medium-emphasis mb-6 hero-tagline">
-              Full-Stack Developer with hands-on experience in Vue.js, React, Node.js, Strapi, and Laravel. Passionate about crafting scalable web
+             Web Developer with hands-on experience in Vue.js, React, Node.js, Strapi, and Laravel. Passionate about crafting scalable web
               applications and collaborating with cross-functional teams to deliver impactful, user-focused solutions.
             </p>
 

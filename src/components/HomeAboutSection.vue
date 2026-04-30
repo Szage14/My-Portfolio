@@ -61,11 +61,11 @@
                 </h1>
 
                 <p class="text-h6 font-weight-medium home-about-accent mb-4">
-                  Fullstack Developer
+                  Web Developer | Vibe Coder
                 </p>
 
                 <p class="text-body-1 text-medium-emphasis mb-5">
-                  Full-stack developer experienced with Vue.js, React, Node.js, Strapi, and Laravel—focused on building resilient, scalable web
+                  Web developer experienced with Vue.js, React, Node.js, Strapi, and Laravel—focused on building resilient, scalable web
                   applications with thoughtful UI/UX and measurable business impact.
                 </p>
 
