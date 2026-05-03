@@ -23,73 +23,165 @@
       color: #1f1f1f;
       max-width: 1000px;
       margin: auto;
-      padding: 48px;
+      padding: clamp(24px, 5vw, 48px);
       line-height: 1.7;
+      min-height: 100vh;
     }
 
     h1 {
-      font-size: 34px;
+      font-size: clamp(28px, 7vw, 36px);
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: clamp(6px, 2vw, 10px);
       letter-spacing: -0.5px;
+      word-wrap: break-word;
     }
 
     h2 {
-      font-size: 20px;
+      font-size: clamp(18px, 5vw, 22px);
       font-weight: 600;
-      margin-top: 34px;
-      margin-bottom: 14px;
+      margin-top: clamp(24px, 4vw, 34px);
+      margin-bottom: clamp(10px, 3vw, 16px);
       border-bottom: 2px solid #111;
-      padding-bottom: 6px;
+      padding-bottom: clamp(4px, 1.5vw, 8px);
     }
 
     h3 {
-      font-size: 17px;
+      font-size: clamp(16px, 4vw, 18px);
       font-weight: 600;
-      margin-top: 18px;
-      margin-bottom: 6px;
+      margin-top: clamp(12px, 3vw, 18px);
+      margin-bottom: clamp(4px, 1.5vw, 8px);
     }
 
     p {
-      font-size: 15px;
-      margin-bottom: 6px;
+      font-size: clamp(14px, 2.5vw, 16px);
+      margin-bottom: clamp(4px, 1.5vw, 8px);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     ul {
-      margin-left: 20px;
-      margin-top: 8px;
+      margin-left: clamp(16px, 4vw, 24px);
+      margin-top: clamp(6px, 1.5vw, 10px);
     }
 
     li {
-      margin-bottom: 8px;
-      font-size: 15px;
+      margin-bottom: clamp(6px, 1.5vw, 10px);
+      font-size: clamp(14px, 2.5vw, 16px);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     .header {
       text-align: center;
-      margin-bottom: 42px;
+      margin-bottom: clamp(28px, 6vw, 48px);
+      padding: 0 clamp(8px, 2vw, 16px);
     }
 
     .subtitle {
-      font-size: 15px;
-      margin-bottom: 10px;
+      font-size: clamp(13px, 2.5vw, 16px);
+      margin-bottom: clamp(6px, 2vw, 12px);
     }
 
     .contact {
-      font-size: 14px;
-      margin-bottom: 4px;
+      font-size: clamp(12px, 2vw, 15px);
+      margin-bottom: clamp(2px, 1vw, 4px);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     .section {
-      margin-bottom: 14px;
+      margin-bottom: clamp(10px, 2.5vw, 16px);
+      padding: 0 clamp(8px, 2vw, 16px);
     }
 
     .company {
       font-style: italic;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     .label {
       font-weight: 600;
+      display: inline-block;
+      min-width: auto;
+    }
+
+    /* Mobile optimization */
+    @media (max-width: 600px) {
+      body {
+        padding: 16px;
+      }
+
+      h1 {
+        margin-bottom: 6px;
+      }
+
+      h2 {
+        margin-top: 20px;
+        margin-bottom: 12px;
+      }
+
+      .header {
+        margin-bottom: 28px;
+        padding: 0;
+      }
+
+      ul {
+        margin-left: 16px;
+      }
+
+      .section {
+        padding: 0;
+        margin-bottom: 12px;
+      }
+
+      p {
+        margin-bottom: 4px;
+      }
+
+      li {
+        margin-bottom: 6px;
+      }
+    }
+
+    /* Tablet optimization */
+    @media (min-width: 601px) and (max-width: 900px) {
+      body {
+        padding: 32px;
+      }
+
+      .header {
+        margin-bottom: 36px;
+      }
+    }
+
+    /* Print optimization */
+    @media print {
+      body {
+        max-width: 100%;
+        padding: 0;
+      }
+
+      h1 {
+        page-break-after: avoid;
+      }
+
+      h2 {
+        page-break-after: avoid;
+        page-break-before: avoid;
+      }
+
+      h3 {
+        page-break-after: avoid;
+      }
+
+      .section {
+        page-break-inside: avoid;
+      }
+
+      ul {
+        page-break-inside: avoid;
+      }
     }
   </style>
 </head>
