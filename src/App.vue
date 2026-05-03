@@ -62,19 +62,21 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
 
 import NavBar from './components/NavBar.vue'
 import HomeAboutSection from './components/HomeAboutSection.vue'
 import SkillsSection from './components/SkillsSection.vue'
-import EducationSection from './components/EducationSection.vue'
-import WorkshopsSection from './components/WorkshopsSection.vue'
-import CertificationsSection from './components/CertificationsSection.vue'
-import TranscriptSection from './components/TranscriptSection.vue'
-import ServicesSection from './components/ServicesSection.vue'
-import ReferencesSection from './components/ReferencesSection.vue'
-import ContactSection from './components/ContactSection.vue'
 import FooterSection from './components/FooterSection.vue'
+
+// Lazy-load non-critical sections
+const EducationSection = defineAsyncComponent(() => import('./components/EducationSection.vue'))
+const WorkshopsSection = defineAsyncComponent(() => import('./components/WorkshopsSection.vue'))
+const CertificationsSection = defineAsyncComponent(() => import('./components/CertificationsSection.vue'))
+const TranscriptSection = defineAsyncComponent(() => import('./components/TranscriptSection.vue'))
+const ServicesSection = defineAsyncComponent(() => import('./components/ServicesSection.vue'))
+const ReferencesSection = defineAsyncComponent(() => import('./components/ReferencesSection.vue'))
+const ContactSection = defineAsyncComponent(() => import('./components/ContactSection.vue'))
 
 const baseUrl = import.meta.env.BASE_URL
 
