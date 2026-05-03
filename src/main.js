@@ -3,7 +3,8 @@ import { createApp } from 'vue'
 import Particles from '@tsparticles/vue3'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
-// import './assets/style.css' // optional if you reuse your old CSS
+// Critical CSS loaded first for FCP optimization
+import './assets/critical.css'
 import './assets/custom.css'
 import 'aos/dist/aos.css'
 import AOS from 'aos'
