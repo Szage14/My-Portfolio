@@ -29,18 +29,18 @@
                   @keydown.enter.prevent="logAvatarClick"
                   @keydown.space.prevent="logAvatarClick"
                 >
-                  <v-img
-                    v-if="imageSrc"
-                    :src="imageSrc"
-                    :lazy-src="imageSrc"
-                    alt="Cristian Jay T. Buquis"
-                    width="220"
-                    height="220"
-                    cover
-                    class="rounded-circle home-about-avatar"
-                    @load="handleImageLoad"
-                    @error="onImgError"
-                  />
+                  <picture v-if="imageSrcPng" class="home-about-avatar rounded-circle">
+                    <source :srcset="imageSrcWebp" type="image/webp" />
+                    <img
+                      :src="imageSrcPng"
+                      alt="Cristian Jay T. Buquis"
+                      width="220"
+                      height="220"
+                      class="rounded-circle home-about-avatar"
+                      @load="handleImageLoad"
+                      @error="onImgError"
+                    />
+                  </picture>
 
                   <div v-else class="avatar-fallback" aria-hidden="true">CJ</div>
                 </div>
@@ -163,8 +163,10 @@
 import { computed, onMounted, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
 import { useTheme } from 'vuetify'
 import { loadFull } from 'tsparticles'
-import profileDark from '../assets/profile-dark.png'
-import profileLight from '../assets/profile-light.png'
+import profileDarkPng from '../assets/profile-dark.png'
+import profileLightPng from '../assets/profile-light.png'
+import profileDarkWebp from '../assets/profile-dark.webp'
+import profileLightWebp from '../assets/profile-light.webp'
 
 /* ---------- lightweight logger (copyable) ---------- */
 function serializeError(err) {
@@ -209,12 +211,16 @@ const log = {
 
 const theme = useTheme()
 const particlesReady = ref(true)
-const currentProfile = computed(() => (theme.global.name.value === 'darkTheme' ? profileDark : profileLight))
-// Reactive image source with fallback behavior for the home avatar
-const imageSrc = ref(currentProfile.value)
-watchEffect(() => {
-  imageSrc.value = currentProfile.value
+const currentProfile = computed(() => {
+  const isDark = theme.global.name.value === 'darkTheme'
+  return {
+    webp: isDark ? profileDarkWebp : profileLightWebp,
+    png: isDark ? profileDarkPng : profileLightPng
+  }
 })
+// Reactive image source with fallback behavior for the home avatar
+const imageSrcWebp = computed(() => currentProfile.value.webp)
+const imageSrcPng = computed(() => currentProfile.value.png)
 const mailtoHref = 'mailto:Cjbuquis@gmail.com'
 
 const handleCtaScroll = (label, targetId) => {
