@@ -37,18 +37,8 @@ const app = createApp(App)
 
 app.use(vuetify)
 
-app.use(Particles, {
-	init: async (engine) => {
-		try {
-			const { loadFull } = await import('tsparticles')
-			await loadFull(engine)
-			pushGlobal('info', 'Particles engine initialised', null)
-		} catch (error) {
-			pushGlobal('error', 'Particles init failed', { error: error?.stack || error?.message || String(error) })
-			throw error
-		}
-	}
-})
+// Particles engine is initialized in section components to keep one import strategy.
+app.use(Particles)
 
 try {
 	app.mount('#app')

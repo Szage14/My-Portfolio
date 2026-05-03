@@ -12,7 +12,6 @@
         <WorkshopsSection />
         <CertificationsSection />
         <TranscriptSection />
-        <MyResumeSection />
         <ServicesSection />
         <ReferencesSection />
         <ContactSection />
@@ -72,7 +71,6 @@ import EducationSection from './components/EducationSection.vue'
 import WorkshopsSection from './components/WorkshopsSection.vue'
 import CertificationsSection from './components/CertificationsSection.vue'
 import TranscriptSection from './components/TranscriptSection.vue'
-import MyResumeSection from './components/MyResumeSection.vue'
 import ServicesSection from './components/ServicesSection.vue'
 import ReferencesSection from './components/ReferencesSection.vue'
 import ContactSection from './components/ContactSection.vue'

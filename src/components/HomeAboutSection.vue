@@ -104,8 +104,10 @@
                         variant="tonal"
                         class="text-none px-6 py-3 home-about-btn home-about-btn--tertiary"
                         :elevation="isHovering ? 10 : 2"
-                        href="#resume"
-                        @click.prevent="handleCtaScroll('View Resume', 'resume')"
+                        href="/My-Portfolio/assets/BUQUIS_RESUME_TEMPLATE.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        @click="handleActionClick('View Resume')"
                       >
                         View Resume
                       </v-btn>
