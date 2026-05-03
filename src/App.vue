@@ -3,7 +3,7 @@
     <!-- 🧭 Navigation Bar -->
     <NavBar />
 
-    <v-main class="flex-grow-1 bg-surface">
+    <main id="main-content" class="flex-grow-1 bg-surface" role="main">
       <!-- 🏠 Main Portfolio Sections -->
       <v-container fluid class="pa-0">
           <HomeAboutSection />
@@ -51,10 +51,11 @@
           color="teal"
           elevation="6"
           class="scroll-top-btn"
+          aria-label="Scroll to top"
           @click="scrollToTop"
         />
       </v-fade-transition>
-    </v-main>
+    </main>
 
     <!-- ⚙️ Footer Section (moved outside v-main) -->
     <FooterSection />
