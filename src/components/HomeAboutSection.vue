@@ -97,6 +97,20 @@
                       </v-btn>
                     </v-hover>
                   </v-col>
+                  <v-col cols="12" sm="auto">
+                    <v-hover v-slot="{ isHovering, props }">
+                      <v-btn
+                        v-bind="props"
+                        variant="tonal"
+                        class="text-none px-6 py-3 home-about-btn home-about-btn--tertiary"
+                        :elevation="isHovering ? 10 : 2"
+                        href="#resume"
+                        @click.prevent="handleCtaScroll('View Resume', 'resume')"
+                      >
+                        View Resume
+                      </v-btn>
+                    </v-hover>
+                  </v-col>
                 </v-row>
 
                 <v-divider class="my-6 home-about-divider" />
@@ -444,6 +458,18 @@ onBeforeUnmount(() => {
 .home-about-btn--secondary:hover,
 .home-about-btn--secondary:focus-visible {
   background-color: rgba(0, 145, 234, 0.12) !important;
+  color: #0091ea !important;
+}
+
+.home-about-btn--tertiary {
+  background-color: rgba(0, 145, 234, 0.16) !important;
+  color: #0091ea !important;
+  border: 1px solid rgba(0, 145, 234, 0.3) !important;
+}
+
+.home-about-btn--tertiary:hover,
+.home-about-btn--tertiary:focus-visible {
+  background-color: rgba(0, 145, 234, 0.24) !important;
   color: #0091ea !important;
 }
 

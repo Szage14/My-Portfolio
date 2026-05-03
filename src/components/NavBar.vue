@@ -185,6 +185,7 @@ const navItems = [
   { id: 'experience', label: 'Experience', icon: 'mdi-briefcase-account-outline' },
   { id: 'certifications', label: 'Certifications', icon: 'mdi-certificate-outline' },
   { id: 'tor', label: 'TOR', icon: 'mdi-file-certificate-outline' },
+  { id: 'resume', label: 'My Resume', icon: 'mdi-file-account-outline' },
   { id: 'references', label: 'References', icon: 'mdi-account-group-outline' },
   { id: 'contact', label: 'Contact', icon: 'mdi-email-outline' }
 ]
