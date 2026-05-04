@@ -72,7 +72,7 @@
                     color="teal"
                     class="ma-2 text-none hero-btn"
                     :elevation="isHovering ? 6 : 2"
-                    href="https://drive.google.com/file/d/1FTNoDGi4g3ZCDl31_kQ97D7FXdwG7Uu0/view?usp=sharing"
+                    :href="resumeHref"
                     target="_blank"
                     rel="noopener noreferrer"
                     @click="handleCtaExternal('View Resume')"
@@ -151,6 +151,7 @@ const currentProfile = computed(() => {
 })
 const currentProfileWebp = computed(() => currentProfile.value.webp)
 const currentProfilePng = computed(() => currentProfile.value.png)
+const resumeHref = `${import.meta.env.BASE_URL}assets/BUQUIS_RESUME_TEMPLATE.html`
 
 const onImgError = (e) => {
   log.error('Profile image failed to load', {

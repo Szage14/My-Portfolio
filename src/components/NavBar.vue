@@ -42,13 +42,15 @@
         </div>
 
         <v-btn
-          :icon="darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny'"
+          icon
           variant="text"
           color="teal"
           class="ms-2 theme-toggle flex-shrink-0"
           :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
           @click="toggleTheme"
-        />
+        >
+          <v-icon :icon="darkMode ? mdiWeatherNight : mdiWeatherSunny" size="24" class="theme-toggle__icon" />
+        </v-btn>
 
         <v-app-bar-nav-icon
           class="d-md-none ms-1"
@@ -113,7 +115,7 @@
         :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
       >
         <template #prepend>
-          <v-icon :icon="darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny'" class="theme-toggle__icon" />
+          <v-icon :icon="darkMode ? mdiWeatherNight : mdiWeatherSunny" class="theme-toggle__icon" />
         </template>
   <v-list-item-title class="drawer-link" :style="drawerAccentStyle">Toggle Theme</v-list-item-title>
       </v-list-item>
@@ -138,6 +140,7 @@
 <script setup>
 import { ref, watch, onMounted, onBeforeUnmount, nextTick, computed } from 'vue'
 import { useTheme } from 'vuetify'
+import { mdiWeatherNight, mdiWeatherSunny } from '@mdi/js'
 
 /* ---------- lightweight logger (copyable) ---------- */
 function serializeError(err) {

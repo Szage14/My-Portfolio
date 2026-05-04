@@ -104,8 +104,10 @@
                         variant="tonal"
                         class="text-none px-6 py-3 home-about-btn home-about-btn--tertiary"
                         :elevation="isHovering ? 10 : 2"
-                        href="#resume"
-                        @click.prevent="handleCtaScroll('View Resume', 'resume')"
+                        :href="resumeHref"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        @click="handleActionClick('View Resume')"
                       >
                         View Resume
                       </v-btn>
@@ -209,6 +211,7 @@ const log = {
 
 const theme = useTheme()
 const particlesReady = ref(true)
+const resumeHref = `${import.meta.env.BASE_URL}assets/BUQUIS_RESUME_TEMPLATE.html`
 const currentProfile = computed(() => {
   const isDark = theme.global.name.value === 'darkTheme'
   return {
@@ -239,20 +242,14 @@ const logAvatarClick = () => {
 }
 
 const handleImageLoad = () => {
-  log.info('Profile image loaded', { src: imageSrc.value })
+  log.info('Profile image loaded', { src: imageSrcPng.value })
 }
 
 const onImgError = (event) => {
   log.error('Profile image failed to load', {
-    attemptedSrc: imageSrc.value,
+    attemptedSrc: imageSrcPng.value,
     eventType: event?.type
   })
-  // Try the light profile first; if that fails, show initials fallback.
-  if (imageSrc.value !== profileLight) {
-    imageSrc.value = profileLight
-  } else {
-    imageSrc.value = null
-  }
 }
 
 const particleOptions = {
