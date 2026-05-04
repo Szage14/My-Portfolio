@@ -1,7 +1,7 @@
 // src/plugins/vuetify.js
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
-import { aliases, mdi } from 'vuetify/lib/iconsets/mdi-svg'
+// Using MDI webfont (no mdi-svg imports required)
 
 const lightTheme = {
   dark: false,
@@ -50,9 +50,9 @@ export default createVuetify({
       darken: 2,
     },
   },
+  // Use the MDI webfont so components can keep using string names like 'mdi-school'
+  // Ensure the font is included in index.html (added below)
   icons: {
     defaultSet: 'mdi',
-    aliases,
-    sets: { mdi },
   },
 })

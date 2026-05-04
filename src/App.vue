@@ -5,9 +5,8 @@
 
     <main id="main-content" class="flex-grow-1 bg-surface" role="main">
       <!-- 🏠 Main Portfolio Sections -->
-      <v-container fluid class="pa-0">
-          <HomeAboutSection />
-        <MyResumeSection />
+          <v-container fluid class="pa-0">
+            <HomeAboutSection />
         <SkillsSection />
         <EducationSection />
         <WorkshopsSection />
@@ -71,7 +70,6 @@ import { mdiArrowUp } from '@mdi/js'
 
 import NavBar from './components/NavBar.vue'
 import HomeAboutSection from './components/HomeAboutSection.vue'
-import MyResumeSection from './components/MyResumeSection.vue'
 import SkillsSection from './components/SkillsSection.vue'
 import FooterSection from './components/FooterSection.vue'
 

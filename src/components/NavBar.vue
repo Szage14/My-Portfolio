@@ -181,7 +181,7 @@ const log = {
 
 const navItems = [
   { id: 'home', label: 'Home/About', icon: 'mdi-home-variant' },
-  { id: 'resume', label: 'Resume', icon: 'mdi-file-account-outline' },
+  /* Resume removed from navbar per user request: resume will open external HTML only */
   { id: 'skills', label: 'Skills', icon: 'mdi-lightning-bolt-outline' },
   { id: 'education', label: 'Education', icon: 'mdi-school-outline' },
   { id: 'experience', label: 'Experience', icon: 'mdi-briefcase-account-outline' },
