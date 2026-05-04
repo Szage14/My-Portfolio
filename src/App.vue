@@ -7,6 +7,7 @@
       <!-- 🏠 Main Portfolio Sections -->
       <v-container fluid class="pa-0">
           <HomeAboutSection />
+        <MyResumeSection />
         <SkillsSection />
         <EducationSection />
         <WorkshopsSection />
@@ -47,13 +48,15 @@
       <v-fade-transition>
         <v-btn
           v-if="showScrollTop"
-          icon="mdi-arrow-up"
+          icon
           color="teal"
           elevation="6"
           class="scroll-top-btn"
           aria-label="Scroll to top"
           @click="scrollToTop"
-        />
+        >
+          <v-icon icon="mdi-arrow-up" />
+        </v-btn>
       </v-fade-transition>
     </main>
 
@@ -67,6 +70,7 @@ import { ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
 
 import NavBar from './components/NavBar.vue'
 import HomeAboutSection from './components/HomeAboutSection.vue'
+import MyResumeSection from './components/MyResumeSection.vue'
 import SkillsSection from './components/SkillsSection.vue'
 import FooterSection from './components/FooterSection.vue'
 
