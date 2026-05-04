@@ -111,6 +111,41 @@
                       </v-btn>
                     </v-hover>
                   </v-col>
+                  <v-col cols="12" sm="auto" class="d-flex align-center justify-center gap-3">
+                    <v-divider vertical class="home-about-divider-vertical" />
+                    <v-hover v-slot="{ isHovering, props }">
+                      <v-btn
+                        v-bind="props"
+                        icon
+                        size="x-large"
+                        variant="text"
+                        class="home-about-icon home-about-icon--email transition-ease"
+                        :class="{ 'home-about-icon--hover': isHovering }"
+                        :href="mailtoHref"
+                        aria-label="Send an email"
+                        @click="handleActionClick('Email')"
+                      >
+                        <v-icon icon="mdi-email" size="28" />
+                      </v-btn>
+                    </v-hover>
+                    <v-hover v-slot="{ isHovering, props }">
+                      <v-btn
+                        v-bind="props"
+                        icon
+                        size="x-large"
+                        variant="text"
+                        class="home-about-icon home-about-icon--messenger transition-ease"
+                        :class="{ 'home-about-icon--hover': isHovering }"
+                        href="https://m.me/cristianjay.buquis"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open Messenger"
+                        @click="handleActionClick('Messenger')"
+                      >
+                        <v-icon icon="mdi-facebook-messenger" size="28" />
+                      </v-btn>
+                    </v-hover>
+                  </v-col>
                 </v-row>
 
                 <v-divider class="my-6 home-about-divider" />
@@ -119,35 +154,6 @@
                   I love collaborating with cross-functional teams, mentoring peers, and iterating quickly using data-driven insights. Let’s work together to
                   craft experiences that feel effortless and deliver results.
                 </p>
-
-                <v-row justify="center" class="g-3 home-about-actions">
-                  <v-col cols="auto">
-                    <v-btn
-                      icon
-                      variant="text"
-                      class="home-about-icon home-about-icon--accent"
-                      :href="mailtoHref"
-                      aria-label="Send an email"
-                      @click="handleActionClick('Email')"
-                    >
-                      <v-icon icon="mdi-email" />
-                    </v-btn>
-                  </v-col>
-                  <v-col cols="auto">
-                    <v-btn
-                      icon
-                      variant="text"
-                      class="home-about-icon home-about-icon--accent"
-                      href="https://m.me/cristianjay.buquis"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Open Messenger"
-                      @click="handleActionClick('Messenger')"
-                    >
-                      <v-icon icon="mdi-facebook-messenger" />
-                    </v-btn>
-                  </v-col>
-                </v-row>
               </div>
             </v-card>
           </v-col>
@@ -493,6 +499,28 @@ onBeforeUnmount(() => {
   color: #00897b;
 }
 
+/* Contact icons in CTA section */
+.home-about-divider-vertical {
+  height: 40px;
+  opacity: 0.25;
+}
+
+.home-about-icon--email,
+.home-about-icon--messenger {
+  color: #0091ea !important;
+}
+
+.home-about-icon--email:hover,
+.home-about-icon--email:focus-visible,
+.home-about-icon--email.home-about-icon--hover,
+.home-about-icon--messenger:hover,
+.home-about-icon--messenger:focus-visible,
+.home-about-icon--messenger.home-about-icon--hover {
+  transform: translateY(-4px) scale(1.15);
+  color: #40c4ff !important;
+  background-color: rgba(0, 145, 234, 0.1) !important;
+}
+
 @media (max-width: 960px) {
   .home-about-card {
     padding: clamp(24px, 6vw, 36px);
@@ -506,6 +534,10 @@ onBeforeUnmount(() => {
 
   .anchor-spacer {
     top: -72px;
+  }
+
+  .home-about-divider-vertical {
+    display: none;
   }
 }
 </style>
