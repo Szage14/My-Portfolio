@@ -48,15 +48,13 @@
       <v-fade-transition>
         <v-btn
           v-if="showScrollTop"
-          icon
+          icon="mdi-arrow-up"
           color="teal"
           elevation="6"
           class="scroll-top-btn"
           aria-label="Scroll to top"
           @click="scrollToTop"
-        >
-          <v-icon icon="mdi-arrow-up" />
-        </v-btn>
+        />
       </v-fade-transition>
     </main>
 

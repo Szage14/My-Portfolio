@@ -42,15 +42,13 @@
         </div>
 
         <v-btn
-          icon
+          :icon="darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny'"
           variant="text"
           color="teal"
           class="ms-2 theme-toggle flex-shrink-0"
           :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
           @click="toggleTheme"
-        >
-          <v-icon :icon="darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny'" class="theme-toggle__icon" />
-        </v-btn>
+        />
 
         <v-app-bar-nav-icon
           class="d-md-none ms-1"
