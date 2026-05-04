@@ -29,18 +29,16 @@
                   @keydown.enter.prevent="logAvatarClick"
                   @keydown.space.prevent="logAvatarClick"
                 >
-                  <picture v-if="imageSrcPng" class="home-about-avatar rounded-circle">
-                    <source :srcset="imageSrcWebp" type="image/webp" />
-                    <img
-                      :src="imageSrcPng"
-                      alt="Cristian Jay T. Buquis"
-                      width="220"
-                      height="220"
-                      class="rounded-circle home-about-avatar"
-                      @load="handleImageLoad"
-                      @error="onImgError"
-                    />
-                  </picture>
+                  <img
+                    v-if="imageSrcWebp"
+                    :src="imageSrcWebp"
+                    alt="Cristian Jay T. Buquis"
+                    width="220"
+                    height="220"
+                    class="rounded-circle home-about-avatar"
+                    @load="handleImageLoad"
+                    @error="onImgError"
+                  />
 
                   <div v-else class="avatar-fallback" aria-hidden="true">CJ</div>
                 </div>
@@ -163,8 +161,6 @@
 import { computed, onMounted, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
 import { useTheme } from 'vuetify'
 import { loadFull } from 'tsparticles'
-import profileDarkPng from '../assets/profile-dark.png'
-import profileLightPng from '../assets/profile-light.png'
 import profileDarkWebp from '../assets/profile-dark.webp'
 import profileLightWebp from '../assets/profile-light.webp'
 
@@ -215,13 +211,12 @@ const resumeHref = `${import.meta.env.BASE_URL}assets/BUQUIS_RESUME_TEMPLATE.htm
 const currentProfile = computed(() => {
   const isDark = theme.global.name.value === 'darkTheme'
   return {
-    webp: isDark ? profileDarkWebp : profileLightWebp,
-    png: isDark ? profileDarkPng : profileLightPng
+    webp: isDark ? profileDarkWebp : profileLightWebp
   }
 })
-// Reactive image source with fallback behavior for the home avatar
+// Reactive image source (WebP only)
 const imageSrcWebp = computed(() => currentProfile.value.webp)
-const imageSrcPng = computed(() => currentProfile.value.png)
+const imageSrcPng = null
 const mailtoHref = 'mailto:Cjbuquis@gmail.com'
 
 const handleCtaScroll = (label, targetId) => {

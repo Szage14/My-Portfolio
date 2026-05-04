@@ -54,7 +54,7 @@
           aria-label="Scroll to top"
           @click="scrollToTop"
         >
-          <v-icon :icon="mdiArrowUp" size="24" />
+          <v-icon icon="mdi-arrow-up" size="24" />
         </v-btn>
       </v-fade-transition>
     </main>
@@ -66,7 +66,6 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
-import { mdiArrowUp } from '@mdi/js'
 
 import NavBar from './components/NavBar.vue'
 import HomeAboutSection from './components/HomeAboutSection.vue'

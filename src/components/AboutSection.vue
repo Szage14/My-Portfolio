@@ -19,16 +19,14 @@
                 @keydown.space.prevent="logAvatarClick"
               >
                 <v-avatar size="200" class="elevation-3">
-                  <picture v-if="imageSrcPng" class="w-100 h-100">
-                    <source :srcset="imageSrcWebp" type="image/webp" />
-                    <img
-                      :src="imageSrcPng"
-                      alt="Cristian Jay T. Buquis"
-                      class="w-100 h-100 object-cover"
-                      @load="handleImageLoad"
-                      @error="handleImageError"
-                    />
-                  </picture>
+                  <img
+                    v-if="imageSrcWebp"
+                    :src="imageSrcWebp"
+                    alt="Cristian Jay T. Buquis"
+                    class="w-100 h-100 object-cover"
+                    @load="handleImageLoad"
+                    @error="handleImageError"
+                  />
 
                   <div v-else class="avatar-fallback" aria-hidden="true">CJ</div>
                 </v-avatar>
@@ -95,8 +93,6 @@
 <script setup>
 import { computed, ref, watchEffect } from 'vue'
 import { useTheme } from 'vuetify'
-import profileDarkPng from '../assets/profile-dark.png'
-import profileLightPng from '../assets/profile-light.png'
 import profileDarkWebp from '../assets/profile-dark.webp'
 import profileLightWebp from '../assets/profile-light.webp'
 
@@ -105,18 +101,15 @@ const theme = useTheme()
 
 const profileImage = computed(() => {
   const isDark = theme.global.name.value === 'darkTheme'
-  return {
-    webp: isDark ? profileDarkWebp : profileLightWebp,
-    png: isDark ? profileDarkPng : profileLightPng
-  }
+  return { webp: isDark ? profileDarkWebp : profileLightWebp }
 })
 
 // Mailto link
 const mailtoHref = 'mailto:Cjbuquis@gmail.com'
 
-// Reactive image source with fallback behavior
+// Reactive image source (WebP only)
 const imageSrcWebp = computed(() => profileImage.value.webp)
-const imageSrcPng = computed(() => profileImage.value.png)
+const imageSrcPng = null
 
 const logAvatarHover = (state) => {
   console.log('[About] Avatar hover:', state)

@@ -13,18 +13,16 @@
       <v-fade-transition appear>
         <v-row justify="center" align="center" class="fill-height">
           <v-col cols="12" md="8" lg="6">
-            <picture class="mx-auto mb-6 rounded-circle elevation-4 hero-avatar transition-ease d-block" v-if="currentProfilePng">
-              <source :srcset="currentProfileWebp" type="image/webp" />
-              <img
-                :src="currentProfilePng"
-                alt="Cristian Jay T. Buquis"
-                width="160"
-                height="160"
-                class="rounded-circle elevation-4 hero-avatar transition-ease d-block"
-                @load="onImgLoad"
-                @error="onImgError"
-              />
-            </picture>
+            <img
+              v-if="currentProfileWebp"
+              :src="currentProfileWebp"
+              alt="Cristian Jay T. Buquis"
+              width="160"
+              height="160"
+              class="rounded-circle elevation-4 hero-avatar transition-ease d-block"
+              @load="onImgLoad"
+              @error="onImgError"
+            />
 
             <h1 class="text-h3 text-md-h2 font-weight-bold mb-4">Cristian Jay T. Buquis</h1>
             <p class="text-subtitle-1 text-medium-emphasis mb-3">Information Systems Graduate | Web Developer</p>
@@ -94,8 +92,6 @@ import { computed, watch, onMounted, onBeforeUnmount, ref } from 'vue'
 import { useTheme } from 'vuetify'
 import Particles from '@tsparticles/vue3'
 import { loadFull } from 'tsparticles'
-import profileDarkPng from '../assets/profile-dark.png'
-import profileLightPng from '../assets/profile-light.png'
 import profileDarkWebp from '../assets/profile-dark.webp'
 import profileLightWebp from '../assets/profile-light.webp'
 
@@ -144,13 +140,10 @@ const theme = useTheme()
 const particlesReady = ref(true)
 const currentProfile = computed(() => {
   const isDark = theme.global.name.value === 'darkTheme'
-  return {
-    webp: isDark ? profileDarkWebp : profileLightWebp,
-    png: isDark ? profileDarkPng : profileLightPng
-  }
+  return { webp: isDark ? profileDarkWebp : profileLightWebp }
 })
 const currentProfileWebp = computed(() => currentProfile.value.webp)
-const currentProfilePng = computed(() => currentProfile.value.png)
+const currentProfilePng = null
 const resumeHref = `${import.meta.env.BASE_URL}assets/BUQUIS_RESUME_TEMPLATE.html`
 
 const onImgError = (e) => {
