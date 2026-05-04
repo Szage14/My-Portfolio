@@ -6,7 +6,7 @@
   --secondary-color: #008E9B;
   --accent-color: #40C4FF;
   --surface-light: rgba(255, 255, 255, 0.86);
-  --surface-dark: rgba(9, 17, 34, 0.72);
+  --surface-dark: rgba(13, 20, 40, 0.88);
   --text-light: #102A43;
   --text-dark: #E8F1FF;
 }
@@ -144,6 +144,12 @@ body.dark .v-card,
 body.dark .glass-panel {
   background: var(--surface-dark);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.v-theme--darkTheme .v-card,
+.v-theme--darkTheme .glass-panel {
+  background: var(--surface-dark);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 /* Loading state */

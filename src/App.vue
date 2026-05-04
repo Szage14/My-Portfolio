@@ -1,5 +1,5 @@
 <template>
-  <v-app class="d-flex flex-column min-h-screen">
+  <v-app class="d-flex flex-column min-h-screen app-shell">
     <!-- 🧭 Navigation Bar -->
     <NavBar />
 
@@ -113,6 +113,10 @@ html {
 .v-application {
   font-family: 'Inter', 'Roboto', sans-serif;
   line-height: 1.6;
+}
+
+.app-shell {
+  background-color: var(--v-theme-background);
 }
 
 .v-main {

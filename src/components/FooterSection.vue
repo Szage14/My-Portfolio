@@ -3,36 +3,30 @@
     <v-divider class="footer-divider" />
     <v-footer
       :color="$vuetify.theme.current.dark ? 'grey-darken-4' : 'grey-lighten-4'"
-      class="footer-shell text-center text-body-2 d-flex flex-column transition-colors duration-500"
+      class="footer-shell text-center text-body-2 transition-colors duration-500"
       :elevation="0"
       padless
     >
-      <v-container class="h-100 d-flex flex-column align-center justify-center py-4">
-        <v-row class="w-100 ma-0" justify="center">
-          <v-col cols="12" class="py-1">
-            <p class="mb-3 text-center text-body-2 text-medium-emphasis">
-              © {{ currentYear }} Cristian Jay T. Buquis. All Rights Reserved.
-            </p>
-          </v-col>
-          <v-col cols="12" class="py-0">
-            <div class="d-flex justify-center align-center gap-2">
-              <v-btn
-                v-for="link in socialLinks"
-                :key="link.label"
-                variant="text"
-                :href="link.href"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-btn"
-                :aria-label="link.label"
-                @click="logSocialClick(link.label)"
-              >
-                <v-icon :icon="link.icon" size="26" />
-              </v-btn>
-            </div>
-          </v-col>
-        </v-row>
-      </v-container>
+      <div class="footer-content w-100 d-flex flex-column align-center justify-center py-6">
+        <p class="mb-4 text-body-2 text-medium-emphasis">
+          © {{ currentYear }} Cristian Jay T. Buquis. All Rights Reserved.
+        </p>
+        <div class="d-flex justify-center align-center gap-2">
+          <v-btn
+            v-for="link in socialLinks"
+            :key="link.label"
+            variant="text"
+            :href="link.href"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-btn"
+            :aria-label="link.label"
+            @click="logSocialClick(link.label)"
+          >
+            <v-icon :icon="link.icon" size="26" />
+          </v-btn>
+        </div>
+      </div>
     </v-footer>
   </div>
 </template>
@@ -69,8 +63,12 @@ const logSocialClick = (label) => {
 }
 
 .footer-shell {
-  min-height: 8vh;
-  max-height: 10vh;
+  width: 100%;
+  min-height: 12vh;
+}
+
+.footer-content {
+  width: 100%;
 }
 
 .social-btn {

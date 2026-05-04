@@ -24,9 +24,9 @@ const lightTheme = {
 const darkTheme = {
   dark: true,
   colors: {
-    background: '#050914',
-    surface: 'rgba(9, 17, 34, 0.72)',
-    'surface-variant': 'rgba(13, 25, 48, 0.78)',
+    background: '#0a0e1f',
+    surface: '#111a2e',
+    'surface-variant': '#1a2844',
     primary: '#1A237E',
     secondary: '#18FFFF',
     accent: '#82B1FF',
