@@ -3,10 +3,11 @@
     <!-- 🧭 Navigation Bar -->
     <NavBar />
 
-    <v-main class="flex-grow-1 bg-surface">
+    <main id="main-content" class="flex-grow-1 bg-surface" role="main">
       <!-- 🏠 Main Portfolio Sections -->
       <v-container fluid class="pa-0">
           <HomeAboutSection />
+        <MyResumeSection />
         <SkillsSection />
         <EducationSection />
         <WorkshopsSection />
@@ -47,14 +48,17 @@
       <v-fade-transition>
         <v-btn
           v-if="showScrollTop"
-          icon="mdi-arrow-up"
+          icon
           color="teal"
           elevation="6"
           class="scroll-top-btn"
+          aria-label="Scroll to top"
           @click="scrollToTop"
-        />
+        >
+          <v-icon :icon="mdiArrowUp" size="24" />
+        </v-btn>
       </v-fade-transition>
-    </v-main>
+    </main>
 
     <!-- ⚙️ Footer Section (moved outside v-main) -->
     <FooterSection />
@@ -62,19 +66,23 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
+import { mdiArrowUp } from '@mdi/js'
 
 import NavBar from './components/NavBar.vue'
 import HomeAboutSection from './components/HomeAboutSection.vue'
+import MyResumeSection from './components/MyResumeSection.vue'
 import SkillsSection from './components/SkillsSection.vue'
-import EducationSection from './components/EducationSection.vue'
-import WorkshopsSection from './components/WorkshopsSection.vue'
-import CertificationsSection from './components/CertificationsSection.vue'
-import TranscriptSection from './components/TranscriptSection.vue'
-import ServicesSection from './components/ServicesSection.vue'
-import ReferencesSection from './components/ReferencesSection.vue'
-import ContactSection from './components/ContactSection.vue'
 import FooterSection from './components/FooterSection.vue'
+
+// Lazy-load non-critical sections
+const EducationSection = defineAsyncComponent(() => import('./components/EducationSection.vue'))
+const WorkshopsSection = defineAsyncComponent(() => import('./components/WorkshopsSection.vue'))
+const CertificationsSection = defineAsyncComponent(() => import('./components/CertificationsSection.vue'))
+const TranscriptSection = defineAsyncComponent(() => import('./components/TranscriptSection.vue'))
+const ServicesSection = defineAsyncComponent(() => import('./components/ServicesSection.vue'))
+const ReferencesSection = defineAsyncComponent(() => import('./components/ReferencesSection.vue'))
+const ContactSection = defineAsyncComponent(() => import('./components/ContactSection.vue'))
 
 const baseUrl = import.meta.env.BASE_URL
 

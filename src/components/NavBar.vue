@@ -9,8 +9,8 @@
       height="72"
       class="nav-bar"
     >
-      <v-container class="d-flex align-center flex-wrap py-0">
-        <v-app-bar-title class="brand-title me-4">
+      <v-container class="d-flex align-center flex-nowrap py-0 nav-bar__content">
+        <v-app-bar-title class="brand-title me-4 flex-shrink-1">
           <v-btn
             variant="text"
             color="teal"
@@ -25,7 +25,7 @@
 
         <v-spacer />
 
-        <div class="nav-buttons d-none d-md-flex align-center">
+        <div class="nav-buttons d-none d-md-flex align-center flex-nowrap">
           <v-btn
             v-for="item in navItems"
             :key="item.id"
@@ -45,11 +45,11 @@
           icon
           variant="text"
           color="teal"
-          class="ms-2 theme-toggle"
+          class="ms-2 theme-toggle flex-shrink-0"
           :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
           @click="toggleTheme"
         >
-          <v-icon :icon="darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny'" class="theme-toggle__icon" />
+          <v-icon :icon="darkMode ? mdiWeatherNight : mdiWeatherSunny" size="24" class="theme-toggle__icon" />
         </v-btn>
 
         <v-app-bar-nav-icon
@@ -115,7 +115,7 @@
         :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
       >
         <template #prepend>
-          <v-icon :icon="darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny'" class="theme-toggle__icon" />
+          <v-icon :icon="darkMode ? mdiWeatherNight : mdiWeatherSunny" class="theme-toggle__icon" />
         </template>
   <v-list-item-title class="drawer-link" :style="drawerAccentStyle">Toggle Theme</v-list-item-title>
       </v-list-item>
@@ -140,6 +140,7 @@
 <script setup>
 import { ref, watch, onMounted, onBeforeUnmount, nextTick, computed } from 'vue'
 import { useTheme } from 'vuetify'
+import { mdiWeatherNight, mdiWeatherSunny } from '@mdi/js'
 
 /* ---------- lightweight logger (copyable) ---------- */
 function serializeError(err) {
@@ -180,6 +181,7 @@ const log = {
 
 const navItems = [
   { id: 'home', label: 'Home/About', icon: 'mdi-home-variant' },
+  { id: 'resume', label: 'Resume', icon: 'mdi-file-account-outline' },
   { id: 'skills', label: 'Skills', icon: 'mdi-lightning-bolt-outline' },
   { id: 'education', label: 'Education', icon: 'mdi-school-outline' },
   { id: 'experience', label: 'Experience', icon: 'mdi-briefcase-account-outline' },
@@ -345,6 +347,10 @@ watch(
   transition: box-shadow 0.2s ease;
 }
 
+.nav-bar__content {
+  min-width: 0;
+}
+
 .nav-buttons {
   gap: 4px;
 }
@@ -371,6 +377,7 @@ watch(
   align-items: flex-start;
   line-height: 1.2;
   gap: 2px;
+  min-width: 0;
 }
 
 .brand-button {

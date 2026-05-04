@@ -13,17 +13,18 @@
       <v-fade-transition appear>
         <v-row justify="center" align="center" class="fill-height">
           <v-col cols="12" md="8" lg="6">
-            <v-img
-              :src="currentProfile"
-              :lazy-src="currentProfile"
-              alt="Cristian Jay T. Buquis"
-              class="mx-auto mb-6 rounded-circle elevation-4 hero-avatar transition-ease"
-              width="160"
-              height="160"
-              cover
-              @load="onImgLoad"
-              @error="onImgError"
-            />
+            <picture class="mx-auto mb-6 rounded-circle elevation-4 hero-avatar transition-ease d-block" v-if="currentProfilePng">
+              <source :srcset="currentProfileWebp" type="image/webp" />
+              <img
+                :src="currentProfilePng"
+                alt="Cristian Jay T. Buquis"
+                width="160"
+                height="160"
+                class="rounded-circle elevation-4 hero-avatar transition-ease d-block"
+                @load="onImgLoad"
+                @error="onImgError"
+              />
+            </picture>
 
             <h1 class="text-h3 text-md-h2 font-weight-bold mb-4">Cristian Jay T. Buquis</h1>
             <p class="text-subtitle-1 text-medium-emphasis mb-3">Information Systems Graduate | Web Developer</p>
@@ -71,7 +72,7 @@
                     color="teal"
                     class="ma-2 text-none hero-btn"
                     :elevation="isHovering ? 6 : 2"
-                    href="https://drive.google.com/file/d/1FTNoDGi4g3ZCDl31_kQ97D7FXdwG7Uu0/view?usp=sharing"
+                    :href="resumeHref"
                     target="_blank"
                     rel="noopener noreferrer"
                     @click="handleCtaExternal('View Resume')"
@@ -93,8 +94,10 @@ import { computed, watch, onMounted, onBeforeUnmount, ref } from 'vue'
 import { useTheme } from 'vuetify'
 import Particles from '@tsparticles/vue3'
 import { loadFull } from 'tsparticles'
-import profileDark from '../assets/profile-dark.png'
-import profileLight from '../assets/profile-light.png'
+import profileDarkPng from '../assets/profile-dark.png'
+import profileLightPng from '../assets/profile-light.png'
+import profileDarkWebp from '../assets/profile-dark.webp'
+import profileLightWebp from '../assets/profile-light.webp'
 
 /* ---------- lightweight logger (copyable) ---------- */
 function serializeError(err) {
@@ -139,17 +142,26 @@ const log = {
 
 const theme = useTheme()
 const particlesReady = ref(true)
-const currentProfile = computed(() => (theme.global.name.value === 'darkTheme' ? profileDark : profileLight))
+const currentProfile = computed(() => {
+  const isDark = theme.global.name.value === 'darkTheme'
+  return {
+    webp: isDark ? profileDarkWebp : profileLightWebp,
+    png: isDark ? profileDarkPng : profileLightPng
+  }
+})
+const currentProfileWebp = computed(() => currentProfile.value.webp)
+const currentProfilePng = computed(() => currentProfile.value.png)
+const resumeHref = `${import.meta.env.BASE_URL}assets/BUQUIS_RESUME_TEMPLATE.html`
 
 const onImgError = (e) => {
   log.error('Profile image failed to load', {
-    srcTried: currentProfile.value,
+    srcTried: currentProfilePng.value,
     eventType: e?.type
   })
 }
 
 const onImgLoad = () => {
-  log.info('Profile image loaded', { src: currentProfile.value })
+  log.info('Profile image loaded', { src: currentProfilePng.value })
 }
 
 const scrollTo = (id) => {

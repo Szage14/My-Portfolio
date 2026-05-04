@@ -19,14 +19,16 @@
                 @keydown.space.prevent="logAvatarClick"
               >
                 <v-avatar size="200" class="elevation-3">
-                  <v-img
-                    v-if="imageSrc"
-                    :src="imageSrc"
-                    alt="Cristian Jay T. Buquis"
-                    cover
-                    @load="handleImageLoad"
-                    @error="handleImageError"
-                  />
+                  <picture v-if="imageSrcPng" class="w-100 h-100">
+                    <source :srcset="imageSrcWebp" type="image/webp" />
+                    <img
+                      :src="imageSrcPng"
+                      alt="Cristian Jay T. Buquis"
+                      class="w-100 h-100 object-cover"
+                      @load="handleImageLoad"
+                      @error="handleImageError"
+                    />
+                  </picture>
 
                   <div v-else class="avatar-fallback" aria-hidden="true">CJ</div>
                 </v-avatar>
@@ -93,24 +95,28 @@
 <script setup>
 import { computed, ref, watchEffect } from 'vue'
 import { useTheme } from 'vuetify'
-import profileDark from '../assets/profile-dark.png'
-import profileLight from '../assets/profile-light.png'
+import profileDarkPng from '../assets/profile-dark.png'
+import profileLightPng from '../assets/profile-light.png'
+import profileDarkWebp from '../assets/profile-dark.webp'
+import profileLightWebp from '../assets/profile-light.webp'
 
 const theme = useTheme()
 
 
-const profileImage = computed(() =>
-  theme.global.name.value === 'darkTheme' ? profileDark : profileLight
-)
+const profileImage = computed(() => {
+  const isDark = theme.global.name.value === 'darkTheme'
+  return {
+    webp: isDark ? profileDarkWebp : profileLightWebp,
+    png: isDark ? profileDarkPng : profileLightPng
+  }
+})
 
 // Mailto link
 const mailtoHref = 'mailto:Cjbuquis@gmail.com'
 
 // Reactive image source with fallback behavior
-const imageSrc = ref(profileImage.value)
-watchEffect(() => {
-  imageSrc.value = profileImage.value
-})
+const imageSrcWebp = computed(() => profileImage.value.webp)
+const imageSrcPng = computed(() => profileImage.value.png)
 
 const logAvatarHover = (state) => {
   console.log('[About] Avatar hover:', state)

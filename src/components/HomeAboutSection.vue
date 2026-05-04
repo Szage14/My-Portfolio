@@ -29,18 +29,18 @@
                   @keydown.enter.prevent="logAvatarClick"
                   @keydown.space.prevent="logAvatarClick"
                 >
-                  <v-img
-                    v-if="imageSrc"
-                    :src="imageSrc"
-                    :lazy-src="imageSrc"
-                    alt="Cristian Jay T. Buquis"
-                    width="220"
-                    height="220"
-                    cover
-                    class="rounded-circle home-about-avatar"
-                    @load="handleImageLoad"
-                    @error="onImgError"
-                  />
+                  <picture v-if="imageSrcPng" class="home-about-avatar rounded-circle">
+                    <source :srcset="imageSrcWebp" type="image/webp" />
+                    <img
+                      :src="imageSrcPng"
+                      alt="Cristian Jay T. Buquis"
+                      width="220"
+                      height="220"
+                      class="rounded-circle home-about-avatar"
+                      @load="handleImageLoad"
+                      @error="onImgError"
+                    />
+                  </picture>
 
                   <div v-else class="avatar-fallback" aria-hidden="true">CJ</div>
                 </div>
@@ -97,6 +97,22 @@
                       </v-btn>
                     </v-hover>
                   </v-col>
+                  <v-col cols="12" sm="auto">
+                    <v-hover v-slot="{ isHovering, props }">
+                      <v-btn
+                        v-bind="props"
+                        variant="tonal"
+                        class="text-none px-6 py-3 home-about-btn home-about-btn--tertiary"
+                        :elevation="isHovering ? 10 : 2"
+                        :href="resumeHref"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        @click="handleActionClick('View Resume')"
+                      >
+                        View Resume
+                      </v-btn>
+                    </v-hover>
+                  </v-col>
                 </v-row>
 
                 <v-divider class="my-6 home-about-divider" />
@@ -147,8 +163,10 @@
 import { computed, onMounted, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
 import { useTheme } from 'vuetify'
 import { loadFull } from 'tsparticles'
-import profileDark from '../assets/profile-dark.png'
-import profileLight from '../assets/profile-light.png'
+import profileDarkPng from '../assets/profile-dark.png'
+import profileLightPng from '../assets/profile-light.png'
+import profileDarkWebp from '../assets/profile-dark.webp'
+import profileLightWebp from '../assets/profile-light.webp'
 
 /* ---------- lightweight logger (copyable) ---------- */
 function serializeError(err) {
@@ -193,12 +211,17 @@ const log = {
 
 const theme = useTheme()
 const particlesReady = ref(true)
-const currentProfile = computed(() => (theme.global.name.value === 'darkTheme' ? profileDark : profileLight))
-// Reactive image source with fallback behavior for the home avatar
-const imageSrc = ref(currentProfile.value)
-watchEffect(() => {
-  imageSrc.value = currentProfile.value
+const resumeHref = `${import.meta.env.BASE_URL}assets/BUQUIS_RESUME_TEMPLATE.html`
+const currentProfile = computed(() => {
+  const isDark = theme.global.name.value === 'darkTheme'
+  return {
+    webp: isDark ? profileDarkWebp : profileLightWebp,
+    png: isDark ? profileDarkPng : profileLightPng
+  }
 })
+// Reactive image source with fallback behavior for the home avatar
+const imageSrcWebp = computed(() => currentProfile.value.webp)
+const imageSrcPng = computed(() => currentProfile.value.png)
 const mailtoHref = 'mailto:Cjbuquis@gmail.com'
 
 const handleCtaScroll = (label, targetId) => {
@@ -219,20 +242,14 @@ const logAvatarClick = () => {
 }
 
 const handleImageLoad = () => {
-  log.info('Profile image loaded', { src: imageSrc.value })
+  log.info('Profile image loaded', { src: imageSrcPng.value })
 }
 
 const onImgError = (event) => {
   log.error('Profile image failed to load', {
-    attemptedSrc: imageSrc.value,
+    attemptedSrc: imageSrcPng.value,
     eventType: event?.type
   })
-  // Try the light profile first; if that fails, show initials fallback.
-  if (imageSrc.value !== profileLight) {
-    imageSrc.value = profileLight
-  } else {
-    imageSrc.value = null
-  }
 }
 
 const particleOptions = {
@@ -444,6 +461,18 @@ onBeforeUnmount(() => {
 .home-about-btn--secondary:hover,
 .home-about-btn--secondary:focus-visible {
   background-color: rgba(0, 145, 234, 0.12) !important;
+  color: #0091ea !important;
+}
+
+.home-about-btn--tertiary {
+  background-color: rgba(0, 145, 234, 0.16) !important;
+  color: #0091ea !important;
+  border: 1px solid rgba(0, 145, 234, 0.3) !important;
+}
+
+.home-about-btn--tertiary:hover,
+.home-about-btn--tertiary:focus-visible {
+  background-color: rgba(0, 145, 234, 0.24) !important;
   color: #0091ea !important;
 }
 
